@@ -1,5 +1,4 @@
-import { useState } from "react";
-import type { CSSProperties } from "react";
+import { useEffect, useState } from "react";
 import {
   Badge,
   Button,
@@ -9,45 +8,18 @@ import {
   Checkbox,
   SegmentedControl,
   Slider,
-} from "./components";
-import "./components/components.css";
+  createThemeConfig,
+  createThemeStyle,
+  defaultThemeConfig,
+  seedColorNames,
+} from "./index";
+import type { LastStackThemeConfig, ThemeClampConfig, ThemeSeeds } from "./index";
+import "./styles.css";
 import "./App.css";
 
-const seedColors = [
-  ["primary", "#292966"],
-  ["accent", "#9ac2d9"],
-  ["info", "#4f8fbf"],
-  ["success", "#5fa868"],
-  ["warning", "#d9a441"],
-  ["error", "#c9626b"],
-] as const;
-
-type SeedName = (typeof seedColors)[number][0];
-type SeedState = Record<SeedName, string>;
-type ClampKey = "primaryLight" | "primaryDark" | "accentLight" | "accentDark";
-type ClampState = Record<ClampKey, boolean>;
-type ThemeStyle = CSSProperties &
-  Record<`--color-${SeedName}`, string> &
-  Record<`--color-action-${"primary" | "accent"}-${"light" | "dark"}`, string> & {
-    "--dark-bg-neutral-mix": string;
-    "--dark-border-neutral-mix": string;
-    "--dark-surface-neutral-mix": string;
-    "--light-bg-neutral-mix": string;
-    "--light-border-neutral-mix": string;
-    "--light-surface-neutral-mix": string;
-    "--surface-tint-color": string;
-    "--surface-tint": string;
-    "--surface-tint-half": string;
-    "--surface-border-tint": string;
-  };
-
-const initialSeeds = Object.fromEntries(seedColors) as SeedState;
-const initialClamps: ClampState = {
-  primaryLight: true,
-  primaryDark: true,
-  accentLight: true,
-  accentDark: true,
-};
+const seedColors = seedColorNames.map((name) => [name, defaultThemeConfig.seeds[name]] as const);
+const initialSeeds = defaultThemeConfig.seeds;
+const initialClamps = defaultThemeConfig.clamps;
 
 const clampControls = [
   ["primaryLight", "Clamp primary in light mode"],
@@ -66,18 +38,8 @@ const tintSourceOptions = [
   { label: "accent", value: "accent" },
 ] as const;
 
-function actionColor(
-  seed: "primary" | "accent",
-  mode: "light" | "dark",
-  isClamped: boolean,
-) {
-  if (!isClamped) {
-    return `var(--color-${seed})`;
-  }
-
-  const lightness = mode === "light" ? "min(l, 0.55)" : "max(l, 0.72)";
-  return `oklch(from var(--color-${seed}) ${lightness} c h)`;
-}
+const hexColorPattern = /#[0-9a-fA-F]{3,8}\b/g;
+const keyedSeedPattern = /(primary|accent|info|success|warning|error)\s*[\s:=,-]+["']?(#[0-9a-fA-F]{3,8})\b/gi;
 
 type SpecimenProps = {
   segmentValue: "left" | "right";
@@ -137,16 +99,80 @@ function Specimen({ segmentValue, sliderValue, onSegmentChange, onSliderChange }
   );
 }
 
+function readSeedsFromJson(value: unknown) {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const source = "seeds" in value && value.seeds && typeof value.seeds === "object"
+    ? value.seeds
+    : value;
+  const nextSeeds: Partial<ThemeSeeds> = {};
+
+  for (const name of seedColorNames) {
+    const seedValue = (source as Partial<Record<typeof name, unknown>>)[name];
+
+    if (typeof seedValue === "string" && /^#[0-9a-fA-F]{3,8}$/.test(seedValue)) {
+      nextSeeds[name] = seedValue;
+    }
+  }
+
+  return Object.keys(nextSeeds).length > 0 ? nextSeeds : null;
+}
+
+function parseSeedImport(rawValue: string) {
+  const value = rawValue.trim();
+
+  if (!value) {
+    return null;
+  }
+
+  try {
+    const jsonSeeds = readSeedsFromJson(JSON.parse(value));
+
+    if (jsonSeeds) {
+      return jsonSeeds;
+    }
+  } catch {
+    // Fall back to loose text parsing below.
+  }
+
+  const keyedSeeds: Partial<ThemeSeeds> = {};
+  const keyedMatches = value.matchAll(keyedSeedPattern);
+
+  for (const match of keyedMatches) {
+    keyedSeeds[match[1].toLowerCase() as keyof ThemeSeeds] = match[2];
+  }
+
+  if (Object.keys(keyedSeeds).length > 0) {
+    return keyedSeeds;
+  }
+
+  const colors = [...value.matchAll(hexColorPattern)].map((match) => match[0]);
+
+  if (colors.length === 0) {
+    return null;
+  }
+
+  return Object.fromEntries(
+    seedColorNames.map((name, index) => [name, colors[index]]).filter(([, color]) => color),
+  ) as Partial<ThemeSeeds>;
+}
+
 function App() {
   const [isPageDark, setIsPageDark] = useState(false);
-  const [seeds, setSeeds] = useState<SeedState>(initialSeeds);
-  const [clamps, setClamps] = useState<ClampState>(initialClamps);
-  const [surfaceTint, setSurfaceTint] = useState(4);
-  const [lightSurfaceBrightness, setLightSurfaceBrightness] = useState(8);
-  const [darkSurfaceLift, setDarkSurfaceLift] = useState(12);
+  const [seeds, setSeeds] = useState<ThemeSeeds>(initialSeeds);
+  const [clamps, setClamps] = useState<ThemeClampConfig>(initialClamps);
+  const [surfaceTint, setSurfaceTint] = useState(defaultThemeConfig.surface.tint);
+  const [lightSurfaceBrightness, setLightSurfaceBrightness] = useState(defaultThemeConfig.surface.lightBrightness);
+  const [darkSurfaceLift, setDarkSurfaceLift] = useState(defaultThemeConfig.surface.darkLift);
   const [surfaceTintSource, setSurfaceTintSource] = useState<"primary" | "accent">(
-    "primary",
+    defaultThemeConfig.surface.tintSource,
   );
+  const [isImportOpen, setIsImportOpen] = useState(false);
+  const [seedImportText, setSeedImportText] = useState("");
+  const [seedImportMessage, setSeedImportMessage] = useState("");
+  const [copyMessage, setCopyMessage] = useState("");
   const [demoChecks, setDemoChecks] = useState({
     primary: true,
     primaryAlt: false,
@@ -171,44 +197,59 @@ function App() {
     darkSlider: 72,
   });
 
-  const themeStyle: ThemeStyle = {
-    "--color-primary": seeds.primary,
-    "--color-accent": seeds.accent,
-    "--color-info": seeds.info,
-    "--color-success": seeds.success,
-    "--color-warning": seeds.warning,
-    "--color-error": seeds.error,
-    "--color-action-primary-light": actionColor(
-      "primary",
-      "light",
-      clamps.primaryLight,
-    ),
-    "--color-action-primary-dark": actionColor(
-      "primary",
-      "dark",
-      clamps.primaryDark,
-    ),
-    "--color-action-accent-light": actionColor(
-      "accent",
-      "light",
-      clamps.accentLight,
-    ),
-    "--color-action-accent-dark": actionColor(
-      "accent",
-      "dark",
-      clamps.accentDark,
-    ),
-    "--light-bg-neutral-mix": `${12 - lightSurfaceBrightness}%`,
-    "--light-surface-neutral-mix": `${Math.max(9 - lightSurfaceBrightness, 0)}%`,
-    "--light-border-neutral-mix": `${Math.min(30 - lightSurfaceBrightness, 34)}%`,
-    "--dark-bg-neutral-mix": `${darkSurfaceLift}%`,
-    "--dark-surface-neutral-mix": `${Math.min(darkSurfaceLift + 4, 38)}%`,
-    "--dark-border-neutral-mix": `${Math.min(darkSurfaceLift + 16, 56)}%`,
-    "--surface-tint-color": `var(--color-${surfaceTintSource})`,
-    "--surface-tint": `${surfaceTint}%`,
-    "--surface-tint-half": `${surfaceTint / 2}%`,
-    "--surface-border-tint": `${Math.min(surfaceTint * 2.5, 24)}%`,
+  const themeConfig: LastStackThemeConfig = {
+    seeds,
+    clamps,
+    surface: {
+      tint: surfaceTint,
+      tintSource: surfaceTintSource,
+      lightBrightness: lightSurfaceBrightness,
+      darkLift: darkSurfaceLift,
+    },
   };
+  const themeStyle = createThemeStyle(themeConfig);
+  const exportedConfig = JSON.stringify(createThemeConfig(themeConfig), null, 2);
+
+  useEffect(() => {
+    if (!copyMessage) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => setCopyMessage(""), 7000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [copyMessage]);
+
+  useEffect(() => {
+    if (!seedImportMessage) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => setSeedImportMessage(""), 7000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [seedImportMessage]);
+
+  function applySeedImport() {
+    const importedSeeds = parseSeedImport(seedImportText);
+
+    if (!importedSeeds) {
+      setSeedImportMessage("Could not find any hex colors to import.");
+      return;
+    }
+
+    setSeeds((current) => ({ ...current, ...importedSeeds }));
+    setSeedImportMessage(`Imported ${Object.keys(importedSeeds).length} seed color${Object.keys(importedSeeds).length === 1 ? "" : "s"}.`);
+  }
+
+  async function copyExportedConfig() {
+    try {
+      await navigator.clipboard.writeText(exportedConfig);
+      setCopyMessage("Copied config.");
+    } catch {
+      setCopyMessage("Copy failed. Expand and select the JSON manually.");
+    }
+  }
 
   return (
     <main className={`catalog ${isPageDark ? "dark" : ""}`} style={themeStyle}>
@@ -217,8 +258,7 @@ function App() {
           <p className="kicker">LastStack UI</p>
           <h1>let's roll our own ui library</h1>
           <p className="catalog-description">
-            Button, badge, and card primitives derived from six editable seed
-            colors.
+            Unreasonably simple brand-driven white label UI kit.
           </p>
         </div>
 
@@ -269,6 +309,40 @@ function App() {
                 </label>
               ))}
             </div>
+            <div className="seed-import-heading">
+              <Button
+                onClick={() => setIsImportOpen((current) => !current)}
+                size="sm"
+                type="button"
+                variant="outline"
+              >
+                {isImportOpen ? "hide import" : "import seeds"}
+              </Button>
+              {seedImportMessage ? <strong>{seedImportMessage}</strong> : null}
+            </div>
+            {isImportOpen ? (
+              <div className="seed-import-panel">
+                <textarea
+                  aria-label="Seed color import"
+                  onChange={(event) => {
+                    setSeedImportText(event.target.value);
+                    setSeedImportMessage("");
+                  }}
+                  placeholder={`Paste JSON, keyed values, or six hex colors:\n#292966\n#9ac2d9\n#4f8fbf\n#5fa868\n#d9a441\n#c9626b`}
+                  spellCheck={false}
+                  value={seedImportText}
+                />
+                <div className="config-actions">
+                  <Button onClick={applySeedImport} size="sm" type="button">
+                    apply seeds
+                  </Button>
+                  <span>
+                    Keyless colors map to primary, accent, info, success,
+                    warning, error.
+                  </span>
+                </div>
+              </div>
+            ) : null}
           </div>
 
           <div className="settings-section settings-section--inline">
@@ -355,6 +429,33 @@ function App() {
                   {label}
                 </Checkbox>
               ))}
+            </div>
+          </div>
+
+          <div className="settings-section">
+            <div>
+              <h3>export config</h3>
+              <p>
+                This read-only config updates as you tune the workbench. Copy it
+                when you are ready to use the theme in an app.
+              </p>
+            </div>
+            <div className="config-export">
+              <div className="config-actions">
+                <Button onClick={copyExportedConfig} size="sm" type="button">
+                  copy config
+                </Button>
+                {copyMessage ? <span>{copyMessage}</span> : null}
+              </div>
+              <details>
+                <summary>show JSON</summary>
+                <textarea
+                  aria-label="Exported theme config JSON"
+                  readOnly
+                  spellCheck={false}
+                  value={exportedConfig}
+                />
+              </details>
             </div>
           </div>
         </section>

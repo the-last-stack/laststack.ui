@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "rootDir": "src",
+    "outDir": "dist-lib",
+    "strict": true
+  },
+  "include": [
+    "src/css.d.ts",
+    "src/index.ts",
+    "src/theme.ts",
+    "src/LastStackUI.tsx",
+    "src/components/**/*.tsx"
+  ]
+}

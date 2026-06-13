@@ -1,13 +1,37 @@
 {
   "name": "laststack.ui",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
+  "main": "./dist-lib/index.js",
+  "types": "./dist-lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist-lib/index.d.ts",
+      "import": "./dist-lib/index.js"
+    },
+    "./styles.css": "./dist-lib/index.css",
+    "./tailwind.css": "./src/tailwind.css",
+    "./theme.css": "./src/theme.css",
+    "./components.css": "./src/components/components.css"
+  },
+  "files": [
+    "dist-lib",
+    "src/styles.css",
+    "src/tailwind.css",
+    "src/theme.css",
+    "src/components/components.css"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",

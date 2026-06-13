@@ -212,6 +212,83 @@
   min-width: min(260px, 100%);
 }
 
+.seed-import-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.seed-import-panel,
+.config-export {
+  display: grid;
+  gap: 10px;
+}
+
+.seed-import-panel textarea,
+.config-export textarea {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  background: color-mix(in srgb, var(--color-bg) 76%, var(--color-surface));
+  font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  padding: 12px;
+}
+
+.seed-import-panel textarea {
+  min-height: 160px;
+}
+
+.config-export textarea {
+  min-height: 280px;
+  margin-top: 10px;
+}
+
+.seed-import-panel textarea:focus-visible,
+.config-export textarea:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-action-primary) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.config-export details {
+  color: var(--color-text-secondary);
+}
+
+.config-export summary {
+  width: fit-content;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.config-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.config-actions span {
+  color: var(--color-text-secondary);
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.config-actions strong {
+  color: var(--color-text-primary);
+  font-size: 0.88rem;
+}
+
+.settings-card code {
+  color: var(--color-text-primary);
+  font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.86em;
+}
+
 .range-control span {
   justify-self: end;
 }

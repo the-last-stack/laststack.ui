@@ -1,0 +1,37 @@
+@theme {
+  --color-primary: #292966;
+  --color-accent: #9ac2d9;
+  --color-info: #4f8fbf;
+  --color-success: #5fa868;
+  --color-warning: #d9a441;
+  --color-error: #c9626b;
+  --color-neutral: #88888c;
+
+  --color-bg: color-mix(in srgb, var(--surface-tint-color) var(--surface-tint), var(--color-bg-neutral));
+  --color-surface: color-mix(in srgb, var(--surface-tint-color) var(--surface-tint-half), var(--color-surface-neutral));
+  --color-border: color-mix(in srgb, var(--surface-tint-color) var(--surface-border-tint), var(--color-border-neutral));
+  --color-bg-neutral: color-mix(in srgb, var(--color-neutral) var(--light-bg-neutral-mix), white);
+  --color-surface-neutral: color-mix(in srgb, var(--color-neutral) var(--light-surface-neutral-mix), white);
+  --color-border-neutral: color-mix(in srgb, var(--color-neutral) var(--light-border-neutral-mix), white);
+
+  --color-text-primary: color-mix(in srgb, var(--color-neutral) 85%, black);
+  --color-text-secondary: color-mix(in srgb, var(--color-neutral) 55%, black);
+
+  --color-action-primary: var(--color-action-primary-light);
+  --color-action-accent: var(--color-action-accent-light);
+  --color-action-error: oklch(from var(--color-error) min(l, 0.55) c h);
+
+  --color-primary-tint: color-mix(in srgb, var(--color-primary) 12%, white);
+  --color-accent-tint: color-mix(in srgb, var(--color-accent) 22%, white);
+  --color-info-tint: color-mix(in srgb, var(--color-info) 14%, white);
+  --color-success-tint: color-mix(in srgb, var(--color-success) 14%, white);
+  --color-warning-tint: color-mix(in srgb, var(--color-warning) 14%, white);
+  --color-error-tint: color-mix(in srgb, var(--color-error) 14%, white);
+
+  --color-primary-on-tint: color-mix(in srgb, var(--color-primary) 76%, black);
+  --color-accent-on-tint: color-mix(in srgb, var(--color-accent) 64%, black);
+  --color-info-on-tint: color-mix(in srgb, var(--color-info) 70%, black);
+  --color-success-on-tint: color-mix(in srgb, var(--color-success) 70%, black);
+  --color-warning-on-tint: color-mix(in srgb, var(--color-warning) 70%, black);
+  --color-error-on-tint: color-mix(in srgb, var(--color-error) 70%, black);
+}
