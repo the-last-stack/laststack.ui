@@ -1,0 +1,305 @@
+.ui-button {
+  --button-action: var(--color-action-primary);
+  --button-tint: var(--color-primary-tint);
+  --button-on-tint: var(--color-primary-on-tint);
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 520;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding: 0 20px;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.ui-button--sm {
+  min-height: 34px;
+  padding: 0 14px;
+}
+
+.ui-button--md {
+  min-height: 42px;
+  padding: 0 20px;
+}
+
+.ui-button--lg {
+  min-height: 50px;
+  padding: 0 24px;
+}
+
+.ui-button--accent {
+  --button-action: var(--color-action-accent);
+  --button-tint: var(--color-accent-tint);
+  --button-on-tint: var(--color-accent-on-tint);
+}
+
+.ui-button--destructive {
+  --button-action: var(--color-action-error);
+  --button-tint: var(--color-error-tint);
+  --button-on-tint: var(--color-error-on-tint);
+}
+
+.ui-button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--button-action) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.ui-button--solid {
+  color: var(--color-bg);
+  background: var(--button-action);
+}
+
+.ui-button--outline {
+  color: var(--button-action);
+  background: transparent;
+  border-color: color-mix(in srgb, var(--button-action) 64%, var(--color-border));
+}
+
+.ui-button--subtle {
+  color: var(--button-on-tint);
+  background: var(--button-tint);
+  border-color: color-mix(in srgb, var(--button-action) 10%, transparent);
+}
+
+.ui-button--ghost {
+  color: var(--button-action);
+  background: transparent;
+}
+
+.ui-button--outline:hover,
+.ui-button--ghost:hover {
+  background: var(--button-tint);
+}
+
+.ui-button--solid:hover,
+.ui-button--subtle:hover {
+  border-color: color-mix(in srgb, var(--button-action) 30%, var(--color-border));
+}
+
+.ui-badge {
+  --badge-tint: var(--color-primary-tint);
+  --badge-text: var(--color-primary-on-tint);
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--badge-text);
+  background: var(--badge-tint);
+  font-size: 0.92rem;
+  font-weight: 520;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  padding: 8px 12px;
+}
+
+.ui-badge--sm {
+  border-radius: 5px;
+  font-size: 0.78rem;
+  padding: 6px 9px;
+}
+
+.ui-badge--lg {
+  font-size: 1.05rem;
+  padding: 10px 14px;
+}
+
+.ui-badge--accent {
+  --badge-tint: var(--color-accent-tint);
+  --badge-text: var(--color-accent-on-tint);
+}
+
+.ui-badge--info {
+  --badge-tint: var(--color-info-tint);
+  --badge-text: var(--color-info-on-tint);
+}
+
+.ui-badge--success {
+  --badge-tint: var(--color-success-tint);
+  --badge-text: var(--color-success-on-tint);
+}
+
+.ui-badge--warning {
+  --badge-tint: var(--color-warning-tint);
+  --badge-text: var(--color-warning-on-tint);
+}
+
+.ui-badge--error {
+  --badge-tint: var(--color-error-tint);
+  --badge-text: var(--color-error-on-tint);
+}
+
+.ui-card {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  padding: clamp(20px, 3vw, 32px);
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.ui-card--elevated {
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-neutral) 18%, transparent);
+}
+
+.ui-card--interactive:hover {
+  border-color: color-mix(in srgb, var(--color-action-primary) 42%, var(--color-border));
+}
+
+.ui-card__title {
+  color: var(--color-text-primary);
+  font-size: clamp(1.55rem, 2.4vw, 2rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.ui-card__description {
+  color: var(--color-text-secondary);
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.ui-checkbox {
+  --control-action: var(--color-action-primary);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 560;
+  line-height: 1.25;
+}
+
+.ui-checkbox--accent {
+  --control-action: var(--color-action-accent);
+}
+
+.ui-checkbox input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  margin: 0;
+  accent-color: var(--control-action);
+  cursor: pointer;
+}
+
+.ui-checkbox input:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--control-action) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.ui-checkbox:has(input:disabled) {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.ui-checkbox input:disabled {
+  cursor: not-allowed;
+}
+
+.ui-segmented {
+  --control-action: var(--color-action-primary);
+  display: inline-flex;
+  border: 1px solid color-mix(in srgb, var(--control-action) 24%, var(--color-border));
+  border-radius: 6px;
+  background: var(--color-surface);
+  padding: 4px;
+}
+
+.ui-segmented--accent {
+  --control-action: var(--color-action-accent);
+}
+
+.ui-segmented button {
+  min-height: 40px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+  background: transparent;
+  cursor: pointer;
+  font-weight: 650;
+  padding: 0 16px;
+}
+
+.ui-segmented--sm button {
+  min-height: 30px;
+  padding: 0 10px;
+}
+
+.ui-segmented--md button {
+  min-height: 40px;
+  padding: 0 16px;
+}
+
+.ui-segmented--lg button {
+  min-height: 48px;
+  padding: 0 20px;
+}
+
+.ui-segmented button[aria-checked='true'] {
+  color: var(--color-bg);
+  background: var(--control-action);
+}
+
+.ui-segmented button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--control-action) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.ui-slider {
+  --control-action: var(--color-action-primary);
+  display: grid;
+  min-width: min(260px, 100%);
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ui-slider--accent {
+  --control-action: var(--color-action-accent);
+}
+
+.ui-slider > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ui-slider strong {
+  color: var(--color-text-primary);
+  font: inherit;
+}
+
+.ui-slider input {
+  width: 100%;
+  accent-color: var(--control-action);
+  cursor: pointer;
+}
+
+.ui-slider input:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--control-action) 45%, transparent);
+  outline-offset: 6px;
+}
+
+.ui-slider:has(input:disabled) {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.ui-slider input:disabled {
+  cursor: not-allowed;
+}
