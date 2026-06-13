@@ -1,28 +1,46 @@
 # LastStack UI
 
-Unreasonably simple, brand-driven white label UI kit for React.
+In theory, component systems are derived from just a few colors: two brand and 
+four semantic (info, success, warning, error). But in practice getting them 
+"right", with background and foregrounds that land well, supporting dark mode 
+and light mode, with subtle changes for cards, kinds of buttons or badges, 
+inputs, borders, hover states. I mean maybe I'm overcomplicating things but 
+there's a reason I keep falling back into building the same damn ui with shadcn 
+in every single product i try to build. 
 
-Six seed colors — two brand, four semantic — drive the entire component system. Surfaces, foregrounds, borders, and states all derive themselves from a single plain JavaScript object. No design token spreadsheet. No manual light/dark mode per component.
+Well, no more. It turns out you can really get most of the way there with some 
+color mixing, especially if the theme you start with is coherent. There's still 
+some fine tuning that the human eye just sorta has to feel out, but we can model 
+that too with some knobs and sliders, right? 
 
-This repo is two things:
+So here we are. This is a component library with an intentionally small 
+footprint that leverages tailwind because I like tailwind. You pass in your 
+color theme with just 6 colors, and some fine tuning you might have worked out 
+in the workbench, and that's it. No weird insane css directives and awkward 
+building (i mean, it's there, but you don't have to deal with that for theming). 
+Literally go to https://coolors.co/, find a color theme you like, paste it into 
+the workbench and your web app will look pretty good, with those colors.
 
-- **Component library** — publishable React package with a theme engine
-- **Workbench** — deployable interactive app to tune and preview the theme in real time
+--- 
 
+The repo has two parts:
+ 
+- **Component library** -- publishable React package with the theme engine
+- **Workbench** -- standalone app for tuning and previewing the theme live
 ---
-
+ 
 ## Using the library
-
+ 
 ```bash
 npm install laststack.ui
 ```
-
-Wrap your app in `LastStackUI` and pass a theme config:
-
+ 
+Wrap your app in `LastStackUI` with a theme config:
+ 
 ```tsx
 import { LastStackUI, Button, Badge } from 'laststack.ui'
 import 'laststack.ui/styles.css'
-
+ 
 export function App() {
   return (
     <LastStackUI theme={{
@@ -41,11 +59,11 @@ export function App() {
   )
 }
 ```
-
-The `theme` prop is optional — defaults ship out of the box.
-
+ 
+The `theme` prop is optional. Defaults work out of the box.
+ 
 ### Theme config
-
+ 
 ```ts
 type LastStackThemeConfig = {
   seeds: {
@@ -57,24 +75,24 @@ type LastStackThemeConfig = {
     error: string
   }
   surface?: {
-    tint?: number           // 0–20, brand tint on surfaces (default 4)
+    tint?: number              // 0-20, brand tint on surfaces (default 4)
     tintSource?: 'primary' | 'accent'
-    lightBrightness?: number  // 0–12, surface lift in light mode (default 8)
-    darkLift?: number         // 0–30, surface lift in dark mode (default 12)
+    lightBrightness?: number   // 0-12, surface lift in light mode (default 8)
+    darkLift?: number          // 0-30, surface lift in dark mode (default 12)
   }
   clamps?: {
-    primaryLight?: boolean  // keep primary legible on light surfaces
-    primaryDark?: boolean   // keep primary legible on dark surfaces
+    primaryLight?: boolean   // keep primary legible on light surfaces
+    primaryDark?: boolean    // keep primary legible on dark surfaces
     accentLight?: boolean
     accentDark?: boolean
   }
 }
 ```
-
-`createThemeStyle(config)` returns a CSS custom property object you can spread onto any element if you want to apply themes to scoped subtrees rather than the whole app.
-
+ 
+If you want theme scoping below the app root, `createThemeStyle(config)` returns a CSS custom property object you can spread onto any element.
+ 
 ### Components
-
+ 
 | Component | Notes |
 |---|---|
 | `Button` | `variant`: solid · outline · subtle · ghost. `tone`: primary · accent · destructive. `size`: sm · md · lg |
@@ -83,40 +101,42 @@ type LastStackThemeConfig = {
 | `Checkbox` | Controlled, accessible |
 | `SegmentedControl` | Single-select tab strip |
 | `Slider` | Controlled range input |
-
+ 
 ### CSS
-
+ 
 ```js
 import 'laststack.ui/styles.css'      // base styles (required)
 import 'laststack.ui/tailwind.css'    // tailwind v4 layer (optional)
 import 'laststack.ui/theme.css'       // CSS custom props only (optional)
 import 'laststack.ui/components.css'  // component styles only (optional)
 ```
-
+ 
 ---
-
+ 
 ## Workbench
-
-The workbench is a standalone Vite app that lets you edit seed colors, surface settings, and contrast clamps live, then copy the resulting config object directly into your project.
-
+ 
+A standalone Vite app. Edit seed colors, surface settings, and contrast clamps live, then copy the resulting config object straight into your project.
+ 
 ```bash
 npm install
 npm run dev
 ```
-
-To build and deploy it:
-
+ 
+To build and deploy:
+ 
 ```bash
 npm run build
 ```
-
+ 
 ---
-
+ 
 ## Scripts
-
+ 
 | Command | What it does |
 |---|---|
 | `npm run dev` | Start the workbench dev server |
 | `npm run build` | Build the workbench for deployment |
 | `npm run build:lib` | Build the component library package |
 | `npm run preview` | Preview the workbench production build |
+ 
+
