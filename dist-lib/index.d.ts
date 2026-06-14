@@ -1,5 +1,6 @@
 export { LastStackUI } from './LastStackUI';
 export { Badge } from './components/Badge';
+export { Callout } from './components/Callout';
 export { Button } from './components/Button';
 export { Card, CardDescription, CardTitle } from './components/Card';
 export { Checkbox } from './components/Checkbox';
