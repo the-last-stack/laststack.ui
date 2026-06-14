@@ -136,8 +136,67 @@
   --badge-text: var(--color-error-on-tint);
 }
 
+.ui-callout {
+  --callout-tint: var(--color-info-tint);
+  --callout-text: var(--color-info-on-tint);
+  --callout-accent: var(--color-info);
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--callout-accent) 28%, transparent);
+  background: var(--callout-tint);
+  color: var(--callout-text);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.ui-callout--success {
+  --callout-tint: var(--color-success-tint);
+  --callout-text: var(--color-success-on-tint);
+  --callout-accent: var(--color-success);
+}
+
+.ui-callout--warning {
+  --callout-tint: var(--color-warning-tint);
+  --callout-text: var(--color-warning-on-tint);
+  --callout-accent: var(--color-warning);
+}
+
+.ui-callout--error {
+  --callout-tint: var(--color-error-tint);
+  --callout-text: var(--color-error-on-tint);
+  --callout-accent: var(--color-error);
+}
+
+.ui-callout--flush {
+  border-radius: 0;
+  border: none;
+}
+
+.ui-callout__icon {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+}
+
+.ui-callout__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ui-callout__title {
+  font-weight: 620;
+  line-height: 1.25;
+  margin: 0;
+}
+
 .ui-card {
-  border: 1px solid var(--color-border);
+  border: 1px solid color-mix(in srgb, var(--color-action-primary) 24%, var(--color-border));
   border-radius: 6px;
   color: var(--color-text-primary);
   background: var(--color-surface);

@@ -2,6 +2,7 @@
 @import "./theme.css";
 @import "./tailwind.css";
 @import "tailwindcss";
+@import "./components/components.css" layer(components);
 
 :root {
   font-family:
