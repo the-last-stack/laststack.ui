@@ -20,6 +20,14 @@
   --color-action-primary: var(--color-action-primary-light);
   --color-action-accent: var(--color-action-accent-light);
   --color-action-error: oklch(from var(--color-error) min(l, 0.55) c h);
+  --color-primary-hover: color-mix(in srgb, var(--color-primary) 88%, black);
+  --color-accent-hover: color-mix(in srgb, var(--color-accent) 88%, black);
+  --color-info-hover: color-mix(in srgb, var(--color-info) 88%, black);
+  --color-success-hover: color-mix(in srgb, var(--color-success) 88%, black);
+  --color-warning-hover: color-mix(in srgb, var(--color-warning) 88%, black);
+  --color-error-hover: color-mix(in srgb, var(--color-error) 88%, black);
+  --color-text-subtle: color-mix(in srgb, var(--color-neutral) 35%, black);
+  --color-border-focus: var(--color-action-accent);
 
   --color-primary-tint: color-mix(in srgb, var(--color-primary) 12%, white);
   --color-accent-tint: color-mix(in srgb, var(--color-accent) 22%, white);

@@ -14,7 +14,7 @@ const Icon = {
   success: CircleCheck,
   warning: TriangleAlert,
   error: XCircle,
-} satisfies Record<CalloutTone, ComponentType<{ size?: number; 'aria-hidden'?: boolean }>>
+} satisfies Record<CalloutTone, ComponentType<{ className?: string; 'aria-hidden'?: boolean }>>
 
 export function Callout({ className = '', tone = 'info', title, flush = false, children, ...props }: CalloutProps) {
   const ToneIcon = Icon[tone]
@@ -23,7 +23,7 @@ export function Callout({ className = '', tone = 'info', title, flush = false, c
       className={`ui-callout ui-callout--${tone}${flush ? ' ui-callout--flush' : ''} ${className}`.trim()}
       {...props}
     >
-      <ToneIcon size={16} aria-hidden />
+      <ToneIcon className="ui-callout__icon" aria-hidden />
       <div className="ui-callout__content">
         {title && <p className="ui-callout__title">{title}</p>}
         {children}

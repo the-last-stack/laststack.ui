@@ -1,5 +1,5 @@
 type SegmentedTone = 'primary' | 'accent';
-type SegmentedSize = 'sm' | 'md' | 'lg';
+type SegmentedSize = 'xs' | 'sm' | 'md' | 'lg';
 type SegmentedOption<TValue extends string> = {
     label: string;
     value: TValue;

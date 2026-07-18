@@ -5,6 +5,7 @@ import { Button } from "./components/Button";
 import { Callout } from "./components/Callout";
 import { Card, CardDescription, CardTitle } from "./components/Card";
 import { Checkbox } from "./components/Checkbox";
+import { ComponentPreviewCard } from "./components/ComponentPreviewCards";
 import { SegmentedControl } from "./components/SegmentedControl";
 import { Slider } from "./components/Slider";
 import {
@@ -95,60 +96,18 @@ function ShowcaseCard({ title, description, children }: ShowcaseCardProps) {
   );
 }
 
-type SpecimenProps = {
-  segmentValue: "left" | "right";
-  sliderValue: number;
-  onSegmentChange: (value: "left" | "right") => void;
-  onSliderChange: (value: number) => void;
-}
-
-function Specimen({ segmentValue, sliderValue, onSegmentChange, onSliderChange }: SpecimenProps) {
+function ComponentPreviewCards() {
   return (
-    <Card className="grid gap-[22px]">
-      <div>
-        <CardTitle>425 Industrial Way</CardTitle>
-        <CardDescription>last comp: 03/2026 · 18,400 sqft</CardDescription>
+    <div className="grid gap-4">
+      <div className="grid gap-3">
+        <h3 className="m-0 text-base font-semibold tracking-[-0.02em] text-text-primary">light mode</h3>
+        <ComponentPreviewCard mode="light" />
       </div>
-
-      <div className="flex flex-wrap gap-3" aria-label="Semantic badge examples">
-        <Badge tone="info">info</Badge>
-        <Badge tone="success">success</Badge>
-        <Badge tone="warning">warning</Badge>
-        <Badge tone="error">error</Badge>
+      <div className="grid gap-3">
+        <h3 className="m-0 text-base font-semibold tracking-[-0.02em] text-text-primary">dark mode</h3>
+        <ComponentPreviewCard mode="dark" />
       </div>
-
-      <Callout tone="info" title="Market note">
-        Vacancy is trending down across comparable industrial assets.
-      </Callout>
-
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(150px,100%),max-content))] items-center gap-4 max-[560px]:flex max-[560px]:flex-col max-[560px]:items-stretch" aria-label="Primary and accent button examples">
-        <Button>primary filled</Button>
-        <Button variant="outline">primary outline</Button>
-        <Button tone="accent">accent filled</Button>
-        <Button tone="accent" variant="outline">accent outline</Button>
-      </div>
-
-      <div className="grid w-[min(340px,100%)] gap-3.5 [&_.ui-segmented]:w-full [&_.ui-segmented_button]:flex-1 [&_.ui-slider]:w-full" aria-label="Input component examples">
-        <Checkbox defaultChecked>Include off-market comps</Checkbox>
-        <Slider
-          label="Confidence"
-          max="100"
-          min="0"
-          onChange={(event) => onSliderChange(Number(event.target.value))}
-          value={sliderValue}
-          valueLabel={`${sliderValue}%`}
-        />
-        <SegmentedControl
-          aria-label="Example view"
-          options={[
-            { label: "left", value: "left" },
-            { label: "right", value: "right" },
-          ]}
-          onChange={onSegmentChange}
-          value={segmentValue}
-        />
-      </div>
-    </Card>
+    </div>
   );
 }
 
@@ -243,13 +202,6 @@ function App() {
     primary: 40,
     accent: 64,
   });
-  const [exampleControls, setExampleControls] = useState({
-    lightSegment: "left" as "left" | "right",
-    darkSegment: "left" as "left" | "right",
-    lightSlider: 72,
-    darkSlider: 72,
-  });
-
   const themeConfig: LastStackThemeConfig = {
     seeds,
     clamps,
@@ -514,38 +466,7 @@ function App() {
 
       <CatalogGroup title="specimens" description="Composed component examples for checking light and dark mode side by side.">
         <CatalogSection title="component examples" description="Matched examples rendered in light and dark mode.">
-          <div className="grid gap-[18px]">
-            <div className="grid gap-3.5">
-              <h3 className="m-0 text-base font-semibold tracking-[-0.02em] text-text-primary">light mode</h3>
-              <div className="ls-ui">
-                <Specimen
-                  onSegmentChange={(value) =>
-                    setExampleControls((current) => ({ ...current, lightSegment: value }))
-                  }
-                  onSliderChange={(value) =>
-                    setExampleControls((current) => ({ ...current, lightSlider: value }))
-                  }
-                  segmentValue={exampleControls.lightSegment}
-                  sliderValue={exampleControls.lightSlider}
-                />
-              </div>
-            </div>
-            <div className="grid gap-3.5">
-              <h3 className="m-0 text-base font-semibold tracking-[-0.02em] text-text-primary">dark mode</h3>
-              <div className="dark">
-                <Specimen
-                  onSegmentChange={(value) =>
-                    setExampleControls((current) => ({ ...current, darkSegment: value }))
-                  }
-                  onSliderChange={(value) =>
-                    setExampleControls((current) => ({ ...current, darkSlider: value }))
-                  }
-                  segmentValue={exampleControls.darkSegment}
-                  sliderValue={exampleControls.darkSlider}
-                />
-              </div>
-            </div>
-          </div>
+          <ComponentPreviewCards />
         </CatalogSection>
       </CatalogGroup>
 
