@@ -439,8 +439,16 @@ function H({ className: t = "", gap: n = "md", align: r = "stretch", ...i }) {
 	});
 }
 //#endregion
+//#region src/components/Text.tsx
+function U({ className: t = "", tone: n = "default", size: r = "md", weight: i = "normal", ...a }) {
+	return /* @__PURE__ */ e("span", {
+		className: `ui-text ui-text--${n} ui-text--${r} ui-text--${i} ${t}`.trim(),
+		...a
+	});
+}
+//#endregion
 //#region src/components/Textarea.tsx
-function U({ className: t = "", invalid: n = !1, ...r }) {
+function W({ className: t = "", invalid: n = !1, ...r }) {
 	return /* @__PURE__ */ e("textarea", {
 		"aria-invalid": n || void 0,
 		className: `ui-textarea${n ? " ui-textarea--invalid" : ""} ${t}`.trim(),
@@ -449,18 +457,18 @@ function U({ className: t = "", invalid: n = !1, ...r }) {
 }
 //#endregion
 //#region src/useLastStackColorValues.ts
-var W = {
+var G = {
 	default: "",
 	muted: "",
 	foreground: "",
 	hover: ""
-}, G = {
-	primary: W,
-	accent: W,
-	success: W,
-	warning: W,
-	error: W,
-	info: W,
+}, K = {
+	primary: G,
+	accent: G,
+	success: G,
+	warning: G,
+	error: G,
+	info: G,
 	background: {
 		default: "",
 		muted: "",
@@ -476,7 +484,7 @@ var W = {
 		muted: "",
 		focus: ""
 	}
-}, K = [
+}, q = [
 	"primary",
 	"accent",
 	"success",
@@ -484,12 +492,12 @@ var W = {
 	"error",
 	"info"
 ];
-function q(e) {
-	let [t, n] = s(G);
+function J(e) {
+	let [t, n] = s(K);
 	return o(() => {
 		let t = e?.current ?? document.documentElement, r = getComputedStyle(t), i = (e) => r.getPropertyValue(`--color-${e}`).trim();
 		n({
-			...Object.fromEntries(K.map((e) => [e, {
+			...Object.fromEntries(q.map((e) => [e, {
 				default: i(e),
 				muted: i(`${e}-tint`),
 				foreground: i(`${e}-on-tint`),
@@ -513,8 +521,8 @@ function q(e) {
 		});
 	}, [e]), { palette: t };
 }
-function J(e) {
-	return q(e).palette;
+function Y(e) {
+	return J(e).palette;
 }
 //#endregion
-export { m as Badge, k as Button, O as Callout, A as Card, M as CardDescription, j as CardTitle, N as Checkbox, I as ComponentPreviewCard, L as Container, R as Field, z as Inline, B as Input, p as LastStackUI, P as SegmentedControl, F as Slider, V as Spinner, H as Stack, U as Textarea, u as createThemeConfig, d as createThemeStyle, l as defaultThemeConfig, c as seedColorNames, J as useLastStackColorValues, q as useTheme };
+export { m as Badge, k as Button, O as Callout, A as Card, M as CardDescription, j as CardTitle, N as Checkbox, I as ComponentPreviewCard, L as Container, R as Field, z as Inline, B as Input, p as LastStackUI, P as SegmentedControl, F as Slider, V as Spinner, H as Stack, U as Text, W as Textarea, u as createThemeConfig, d as createThemeStyle, l as defaultThemeConfig, c as seedColorNames, Y as useLastStackColorValues, J as useTheme };

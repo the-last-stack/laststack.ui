@@ -13,6 +13,7 @@ export { SegmentedControl } from './components/SegmentedControl';
 export { Slider } from './components/Slider';
 export { Spinner } from './components/Spinner';
 export { Stack } from './components/Stack';
+export { Text } from './components/Text';
 export { Textarea } from './components/Textarea';
 export { useLastStackColorValues, useTheme } from './useLastStackColorValues';
 export type { LastStackColorValues, LastStackPalette, LastStackThemeValues } from './useLastStackColorValues';
