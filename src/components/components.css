@@ -391,3 +391,245 @@
 .ui-slider input:disabled {
   cursor: not-allowed;
 }
+
+.ui-input,
+.ui-textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  font: inherit;
+  line-height: 1.4;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.ui-input {
+  min-height: 42px;
+  padding: 0 14px;
+}
+
+.ui-input--sm {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 0.9rem;
+}
+
+.ui-input--lg {
+  min-height: 50px;
+  padding: 0 16px;
+}
+
+.ui-textarea {
+  min-height: 120px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.ui-input::placeholder,
+.ui-textarea::placeholder {
+  color: var(--color-text-subtle);
+}
+
+.ui-input:focus-visible,
+.ui-textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-border-focus) 30%, transparent);
+}
+
+.ui-input:disabled,
+.ui-textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background: color-mix(in srgb, var(--color-border) 20%, transparent);
+}
+
+.ui-input--invalid,
+.ui-textarea--invalid {
+  border-color: var(--color-action-error);
+}
+
+.ui-input--invalid:focus-visible,
+.ui-textarea--invalid:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-action-error) 28%, transparent);
+}
+
+.ui-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ui-field__label {
+  color: var(--color-text-secondary);
+  font-size: 0.88rem;
+  font-weight: 560;
+  letter-spacing: -0.01em;
+}
+
+.ui-field__hint {
+  color: var(--color-text-subtle);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.ui-field__error {
+  color: var(--color-action-error);
+  font-size: 0.85rem;
+  font-weight: 560;
+  margin: 0;
+}
+
+.ui-spinner {
+  --spinner-color: var(--color-action-primary);
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--spinner-color) 26%, transparent);
+  border-top-color: var(--spinner-color);
+  animation: ui-spin 0.6s linear infinite;
+}
+
+.ui-spinner--accent {
+  --spinner-color: var(--color-action-accent);
+}
+
+.ui-spinner--neutral {
+  --spinner-color: var(--color-text-secondary);
+}
+
+.ui-spinner--sm {
+  width: 14px;
+  height: 14px;
+}
+
+.ui-spinner--md {
+  width: 20px;
+  height: 20px;
+}
+
+.ui-spinner--lg {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+}
+
+.ui-button__spinner {
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-top-color: currentColor;
+  animation: ui-spin 0.6s linear infinite;
+}
+
+.ui-button--loading {
+  cursor: progress;
+}
+
+@keyframes ui-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ui-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-inline {
+  display: flex;
+  flex-direction: row;
+}
+
+.ui-inline--wrap {
+  flex-wrap: wrap;
+}
+
+.ui-stack--gap-none,
+.ui-inline--gap-none {
+  gap: 0;
+}
+
+.ui-stack--gap-xs,
+.ui-inline--gap-xs {
+  gap: 6px;
+}
+
+.ui-stack--gap-sm,
+.ui-inline--gap-sm {
+  gap: 10px;
+}
+
+.ui-stack--gap-md,
+.ui-inline--gap-md {
+  gap: 16px;
+}
+
+.ui-stack--gap-lg,
+.ui-inline--gap-lg {
+  gap: 24px;
+}
+
+.ui-stack--gap-xl,
+.ui-inline--gap-xl {
+  gap: 36px;
+}
+
+.ui-stack--align-start,
+.ui-inline--align-start {
+  align-items: flex-start;
+}
+
+.ui-stack--align-center,
+.ui-inline--align-center {
+  align-items: center;
+}
+
+.ui-stack--align-end,
+.ui-inline--align-end {
+  align-items: flex-end;
+}
+
+.ui-stack--align-stretch,
+.ui-inline--align-stretch {
+  align-items: stretch;
+}
+
+.ui-inline--justify-start {
+  justify-content: flex-start;
+}
+
+.ui-inline--justify-center {
+  justify-content: center;
+}
+
+.ui-inline--justify-end {
+  justify-content: flex-end;
+}
+
+.ui-inline--justify-between {
+  justify-content: space-between;
+}
+
+.ui-container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+}
+
+.ui-container--sm {
+  max-width: 640px;
+}
+
+.ui-container--md {
+  max-width: 860px;
+}
+
+.ui-container--lg {
+  max-width: 1100px;
+}
