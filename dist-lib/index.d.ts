@@ -6,6 +6,7 @@ export { Card, CardDescription, CardTitle } from './components/Card';
 export { Checkbox } from './components/Checkbox';
 export { ComponentPreviewCard } from './components/ComponentPreviewCards';
 export { Container } from './components/Container';
+export { Disclosure } from './components/Disclosure';
 export { Field } from './components/Field';
 export { Inline } from './components/Inline';
 export { Input } from './components/Input';

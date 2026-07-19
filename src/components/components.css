@@ -670,3 +670,38 @@
 .ui-text--strong {
   font-weight: 680;
 }
+
+.ui-disclosure {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-surface);
+}
+.ui-disclosure__summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  font-weight: 560;
+}
+.ui-disclosure__summary::-webkit-details-marker {
+  display: none;
+}
+.ui-disclosure__chevron {
+  flex: 0 0 auto;
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--color-text-subtle);
+  transition: transform 120ms ease;
+}
+.ui-disclosure[open] .ui-disclosure__chevron {
+  transform: rotate(90deg);
+}
+.ui-disclosure__content {
+  padding: 0 14px 14px;
+  color: var(--color-text-secondary);
+}
