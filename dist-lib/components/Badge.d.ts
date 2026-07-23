@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-type BadgeTone = 'primary' | 'accent' | 'info' | 'success' | 'warning' | 'error';
+type BadgeTone = 'primary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'muted';
 type BadgeSize = 'sm' | 'md' | 'lg';
 type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
     tone?: BadgeTone;

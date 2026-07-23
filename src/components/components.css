@@ -149,6 +149,13 @@
   --badge-text: var(--color-error-on-tint);
 }
 
+/* Muted tone — an outlined, receding chip for background/inactive states. */
+.ui-badge--muted {
+  --badge-tint: transparent;
+  --badge-text: var(--color-text-subtle);
+  border-color: var(--color-border);
+}
+
 .ui-callout {
   --callout-tint: var(--color-info-tint);
   --callout-text: var(--color-info-on-tint);
