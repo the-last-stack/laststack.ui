@@ -6,8 +6,10 @@ import { Callout } from "./components/Callout";
 import { Card, CardDescription, CardTitle } from "./components/Card";
 import { Checkbox } from "./components/Checkbox";
 import { ComponentPreviewCard } from "./components/ComponentPreviewCards";
+import { Progress } from "./components/Progress";
 import { SegmentedControl } from "./components/SegmentedControl";
 import { Slider } from "./components/Slider";
+import { Tab, Tabs } from "./components/Tabs";
 import {
   createThemeConfig,
   createThemeStyle,
@@ -526,6 +528,78 @@ function App() {
                   <Badge>md</Badge>
                   <Badge size="lg">lg</Badge>
                 </div>
+              </div>
+            </ShowcaseCard>
+          </div>
+        </CatalogSection>
+
+        <CatalogSection title="progress" description="Proportion of a known total, as one bar or several stacked parts.">
+          <div className={showcaseGrid}>
+            <ShowcaseCard title="tones" description="Semantic fills over the neutral track, at the default medium size.">
+              <div className={stackedControls}>
+                <Progress aria-label="Primary progress" max={100} value={62} />
+                <Progress aria-label="Accent progress" max={100} tone="accent" value={45} />
+                <Progress aria-label="Success progress" max={100} tone="success" value={88} />
+                <Progress aria-label="Warning progress" max={100} tone="warning" value={30} />
+              </div>
+            </ShowcaseCard>
+            <ShowcaseCard title="sizes and segments" description="Small, medium, and large; the last stacks two parts of one total.">
+              <div className={stackedControls}>
+                <Progress aria-label="Small progress" max={100} size="sm" value={62} />
+                <Progress aria-label="Medium progress" max={100} value={62} />
+                <Progress aria-label="Large progress" max={100} size="lg" value={62} />
+                <Progress
+                  aria-label="Segmented progress"
+                  max={100}
+                  segments={[
+                    { tone: "success", value: 48 },
+                    { tone: "warning", value: 18 },
+                  ]}
+                  size="lg"
+                />
+              </div>
+            </ShowcaseCard>
+          </div>
+        </CatalogSection>
+      </CatalogGroup>
+
+      <CatalogGroup title="navigation" description="Components for moving between pages.">
+        <CatalogSection title="tabs" description="A row of links with the current page underlined. Not a tablist — these navigate.">
+          <div className={showcaseGrid}>
+            <ShowcaseCard title="tones" description="Primary and accent underlines, over the rule the underline sits on.">
+              <div className={stackedControls}>
+                <Tabs rule>
+                  <Tab active href="#tabs">
+                    overview
+                  </Tab>
+                  <Tab href="#tabs">history</Tab>
+                  <Tab href="#tabs">settings</Tab>
+                </Tabs>
+                <Tabs rule tone="accent">
+                  <Tab active href="#tabs">
+                    overview
+                  </Tab>
+                  <Tab href="#tabs">history</Tab>
+                  <Tab href="#tabs">settings</Tab>
+                </Tabs>
+              </div>
+            </ShowcaseCard>
+            <ShowcaseCard title="sizes" description="Small and medium, without the rule — the shape for a page header.">
+              <div className={stackedControls}>
+                <Tabs size="sm">
+                  <Tab active href="#tabs">
+                    overview
+                  </Tab>
+                  <Tab href="#tabs">history</Tab>
+                  <Tab href="#tabs">settings</Tab>
+                </Tabs>
+                <Tabs>
+                  <Tab active href="#tabs">
+                    overview
+                  </Tab>
+                  <Tab href="#tabs">history</Tab>
+                  <Tab href="#tabs">settings</Tab>
+                </Tabs>
               </div>
             </ShowcaseCard>
           </div>

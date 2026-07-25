@@ -446,8 +446,28 @@ function H({ className: t = "", inputSize: n = "md", invalid: r = !1, ...i }) {
 	});
 }
 //#endregion
+//#region src/components/Progress.tsx
+function U({ className: t = "", value: n = 0, max: r = 100, tone: i = "primary", size: a = "md", segments: o, ...s }) {
+	let c = o ?? [{
+		value: n,
+		tone: i
+	}], l = c.reduce((e, t) => e + Math.max(0, t.value), 0), u = (e) => r <= 0 ? 0 : Math.min(100, Math.max(0, e) / r * 100);
+	return /* @__PURE__ */ e("div", {
+		className: `ui-progress ui-progress--${a} ${t}`.trim(),
+		role: "progressbar",
+		"aria-valuemin": 0,
+		"aria-valuemax": r,
+		"aria-valuenow": l,
+		...s,
+		children: c.map((t, n) => /* @__PURE__ */ e("div", {
+			className: `ui-progress__fill ui-progress__fill--${t.tone ?? i}`,
+			style: { width: `${u(t.value)}%` }
+		}, `${n}-${t.tone ?? i}`))
+	});
+}
+//#endregion
 //#region src/components/Spinner.tsx
-function U({ className: t = "", size: n = "md", tone: r = "primary", label: i = "Loading", ...a }) {
+function W({ className: t = "", size: n = "md", tone: r = "primary", label: i = "Loading", ...a }) {
 	return /* @__PURE__ */ e("span", {
 		"aria-label": i,
 		className: `ui-spinner ui-spinner--${n} ui-spinner--${r} ${t}`.trim(),
@@ -457,15 +477,30 @@ function U({ className: t = "", size: n = "md", tone: r = "primary", label: i = 
 }
 //#endregion
 //#region src/components/Stack.tsx
-function W({ className: t = "", gap: n = "md", align: r = "stretch", ...i }) {
+function G({ className: t = "", gap: n = "md", align: r = "stretch", ...i }) {
 	return /* @__PURE__ */ e("div", {
 		className: `ui-stack ui-stack--gap-${n} ui-stack--align-${r} ${t}`.trim(),
 		...i
 	});
 }
 //#endregion
+//#region src/components/Tabs.tsx
+function K({ className: t = "", tone: n = "primary", size: r = "md", rule: i = !1, ...a }) {
+	return /* @__PURE__ */ e("nav", {
+		className: `ui-tabs ui-tabs--${n} ui-tabs--${r}${i ? " ui-tabs--rule" : ""} ${t}`.trim(),
+		...a
+	});
+}
+function q({ className: t = "", active: n = !1, ...r }) {
+	return /* @__PURE__ */ e("a", {
+		className: `ui-tab ${t}`.trim(),
+		"aria-current": n ? "page" : void 0,
+		...r
+	});
+}
+//#endregion
 //#region src/components/Text.tsx
-function G({ className: t = "", tone: n = "default", size: r = "md", weight: i = "normal", ...a }) {
+function J({ className: t = "", tone: n = "default", size: r = "md", weight: i = "normal", ...a }) {
 	return /* @__PURE__ */ e("span", {
 		className: `ui-text ui-text--${n} ui-text--${r} ui-text--${i} ${t}`.trim(),
 		...a
@@ -473,7 +508,7 @@ function G({ className: t = "", tone: n = "default", size: r = "md", weight: i =
 }
 //#endregion
 //#region src/components/Textarea.tsx
-function K({ className: t = "", invalid: n = !1, ...r }) {
+function Y({ className: t = "", invalid: n = !1, ...r }) {
 	return /* @__PURE__ */ e("textarea", {
 		"aria-invalid": n || void 0,
 		className: `ui-textarea${n ? " ui-textarea--invalid" : ""} ${t}`.trim(),
@@ -482,18 +517,18 @@ function K({ className: t = "", invalid: n = !1, ...r }) {
 }
 //#endregion
 //#region src/useLastStackColorValues.ts
-var q = {
+var X = {
 	default: "",
 	muted: "",
 	foreground: "",
 	hover: ""
-}, J = {
-	primary: q,
-	accent: q,
-	success: q,
-	warning: q,
-	error: q,
-	info: q,
+}, Z = {
+	primary: X,
+	accent: X,
+	success: X,
+	warning: X,
+	error: X,
+	info: X,
 	background: {
 		default: "",
 		muted: "",
@@ -509,7 +544,7 @@ var q = {
 		muted: "",
 		focus: ""
 	}
-}, Y = [
+}, Q = [
 	"primary",
 	"accent",
 	"success",
@@ -517,12 +552,12 @@ var q = {
 	"error",
 	"info"
 ];
-function X(e) {
-	let [t, n] = s(J);
+function $(e) {
+	let [t, n] = s(Z);
 	return o(() => {
 		let t = e?.current ?? document.documentElement, r = getComputedStyle(t), i = (e) => r.getPropertyValue(`--color-${e}`).trim();
 		n({
-			...Object.fromEntries(Y.map((e) => [e, {
+			...Object.fromEntries(Q.map((e) => [e, {
 				default: i(e),
 				muted: i(`${e}-tint`),
 				foreground: i(`${e}-on-tint`),
@@ -546,8 +581,8 @@ function X(e) {
 		});
 	}, [e]), { palette: t };
 }
-function Z(e) {
-	return X(e).palette;
+function ee(e) {
+	return $(e).palette;
 }
 //#endregion
-export { m as Badge, A as Button, k as Callout, j as Card, N as CardDescription, M as CardTitle, P as Checkbox, L as ComponentPreviewCard, R as Container, z as Disclosure, B as Field, V as Inline, H as Input, p as LastStackUI, F as SegmentedControl, I as Slider, U as Spinner, W as Stack, G as Text, K as Textarea, u as createThemeConfig, d as createThemeStyle, l as defaultThemeConfig, c as seedColorNames, Z as useLastStackColorValues, X as useTheme };
+export { m as Badge, A as Button, k as Callout, j as Card, N as CardDescription, M as CardTitle, P as Checkbox, L as ComponentPreviewCard, R as Container, z as Disclosure, B as Field, V as Inline, H as Input, p as LastStackUI, U as Progress, F as SegmentedControl, I as Slider, W as Spinner, G as Stack, q as Tab, K as Tabs, J as Text, Y as Textarea, u as createThemeConfig, d as createThemeStyle, l as defaultThemeConfig, c as seedColorNames, ee as useLastStackColorValues, $ as useTheme };
