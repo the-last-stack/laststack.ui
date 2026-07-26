@@ -1,7 +1,16 @@
 {
   "name": "laststack.ui",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "A small React component library themed from six colors — two brand, four semantic — with the rest color-mixed from them.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-last-stack/laststack.ui.git"
+  },
+  "homepage": "https://github.com/the-last-stack/laststack.ui#readme",
+  "keywords": ["react", "components", "ui", "design-system", "tailwind", "theme"],
+  "sideEffects": ["**/*.css"],
   "type": "module",
   "main": "./dist-lib/index.js",
   "types": "./dist-lib/index.d.ts",
@@ -27,21 +36,16 @@
     "build": "tsc -b && vite build",
     "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build:lib"
   },
   "peerDependencies": {
     "react": ">=19",
     "react-dom": ">=19"
   },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.3.1",
-    "lucide-react": "^1.18.0",
-    "react": ">=19",
-    "react-dom": ">=19",
-    "tailwindcss": "^4.3.1"
-  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.1",
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -50,6 +54,8 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "lucide-react": "^1.18.0",
+    "tailwindcss": "^4.3.1",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12"
