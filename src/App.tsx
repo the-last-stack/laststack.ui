@@ -11,6 +11,14 @@ import { SegmentedControl } from "./components/SegmentedControl";
 import { Slider } from "./components/Slider";
 import { Tab, Tabs } from "./components/Tabs";
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableRow,
+} from "./components/Table";
+import {
   createThemeConfig,
   createThemeStyle,
   defaultThemeConfig,
@@ -771,6 +779,67 @@ function App() {
       </CatalogGroup>
 
       <CatalogGroup title="presentation" description="Components for grouping and presenting content.">
+        <CatalogSection title="table" description="Rows of data in real table markup, with a caption naming it and numeric columns aligned on their digits.">
+          <div className={showcaseGrid}>
+            <ShowcaseCard title="default" description="A caption, a header row, and numeric columns right-aligned with tabular figures.">
+              <Table caption="Comparable sales">
+                <TableHead>
+                  <TableRow>
+                    <TableHeaderCell>property</TableHeaderCell>
+                    <TableHeaderCell numeric>sq ft</TableHeaderCell>
+                    <TableHeaderCell numeric>price</TableHeaderCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>450 Commerce Dr</TableCell>
+                    <TableCell numeric>12,400</TableCell>
+                    <TableCell numeric>$4.10M</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>1200 Harbour Way</TableCell>
+                    <TableCell numeric>8,900</TableCell>
+                    <TableCell numeric>$2.95M</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>77 Kingsley Ave</TableCell>
+                    <TableCell numeric>21,050</TableCell>
+                    <TableCell numeric>$7.80M</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </ShowcaseCard>
+            <ShowcaseCard title="small" description="Denser padding and type for readouts that sit inside a card.">
+              <Table caption="Spend by task" size="sm">
+                <TableHead>
+                  <TableRow>
+                    <TableHeaderCell>task</TableHeaderCell>
+                    <TableHeaderCell numeric>calls</TableHeaderCell>
+                    <TableHeaderCell numeric>cost</TableHeaderCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>ingest-extract</TableCell>
+                    <TableCell numeric>1</TableCell>
+                    <TableCell numeric>$0.0403</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>applicability</TableCell>
+                    <TableCell numeric>4</TableCell>
+                    <TableCell numeric>$0.0130</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>drill-grade</TableCell>
+                    <TableCell numeric>42</TableCell>
+                    <TableCell numeric>$0.0020</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </ShowcaseCard>
+          </div>
+        </CatalogSection>
+
         <CatalogSection title="callout" description="Full-width contextual messages with semantic tone and an optional flush mode for embedding inside containers.">
           <div className={showcaseGrid}>
             <ShowcaseCard title="tones" description="Info, success, warning, and error using tint tokens.">

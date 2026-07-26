@@ -15,5 +15,13 @@ export { Slider } from './Slider'
 export { Spinner } from './Spinner'
 export { Stack } from './Stack'
 export { Tab, Tabs } from './Tabs'
+export {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableRow,
+} from './Table'
 export { Text } from './Text'
 export { Textarea } from './Textarea'

@@ -803,3 +803,70 @@
 .ui-progress__fill--error {
   background: var(--color-error);
 }
+
+.ui-table__scroll {
+  overflow-x: auto;
+}
+.ui-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+}
+/* The table's title, so it sits a step below a card heading and clearly above
+   the column headers — those drop to a micro-label so the two can't be read as
+   two header rows. */
+.ui-table__caption {
+  caption-side: top;
+  padding-bottom: 12px;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+.ui-table__header,
+.ui-table__cell {
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: baseline;
+}
+.ui-table__header {
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-subtle);
+  font-size: 0.75rem;
+  font-weight: 560;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+/* Rules between rows only — the header already has its own, and a line under
+   the last row would read as a table that continues. */
+.ui-table__body .ui-table__row + .ui-table__row .ui-table__cell {
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 55%, transparent);
+}
+.ui-table--sm .ui-table__header,
+.ui-table--sm .ui-table__cell {
+  padding: 6px 10px;
+}
+.ui-table--sm .ui-table__caption {
+  font-size: 0.9rem;
+}
+.ui-table--sm {
+  font-size: 0.875rem;
+}
+/* The outer columns sit flush with whatever contains the table, so it lines up
+   with the text around it rather than floating inside its own padding. */
+.ui-table__header:first-child,
+.ui-table__cell:first-child {
+  padding-left: 0;
+}
+.ui-table__header:last-child,
+.ui-table__cell:last-child {
+  padding-right: 0;
+}
+.ui-table__header--numeric,
+.ui-table__cell--numeric {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}

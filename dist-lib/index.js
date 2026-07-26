@@ -111,11 +111,11 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 	strokeWidth: 2,
 	strokeLinecap: "round",
 	strokeLinejoin: "round"
-}, b = (e) => {
+}, ee = (e) => {
 	for (let t in e) if (t.startsWith("aria-") || t === "role" || t === "title") return !0;
 	return !1;
-}, x = n({}), S = () => a(x), C = i(({ color: e, size: t, strokeWidth: n, absoluteStrokeWidth: i, className: a = "", children: o, iconNode: s, ...c }, l) => {
-	let { size: u = 24, strokeWidth: d = 2, absoluteStrokeWidth: f = !1, color: p = "currentColor", className: m = "" } = S() ?? {}, g = i ?? f ? Number(n ?? d) * 24 / Number(t ?? u) : n ?? d;
+}, te = n({}), b = () => a(te), x = i(({ color: e, size: t, strokeWidth: n, absoluteStrokeWidth: i, className: a = "", children: o, iconNode: s, ...c }, l) => {
+	let { size: u = 24, strokeWidth: d = 2, absoluteStrokeWidth: f = !1, color: p = "currentColor", className: m = "" } = b() ?? {}, g = i ?? f ? Number(n ?? d) * 24 / Number(t ?? u) : n ?? d;
 	return r("svg", {
 		ref: l,
 		...y,
@@ -124,21 +124,21 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 		stroke: e ?? p,
 		strokeWidth: g,
 		className: h("lucide", m, a),
-		...!o && !b(c) && { "aria-hidden": "true" },
+		...!o && !ee(c) && { "aria-hidden": "true" },
 		...c
 	}, [...s.map(([e, t]) => r(e, t)), ...Array.isArray(o) ? o : [o]]);
-}), w = (e, t) => {
-	let n = i(({ className: n, ...i }, a) => r(C, {
+}), S = (e, t) => {
+	let n = i(({ className: n, ...i }, a) => r(x, {
 		ref: a,
 		iconNode: t,
 		className: h(`lucide-${g(v(e))}`, `lucide-${e}`, n),
 		...i
 	}));
 	return n.displayName = v(e), n;
-}, T = w("chevron-right", [["path", {
+}, C = S("chevron-right", [["path", {
 	d: "m9 18 6-6-6-6",
 	key: "mthhwq"
-}]]), E = w("circle-check", [["circle", {
+}]]), w = S("circle-check", [["circle", {
 	cx: "12",
 	cy: "12",
 	r: "10",
@@ -146,7 +146,7 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 }], ["path", {
 	d: "m9 12 2 2 4-4",
 	key: "dzmm74"
-}]]), D = w("circle-x", [
+}]]), T = S("circle-x", [
 	["circle", {
 		cx: "12",
 		cy: "12",
@@ -161,8 +161,8 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 		d: "m9 9 6 6",
 		key: "z0biqf"
 	}]
-]), O = {
-	info: w("info", [
+]), E = {
+	info: S("info", [
 		["circle", {
 			cx: "12",
 			cy: "12",
@@ -178,8 +178,8 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 			key: "e9boi3"
 		}]
 	]),
-	success: E,
-	warning: w("triangle-alert", [
+	success: w,
+	warning: S("triangle-alert", [
 		["path", {
 			d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
 			key: "wmoenq"
@@ -193,10 +193,10 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 			key: "p32p05"
 		}]
 	]),
-	error: D
+	error: T
 };
-function k({ className: n = "", tone: r = "info", title: i, flush: a = !1, children: o, ...s }) {
-	let c = O[r];
+function D({ className: n = "", tone: r = "info", title: i, flush: a = !1, children: o, ...s }) {
+	let c = E[r];
 	return /* @__PURE__ */ t("div", {
 		className: `ui-callout ui-callout--${r}${a ? " ui-callout--flush" : ""} ${n}`.trim(),
 		...s,
@@ -214,7 +214,7 @@ function k({ className: n = "", tone: r = "info", title: i, flush: a = !1, child
 }
 //#endregion
 //#region src/components/Button.tsx
-function A({ className: n = "", size: r = "md", tone: i = "primary", variant: a = "solid", loading: o = !1, disabled: s, children: c, ...l }) {
+function O({ className: n = "", size: r = "md", tone: i = "primary", variant: a = "solid", loading: o = !1, disabled: s, children: c, ...l }) {
 	return /* @__PURE__ */ t("button", {
 		"aria-busy": o || void 0,
 		className: `ui-button ui-button--${a} ui-button--${i} ui-button--${r}${o ? " ui-button--loading" : ""} ${n}`.trim(),
@@ -228,19 +228,19 @@ function A({ className: n = "", size: r = "md", tone: i = "primary", variant: a 
 }
 //#endregion
 //#region src/components/Card.tsx
-function j({ className: t = "", variant: n = "default", ...r }) {
+function k({ className: t = "", variant: n = "default", ...r }) {
 	return /* @__PURE__ */ e("div", {
 		className: `ui-card ui-card--${n} ${t}`.trim(),
 		...r
 	});
 }
-function M({ className: t = "", ...n }) {
+function A({ className: t = "", ...n }) {
 	return /* @__PURE__ */ e("h3", {
 		className: `ui-card__title ${t}`.trim(),
 		...n
 	});
 }
-function N({ className: t = "", ...n }) {
+function j({ className: t = "", ...n }) {
 	return /* @__PURE__ */ e("p", {
 		className: `ui-card__description ${t}`.trim(),
 		...n
@@ -248,7 +248,7 @@ function N({ className: t = "", ...n }) {
 }
 //#endregion
 //#region src/components/Checkbox.tsx
-function P({ children: n, className: r = "", tone: i = "primary", ...a }) {
+function M({ children: n, className: r = "", tone: i = "primary", ...a }) {
 	return /* @__PURE__ */ t("label", {
 		className: `ui-checkbox ui-checkbox--${i} ${r}`.trim(),
 		children: [/* @__PURE__ */ e("input", {
@@ -259,7 +259,7 @@ function P({ children: n, className: r = "", tone: i = "primary", ...a }) {
 }
 //#endregion
 //#region src/components/SegmentedControl.tsx
-function F({ "aria-label": t, className: n = "", onChange: r, options: i, size: a = "md", tone: o = "primary", value: s }) {
+function N({ "aria-label": t, className: n = "", onChange: r, options: i, size: a = "md", tone: o = "primary", value: s }) {
 	return /* @__PURE__ */ e("div", {
 		"aria-label": t,
 		className: `ui-segmented ui-segmented--${o} ui-segmented--${a} ${n}`.trim(),
@@ -275,7 +275,7 @@ function F({ "aria-label": t, className: n = "", onChange: r, options: i, size: 
 }
 //#endregion
 //#region src/components/Slider.tsx
-function I({ className: n = "", label: r, tone: i = "primary", valueLabel: a, ...o }) {
+function P({ className: n = "", label: r, tone: i = "primary", valueLabel: a, ...o }) {
 	return /* @__PURE__ */ t("label", {
 		className: `ui-slider ui-slider--${i} ${n}`.trim(),
 		children: [/* @__PURE__ */ t("span", { children: [r, a ? /* @__PURE__ */ e("strong", { children: a }) : null] }), /* @__PURE__ */ e("input", {
@@ -286,14 +286,14 @@ function I({ className: n = "", label: r, tone: i = "primary", valueLabel: a, ..
 }
 //#endregion
 //#region src/components/ComponentPreviewCards.tsx
-function L({ mode: n }) {
+function F({ mode: n }) {
 	let [r, i] = s("left"), [a, o] = s(72);
 	return /* @__PURE__ */ e("div", {
 		className: n === "dark" ? "dark" : "ls-ui",
-		children: /* @__PURE__ */ t(j, {
+		children: /* @__PURE__ */ t(k, {
 			className: "grid gap-[22px]",
 			children: [
-				/* @__PURE__ */ t("div", { children: [/* @__PURE__ */ e(M, { children: "425 Industrial Way" }), /* @__PURE__ */ e(N, { children: "last comp: 03/2026 · 18,400 sqft" })] }),
+				/* @__PURE__ */ t("div", { children: [/* @__PURE__ */ e(A, { children: "425 Industrial Way" }), /* @__PURE__ */ e(j, { children: "last comp: 03/2026 · 18,400 sqft" })] }),
 				/* @__PURE__ */ t("div", {
 					className: "flex flex-wrap gap-3",
 					"aria-label": "Semantic badge examples",
@@ -316,7 +316,7 @@ function L({ mode: n }) {
 						})
 					]
 				}),
-				/* @__PURE__ */ e(k, {
+				/* @__PURE__ */ e(D, {
 					tone: "info",
 					title: "Market note",
 					children: "Vacancy is trending down across comparable industrial assets."
@@ -325,16 +325,16 @@ function L({ mode: n }) {
 					className: "grid grid-cols-[repeat(auto-fit,minmax(min(150px,100%),max-content))] items-center gap-4 max-[560px]:flex max-[560px]:flex-col max-[560px]:items-stretch",
 					"aria-label": "Primary and accent button examples",
 					children: [
-						/* @__PURE__ */ e(A, { children: "primary filled" }),
-						/* @__PURE__ */ e(A, {
+						/* @__PURE__ */ e(O, { children: "primary filled" }),
+						/* @__PURE__ */ e(O, {
 							variant: "outline",
 							children: "primary outline"
 						}),
-						/* @__PURE__ */ e(A, {
+						/* @__PURE__ */ e(O, {
 							tone: "accent",
 							children: "accent filled"
 						}),
-						/* @__PURE__ */ e(A, {
+						/* @__PURE__ */ e(O, {
 							tone: "accent",
 							variant: "outline",
 							children: "accent outline"
@@ -345,11 +345,11 @@ function L({ mode: n }) {
 					className: "grid w-[min(340px,100%)] gap-3.5 [&_.ui-segmented]:w-full [&_.ui-segmented_button]:flex-1 [&_.ui-slider]:w-full",
 					"aria-label": "Input component examples",
 					children: [
-						/* @__PURE__ */ e(P, {
+						/* @__PURE__ */ e(M, {
 							defaultChecked: !0,
 							children: "Include off-market comps"
 						}),
-						/* @__PURE__ */ e(I, {
+						/* @__PURE__ */ e(P, {
 							label: "Confidence",
 							max: "100",
 							min: "0",
@@ -357,7 +357,7 @@ function L({ mode: n }) {
 							value: a,
 							valueLabel: `${a}%`
 						}),
-						/* @__PURE__ */ e(F, {
+						/* @__PURE__ */ e(N, {
 							"aria-label": "Example view",
 							options: [{
 								label: "left",
@@ -377,7 +377,7 @@ function L({ mode: n }) {
 }
 //#endregion
 //#region src/components/Container.tsx
-function R({ className: t = "", size: n = "md", ...r }) {
+function I({ className: t = "", size: n = "md", ...r }) {
 	return /* @__PURE__ */ e("div", {
 		className: `ui-container ui-container--${n} ${t}`.trim(),
 		...r
@@ -385,14 +385,14 @@ function R({ className: t = "", size: n = "md", ...r }) {
 }
 //#endregion
 //#region src/components/Disclosure.tsx
-function z({ className: n = "", title: r, defaultOpen: i = !1, children: a, ...o }) {
+function L({ className: n = "", title: r, defaultOpen: i = !1, children: a, ...o }) {
 	return /* @__PURE__ */ t("details", {
 		className: `ui-disclosure ${n}`.trim(),
 		open: i,
 		...o,
 		children: [/* @__PURE__ */ t("summary", {
 			className: "ui-disclosure__summary",
-			children: [/* @__PURE__ */ e(T, {
+			children: [/* @__PURE__ */ e(C, {
 				className: "ui-disclosure__chevron",
 				"aria-hidden": !0
 			}), /* @__PURE__ */ e("span", {
@@ -407,7 +407,7 @@ function z({ className: n = "", title: r, defaultOpen: i = !1, children: a, ...o
 }
 //#endregion
 //#region src/components/Field.tsx
-function B({ className: n = "", children: r, label: i, hint: a, error: o, htmlFor: s, ...c }) {
+function R({ className: n = "", children: r, label: i, hint: a, error: o, htmlFor: s, ...c }) {
 	return /* @__PURE__ */ t("div", {
 		className: `ui-field ${n}`.trim(),
 		...c,
@@ -430,7 +430,7 @@ function B({ className: n = "", children: r, label: i, hint: a, error: o, htmlFo
 }
 //#endregion
 //#region src/components/Inline.tsx
-function V({ className: t = "", gap: n = "md", align: r = "center", justify: i = "start", wrap: a = !1, ...o }) {
+function z({ className: t = "", gap: n = "md", align: r = "center", justify: i = "start", wrap: a = !1, ...o }) {
 	return /* @__PURE__ */ e("div", {
 		className: `ui-inline ui-inline--gap-${n} ui-inline--align-${r} ui-inline--justify-${i}${a ? " ui-inline--wrap" : ""} ${t}`.trim(),
 		...o
@@ -438,7 +438,7 @@ function V({ className: t = "", gap: n = "md", align: r = "center", justify: i =
 }
 //#endregion
 //#region src/components/Input.tsx
-function H({ className: t = "", inputSize: n = "md", invalid: r = !1, ...i }) {
+function B({ className: t = "", inputSize: n = "md", invalid: r = !1, ...i }) {
 	return /* @__PURE__ */ e("input", {
 		"aria-invalid": r || void 0,
 		className: `ui-input ui-input--${n}${r ? " ui-input--invalid" : ""} ${t}`.trim(),
@@ -447,7 +447,7 @@ function H({ className: t = "", inputSize: n = "md", invalid: r = !1, ...i }) {
 }
 //#endregion
 //#region src/components/Progress.tsx
-function U({ className: t = "", value: n = 0, max: r = 100, tone: i = "primary", size: a = "md", segments: o, ...s }) {
+function V({ className: t = "", value: n = 0, max: r = 100, tone: i = "primary", size: a = "md", segments: o, ...s }) {
 	let c = o ?? [{
 		value: n,
 		tone: i
@@ -467,7 +467,7 @@ function U({ className: t = "", value: n = 0, max: r = 100, tone: i = "primary",
 }
 //#endregion
 //#region src/components/Spinner.tsx
-function W({ className: t = "", size: n = "md", tone: r = "primary", label: i = "Loading", ...a }) {
+function H({ className: t = "", size: n = "md", tone: r = "primary", label: i = "Loading", ...a }) {
 	return /* @__PURE__ */ e("span", {
 		"aria-label": i,
 		className: `ui-spinner ui-spinner--${n} ui-spinner--${r} ${t}`.trim(),
@@ -477,7 +477,7 @@ function W({ className: t = "", size: n = "md", tone: r = "primary", label: i = 
 }
 //#endregion
 //#region src/components/Stack.tsx
-function G({ className: t = "", gap: n = "md", align: r = "stretch", ...i }) {
+function U({ className: t = "", gap: n = "md", align: r = "stretch", ...i }) {
 	return /* @__PURE__ */ e("div", {
 		className: `ui-stack ui-stack--gap-${n} ui-stack--align-${r} ${t}`.trim(),
 		...i
@@ -485,13 +485,13 @@ function G({ className: t = "", gap: n = "md", align: r = "stretch", ...i }) {
 }
 //#endregion
 //#region src/components/Tabs.tsx
-function K({ className: t = "", tone: n = "primary", size: r = "md", rule: i = !1, ...a }) {
+function W({ className: t = "", tone: n = "primary", size: r = "md", rule: i = !1, ...a }) {
 	return /* @__PURE__ */ e("nav", {
 		className: `ui-tabs ui-tabs--${n} ui-tabs--${r}${i ? " ui-tabs--rule" : ""} ${t}`.trim(),
 		...a
 	});
 }
-function q({ className: t = "", active: n = !1, ...r }) {
+function G({ className: t = "", active: n = !1, ...r }) {
 	return /* @__PURE__ */ e("a", {
 		className: `ui-tab ${t}`.trim(),
 		"aria-current": n ? "page" : void 0,
@@ -499,8 +499,54 @@ function q({ className: t = "", active: n = !1, ...r }) {
 	});
 }
 //#endregion
+//#region src/components/Table.tsx
+function K({ className: n = "", size: r = "md", caption: i, children: a, ...o }) {
+	return /* @__PURE__ */ e("div", {
+		className: "ui-table__scroll",
+		children: /* @__PURE__ */ t("table", {
+			className: `ui-table ui-table--${r} ${n}`.trim(),
+			...o,
+			children: [i ? /* @__PURE__ */ e("caption", {
+				className: "ui-table__caption",
+				children: i
+			}) : null, a]
+		})
+	});
+}
+function q({ className: t = "", ...n }) {
+	return /* @__PURE__ */ e("thead", {
+		className: `ui-table__head ${t}`.trim(),
+		...n
+	});
+}
+function J({ className: t = "", ...n }) {
+	return /* @__PURE__ */ e("tbody", {
+		className: `ui-table__body ${t}`.trim(),
+		...n
+	});
+}
+function Y({ className: t = "", ...n }) {
+	return /* @__PURE__ */ e("tr", {
+		className: `ui-table__row ${t}`.trim(),
+		...n
+	});
+}
+function X({ className: t = "", numeric: n = !1, scope: r = "col", ...i }) {
+	return /* @__PURE__ */ e("th", {
+		className: `ui-table__header${n ? " ui-table__header--numeric" : ""} ${t}`.trim(),
+		scope: r,
+		...i
+	});
+}
+function Z({ className: t = "", numeric: n = !1, ...r }) {
+	return /* @__PURE__ */ e("td", {
+		className: `ui-table__cell${n ? " ui-table__cell--numeric" : ""} ${t}`.trim(),
+		...r
+	});
+}
+//#endregion
 //#region src/components/Text.tsx
-function J({ className: t = "", tone: n = "default", size: r = "md", weight: i = "normal", ...a }) {
+function ne({ className: t = "", tone: n = "default", size: r = "md", weight: i = "normal", ...a }) {
 	return /* @__PURE__ */ e("span", {
 		className: `ui-text ui-text--${n} ui-text--${r} ui-text--${i} ${t}`.trim(),
 		...a
@@ -508,7 +554,7 @@ function J({ className: t = "", tone: n = "default", size: r = "md", weight: i =
 }
 //#endregion
 //#region src/components/Textarea.tsx
-function Y({ className: t = "", invalid: n = !1, ...r }) {
+function re({ className: t = "", invalid: n = !1, ...r }) {
 	return /* @__PURE__ */ e("textarea", {
 		"aria-invalid": n || void 0,
 		className: `ui-textarea${n ? " ui-textarea--invalid" : ""} ${t}`.trim(),
@@ -517,18 +563,18 @@ function Y({ className: t = "", invalid: n = !1, ...r }) {
 }
 //#endregion
 //#region src/useLastStackColorValues.ts
-var X = {
+var Q = {
 	default: "",
 	muted: "",
 	foreground: "",
 	hover: ""
-}, Z = {
-	primary: X,
-	accent: X,
-	success: X,
-	warning: X,
-	error: X,
-	info: X,
+}, ie = {
+	primary: Q,
+	accent: Q,
+	success: Q,
+	warning: Q,
+	error: Q,
+	info: Q,
 	background: {
 		default: "",
 		muted: "",
@@ -544,7 +590,7 @@ var X = {
 		muted: "",
 		focus: ""
 	}
-}, Q = [
+}, ae = [
 	"primary",
 	"accent",
 	"success",
@@ -553,11 +599,11 @@ var X = {
 	"info"
 ];
 function $(e) {
-	let [t, n] = s(Z);
+	let [t, n] = s(ie);
 	return o(() => {
 		let t = e?.current ?? document.documentElement, r = getComputedStyle(t), i = (e) => r.getPropertyValue(`--color-${e}`).trim();
 		n({
-			...Object.fromEntries(Q.map((e) => [e, {
+			...Object.fromEntries(ae.map((e) => [e, {
 				default: i(e),
 				muted: i(`${e}-tint`),
 				foreground: i(`${e}-on-tint`),
@@ -581,8 +627,8 @@ function $(e) {
 		});
 	}, [e]), { palette: t };
 }
-function ee(e) {
+function oe(e) {
 	return $(e).palette;
 }
 //#endregion
-export { m as Badge, A as Button, k as Callout, j as Card, N as CardDescription, M as CardTitle, P as Checkbox, L as ComponentPreviewCard, R as Container, z as Disclosure, B as Field, V as Inline, H as Input, p as LastStackUI, U as Progress, F as SegmentedControl, I as Slider, W as Spinner, G as Stack, q as Tab, K as Tabs, J as Text, Y as Textarea, u as createThemeConfig, d as createThemeStyle, l as defaultThemeConfig, c as seedColorNames, ee as useLastStackColorValues, $ as useTheme };
+export { m as Badge, O as Button, D as Callout, k as Card, j as CardDescription, A as CardTitle, M as Checkbox, F as ComponentPreviewCard, I as Container, L as Disclosure, R as Field, z as Inline, B as Input, p as LastStackUI, V as Progress, N as SegmentedControl, P as Slider, H as Spinner, U as Stack, G as Tab, K as Table, J as TableBody, Z as TableCell, q as TableHead, X as TableHeaderCell, Y as TableRow, W as Tabs, ne as Text, re as Textarea, u as createThemeConfig, d as createThemeStyle, l as defaultThemeConfig, c as seedColorNames, oe as useLastStackColorValues, $ as useTheme };

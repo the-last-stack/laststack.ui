@@ -16,6 +16,7 @@ export { Slider } from './components/Slider';
 export { Spinner } from './components/Spinner';
 export { Stack } from './components/Stack';
 export { Tab, Tabs } from './components/Tabs';
+export { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow, } from './components/Table';
 export { Text } from './components/Text';
 export { Textarea } from './components/Textarea';
 export { useLastStackColorValues, useTheme } from './useLastStackColorValues';
