@@ -32,14 +32,19 @@ The repo has two parts:
 ## Using the library
  
 ```bash
-npm install laststack.ui
+npm install @the-last-stack/laststack.ui
 ```
+ 
+React 19 or newer is a peer dependency, so bring your own `react` and
+`react-dom`. Nothing else is needed at runtime — Tailwind builds this package
+but doesn't have to build yours, because the stylesheet you import is already
+compiled.
  
 Wrap your app in `LastStackUI` with a theme config:
  
 ```tsx
-import { LastStackUI, Button, Badge } from 'laststack.ui'
-import 'laststack.ui/styles.css'
+import { LastStackUI, Button, Badge } from '@the-last-stack/laststack.ui'
+import '@the-last-stack/laststack.ui/styles.css'
  
 export function App() {
   return (
@@ -93,22 +98,41 @@ If you want theme scoping below the app root, `createThemeStyle(config)` returns
  
 ### Components
  
+Every component spreads the rest of its props onto the element it renders, so
+`className`, `id`, handlers and ARIA attributes all pass through.
+ 
 | Component | Notes |
 |---|---|
 | `Button` | `variant`: solid · outline · subtle · ghost. `tone`: primary · accent · destructive. `size`: sm · md · lg |
-| `Badge` | `tone`: primary · accent · info · success · warning · error. `size`: sm · md · lg |
-| `Card` | `variant`: default · elevated · interactive |
-| `Checkbox` | Controlled, accessible |
+| `Badge` | `tone`: primary · accent · info · success · warning · error · muted. `size`: sm · md · lg |
+| `Callout` | `tone`: info · success · warning · error, each with its own icon. `title` optional |
+| `Card` | `variant`: default · elevated · interactive. With `CardTitle` and `CardDescription` |
+| `Text` | `tone`: default · muted · subtle. `size`: sm · md · lg. `weight`: normal · medium · strong |
+| `Checkbox` | Controlled, accessible. `tone`: primary · accent |
+| `Input` · `Textarea` | Form controls, styled from the theme |
+| `Field` | Label, hint and error wrapper for a control |
 | `SegmentedControl` | Single-select tab strip |
-| `Slider` | Controlled range input |
+| `Slider` | Controlled range input. `tone`: primary · accent |
+| `Tabs` · `Tab` | Navigation strip. `tone`: primary · accent. `size`: sm · md |
+| `Table` | With `TableHead`, `TableBody`, `TableRow`, `TableCell`, `TableHeaderCell`. `size`: sm · md |
+| `Progress` | `value` and `max`. `tone`: the six seeds. `size`: sm · md · lg |
+| `Spinner` | `tone`: primary · accent · neutral. `size`: sm · md · lg. `label` for screen readers |
+| `Disclosure` | Collapsible `<details>`. `title` required, `defaultOpen` optional |
+| `Container` | Page-width wrapper. `size`: sm · md · lg |
+| `Stack` · `Inline` | Vertical and horizontal layout. `gap`: none · xs · sm · md · lg · xl, plus `align` and `justify` |
+ 
+### Hooks
+ 
+`useTheme()` and `useLastStackColorValues()` read the resolved theme from
+inside the provider — the mixed palette, not just the six seeds you passed in.
  
 ### CSS
  
 ```js
-import 'laststack.ui/styles.css'      // base styles (required)
-import 'laststack.ui/tailwind.css'    // tailwind v4 layer (optional)
-import 'laststack.ui/theme.css'       // CSS custom props only (optional)
-import 'laststack.ui/components.css'  // component styles only (optional)
+import '@the-last-stack/laststack.ui/styles.css'      // base styles (required)
+import '@the-last-stack/laststack.ui/tailwind.css'    // tailwind v4 layer (optional)
+import '@the-last-stack/laststack.ui/theme.css'       // CSS custom props only (optional)
+import '@the-last-stack/laststack.ui/components.css'  // component styles only (optional)
 ```
  
 ---
