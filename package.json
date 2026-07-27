@@ -1,7 +1,10 @@
 {
-  "name": "laststack.ui",
+  "name": "@the-last-stack/laststack.ui",
   "private": false,
   "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "A small React component library themed from six colors — two brand, four semantic — with the rest color-mixed from them.",
   "license": "MIT",
   "repository": {
