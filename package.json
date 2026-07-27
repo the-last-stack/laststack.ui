@@ -1,7 +1,7 @@
 {
   "name": "@the-last-stack/laststack.ui",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publishConfig": {
     "access": "public"
   },
@@ -12,8 +12,17 @@
     "url": "git+https://github.com/the-last-stack/laststack.ui.git"
   },
   "homepage": "https://github.com/the-last-stack/laststack.ui#readme",
-  "keywords": ["react", "components", "ui", "design-system", "tailwind", "theme"],
-  "sideEffects": ["**/*.css"],
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "design-system",
+    "tailwind",
+    "theme"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "type": "module",
   "main": "./dist-lib/index.js",
   "types": "./dist-lib/index.d.ts",
