@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { RefObject } from 'react'
+import { useLastStackScope } from './LastStackUI'
 
 type IntentColor = {
   default: string
@@ -72,10 +73,13 @@ const emptyPalette: LastStackPalette = {
 const intentColorNames = ['primary', 'accent', 'success', 'warning', 'error', 'info'] as const
 
 export function useTheme(ref?: RefObject<HTMLElement | null>): LastStackThemeValues {
+  const scopeRef = useLastStackScope()
   const [palette, setPalette] = useState<LastStackPalette>(emptyPalette)
 
   useEffect(() => {
-    const target = ref?.current ?? document.documentElement
+    // The theme is inline on the provider; documentElement only ever has the
+    // library defaults, so falling back to it silently ignored the theme prop.
+    const target = ref?.current ?? scopeRef?.current ?? document.documentElement
     const styles = getComputedStyle(target)
     const color = (name: string) => styles.getPropertyValue(`--color-${name}`).trim()
 
@@ -107,7 +111,7 @@ export function useTheme(ref?: RefObject<HTMLElement | null>): LastStackThemeVal
         focus: color('border-focus'),
       },
     })
-  }, [ref])
+  }, [ref, scopeRef])
 
   return { palette }
 }

@@ -6,6 +6,7 @@ import { Callout } from "./components/Callout";
 import { Card, CardDescription, CardTitle } from "./components/Card";
 import { Checkbox } from "./components/Checkbox";
 import { ComponentPreviewCard } from "./components/ComponentPreviewCards";
+import { RampSwatches } from "./components/RampSwatches";
 import { Progress } from "./components/Progress";
 import { SegmentedControl } from "./components/SegmentedControl";
 import { Slider } from "./components/Slider";
@@ -473,6 +474,15 @@ function App() {
           </div>
         </section>
       </header>
+
+      <CatalogGroup title="palette" description="The numbered scales generated from your seeds, and how they respond as you tune.">
+        <CatalogSection
+          title="ramps"
+          description="Lightness is fixed per step, so a step number means the same lightness across every intent — the seed only supplies hue and chroma. The label in each swatch is coloured by the step number alone (black at 500 and below, white at 600 and up); if any label is hard to read, the ladder needs adjusting. The seed itself is deliberately not one of the steps."
+        >
+          <RampSwatches />
+        </CatalogSection>
+      </CatalogGroup>
 
       <CatalogGroup title="specimens" description="Composed component examples for checking light and dark mode side by side.">
         <CatalogSection title="component examples" description="Matched examples rendered in light and dark mode.">
