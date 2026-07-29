@@ -11,12 +11,14 @@ type ComponentPreviewCardProps = {
   mode: 'light' | 'dark'
 }
 
+// The two specimens sit side by side and must each keep their own mode no
+// matter what the page shell around them is doing, so both scopes are explicit.
 export function ComponentPreviewCard({ mode }: ComponentPreviewCardProps) {
   const [segmentValue, setSegmentValue] = useState<'left' | 'right'>('left')
   const [sliderValue, setSliderValue] = useState(72)
 
   return (
-    <div className={mode === 'dark' ? 'dark' : 'ls-ui'}>
+    <div className={mode === 'dark' ? 'dark' : 'ls-ui light'}>
       <Card className="grid gap-[22px]">
         <div>
           <CardTitle>425 Industrial Way</CardTitle>

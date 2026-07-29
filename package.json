@@ -46,8 +46,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts",
+    "build:lib": "node scripts/check-mode-cascade.mjs && tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts",
     "lint": "eslint .",
+    "check:cascade": "node scripts/check-mode-cascade.mjs",
     "preview": "vite preview",
     "prepublishOnly": "npm run build:lib"
   },
