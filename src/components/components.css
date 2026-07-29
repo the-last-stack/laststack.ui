@@ -14,6 +14,16 @@
   letter-spacing: -0.02em;
   line-height: 1;
   padding: 0 20px;
+  /* Centre the glyphs, not the em box. With `line-height: 1` the line box is
+     one em, but a font's ascent and descent aren't symmetric around the caps —
+     Familjen Grotesk has a 1.025em ascent against a 0.225em descent, which puts
+     0.25em above the cap and 0.10em below the baseline and makes flex-centred
+     text sit ~0.075em low. Trimming to cap/baseline makes geometric centring
+     optically correct. Ignored by browsers that don't support it, which just
+     get today's behaviour. */
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  text-box: trim-both cap alphabetic;
   transition:
     background-color 120ms ease,
     border-color 120ms ease,
@@ -310,6 +320,9 @@
 
 .ui-segmented button {
   min-height: 40px;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+  text-box: trim-both cap alphabetic;
   border: 1px solid transparent;
   border-radius: 4px;
   color: var(--color-text-secondary);
@@ -379,10 +392,60 @@
   font: inherit;
 }
 
+/* The track is drawn from theme tokens rather than left to the UA. `accent-color`
+   only colours the filled side; the unfilled remainder is UA-drawn and does not
+   reliably follow `color-scheme`, so on a dark surface it stayed pale. The fill
+   position comes from `--slider-pct`, set by the component. */
 .ui-slider input {
   width: 100%;
-  accent-color: var(--control-action);
   cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  height: 18px;
+}
+
+.ui-slider input::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--control-action) 0 var(--slider-pct, 0%),
+    var(--color-border) var(--slider-pct, 0%) 100%
+  );
+}
+
+.ui-slider input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--control-action);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+}
+
+.ui-slider input::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-border);
+}
+
+.ui-slider input::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--control-action);
+}
+
+.ui-slider input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--control-action);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
 }
 
 .ui-slider input:focus-visible {
