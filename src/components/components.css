@@ -305,9 +305,14 @@
   cursor: not-allowed;
 }
 
+/* `inline-flex` declares this control is content-sized, but a flex parent
+   overrides that: inside a Field, which is a column flex box, the default
+   `align-items: stretch` pulls the border out to the full width while the
+   options stay put, leaving dead track after the last one. */
 .ui-segmented {
   --control-action: var(--color-action-primary);
   display: inline-flex;
+  align-self: start;
   border: 1px solid color-mix(in srgb, var(--control-action) 24%, var(--color-border));
   border-radius: 6px;
   background: var(--color-surface);
