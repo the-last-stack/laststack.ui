@@ -367,14 +367,18 @@
   outline-offset: 2px;
 }
 
+/* The label row carries the Field label treatment, not one of its own — a
+   Slider and an Input sit side by side in most forms, and any difference in
+   size or leading reads as the two controls being misaligned. */
 .ui-slider {
   --control-action: var(--color-action-primary);
   display: grid;
   min-width: min(260px, 100%);
-  gap: 8px;
+  gap: 6px;
   color: var(--color-text-secondary);
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.88rem;
+  font-weight: 560;
+  letter-spacing: -0.01em;
 }
 
 .ui-slider--accent {
@@ -390,6 +394,7 @@
 .ui-slider strong {
   color: var(--color-text-primary);
   font: inherit;
+  font-weight: 700;
 }
 
 /* The track is drawn from theme tokens rather than left to the UA. `accent-color`
