@@ -300,12 +300,10 @@ function V({ className: e = "", label: t, tone: n = "primary", valueLabel: r, st
 	let o = B(a.min, 0), s = B(a.max, 100), c = B(a.value ?? a.defaultValue, o), d = s === o ? 0 : Math.min(100, Math.max(0, (c - o) / (s - o) * 100));
 	return /* @__PURE__ */ u("label", {
 		className: `ui-slider ui-slider--${n} ${e}`.trim(),
+		style: i,
 		children: [/* @__PURE__ */ u("span", { children: [t, r ? /* @__PURE__ */ l("strong", { children: r }) : null] }), /* @__PURE__ */ l("input", {
 			type: "range",
-			style: {
-				"--slider-pct": `${d}%`,
-				...i
-			},
+			style: { "--slider-pct": `${d}%` },
 			...a
 		})]
 	});

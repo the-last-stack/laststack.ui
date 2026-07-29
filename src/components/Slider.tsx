@@ -30,13 +30,17 @@ export function Slider({
   const value = num(props.value ?? props.defaultValue, min)
   const pct = max === min ? 0 : Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100))
 
+  // `className` and `style` both describe the control, so both land on the root.
+  // With `style` on the range input instead, laying a Slider out — giving it
+  // `flex: 1` in a row, say — silently styled the track and left the label and
+  // the control itself unmoved.
   return (
-    <label className={`ui-slider ui-slider--${tone} ${className}`.trim()}>
+    <label className={`ui-slider ui-slider--${tone} ${className}`.trim()} style={style}>
       <span>
         {label}
         {valueLabel ? <strong>{valueLabel}</strong> : null}
       </span>
-      <input type="range" style={{ '--slider-pct': `${pct}%`, ...style } as CSSProperties} {...props} />
+      <input type="range" style={{ '--slider-pct': `${pct}%` } as CSSProperties} {...props} />
     </label>
   )
 }
