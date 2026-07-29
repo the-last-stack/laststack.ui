@@ -96,6 +96,87 @@ type LastStackThemeConfig = {
  
 If you want theme scoping below the app root, `createThemeStyle(config)` returns a CSS custom property object you can spread onto any element.
  
+### Where the seeds land
+ 
+Inline styles on the provider only reach its descendants. Anything resolving
+*above* it — `:root` variables your app defines, the `body` background, the
+overscroll area — would fall back to the library defaults and paint in the wrong
+colour. So the outermost `LastStackUI` also mirrors the seeds onto `<html>`.
+ 
+Control it with `scope`:
+ 
+| value | behaviour |
+|---|---|
+| `auto` (default) | mirror onto `<html>` when outermost; nested providers stay local |
+| `root` | always mirror onto `<html>` |
+| `element` | never touch `<html>` — for apps embedded in a page they don't own |
+ 
+The mirrored properties are restored on unmount.
+ 
+### Light and dark mode
+ 
+Add `dark` to any ancestor — usually `<html>`:
+ 
+```js
+document.documentElement.classList.add('dark')
+```
+ 
+Everything inside switches, including providers further down the tree.
+ 
+To pin a subtree to light *inside* a dark ancestor — side-by-side specimens, a
+printable panel — add the explicit `light` class:
+ 
+```tsx
+<div className="ls-ui light">…stays light…</div>
+```
+ 
+Why both exist: `LastStackUI` sets your seed colors on its own element, so the
+derived tokens (surfaces, borders, text, tints) have to be re-declared there to
+resolve against *your* colors rather than the defaults. That means the provider
+always restates the mode it's in, and a `dark` ancestor has to out-specify it.
+`light` is the escape hatch that ties on specificity and wins on order.
+ 
+### Palette ramps
+ 
+Every seed also generates a numbered scale, as CSS variables and as a hook:
+ 
+```tsx
+import { usePalette, stepTextTone } from 'laststack.ui'
+ 
+const { primary } = usePalette()
+primary[300]   // resolved colour value
+primary.seed   // exactly the hex you passed in
+```
+ 
+```css
+background: var(--color-primary-300);
+```
+ 
+Steps are `50 100 200 … 900 950`.
+ 
+**Lightness is fixed per step; the seed supplies hue and chroma.** Step 300 is
+the same lightness whatever colour you passed in, which is what makes the
+number comparable across intents — `primary-200` and `error-200` are equally
+light. The seed is never snapped into the scale; a seed that happens to be very
+light or very dark would otherwise skew every step around it. It stays
+available as `seed`.
+ 
+Because lightness is fixed, legibility is a property of the number:
+ 
+| step | text |
+|---|---|
+| ≤ 500 | black |
+| ≥ 600 | white |
+ 
+True for every hue — `stepTextTone(step)` returns `'dark' | 'light'`. The ladder
+jumps from L .68 at 500 to L .53 at 600 on purpose, stepping over the band
+around L .56 where neither black nor white reaches 4.5:1, so no step is ever
+illegible both ways.
+ 
+The ramp is **mode-independent**. Dark mode doesn't change the scale, it changes
+which step you reach for — the same button might be `700` in light and `300` in
+dark.
+ 
 ### Components
  
 Every component spreads the rest of its props onto the element it renders, so
