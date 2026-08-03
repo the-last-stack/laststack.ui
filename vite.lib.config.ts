@@ -8,14 +8,21 @@ export default defineConfig({
     emptyOutDir: false,
     outDir: 'dist-lib',
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        color: resolve(__dirname, 'src/color/index.ts'),
+      },
       formats: ['es'],
-      fileName: 'index',
+      // Named, not derived: with more than one entry the default is the package
+      // name, and the banner below imports this by path.
+      cssFileName: 'index',
     },
     rollupOptions: {
       external: ['react', 'react/jsx-runtime'],
       output: {
-        banner: "import './index.css';",
+        // Only the component entry carries the stylesheet. `color` is imported
+        // by React Native, where a CSS import is a build error.
+        banner: (chunk) => (chunk.name === 'index' ? "import './index.css';" : ''),
       },
     },
   },

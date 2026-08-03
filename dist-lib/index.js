@@ -1,124 +1,50 @@
 import "./index.css";
-import { createContext as e, createElement as t, forwardRef as n, useContext as r, useEffect as i, useLayoutEffect as a, useMemo as o, useRef as s, useState as c } from "react";
-import { jsx as l, jsxs as u } from "react/jsx-runtime";
-//#region src/theme.ts
-var d = [
-	"primary",
-	"accent",
-	"info",
-	"success",
-	"warning",
-	"error"
-], f = {
-	seeds: {
-		primary: "#292966",
-		accent: "#9ac2d9",
-		info: "#4f8fbf",
-		success: "#5fa868",
-		warning: "#d9a441",
-		error: "#c9626b"
-	},
-	clamps: {
-		primaryLight: !0,
-		primaryDark: !0,
-		accentLight: !0,
-		accentDark: !0
-	},
-	surface: {
-		tint: 4,
-		tintSource: "primary",
-		lightBrightness: 8,
-		darkLift: 12
-	}
-};
-function p(e) {
-	return {
-		seeds: {
-			...f.seeds,
-			...e.seeds
-		},
-		clamps: {
-			...f.clamps,
-			...e.clamps
-		},
-		surface: {
-			...f.surface,
-			...e.surface
-		}
-	};
-}
-function m(e) {
-	let { clamps: t, seeds: n, surface: r } = p(e);
-	return {
-		"--color-primary": n.primary,
-		"--color-accent": n.accent,
-		"--color-info": n.info,
-		"--color-success": n.success,
-		"--color-warning": n.warning,
-		"--color-error": n.error,
-		"--color-action-primary-light": h("primary", "light", t.primaryLight),
-		"--color-action-primary-dark": h("primary", "dark", t.primaryDark),
-		"--color-action-accent-light": h("accent", "light", t.accentLight),
-		"--color-action-accent-dark": h("accent", "dark", t.accentDark),
-		"--light-bg-neutral-mix": `${12 - r.lightBrightness}%`,
-		"--light-surface-neutral-mix": `${Math.max(9 - r.lightBrightness, 0)}%`,
-		"--light-border-neutral-mix": `${Math.min(30 - r.lightBrightness, 34)}%`,
-		"--dark-bg-neutral-mix": `${r.darkLift}%`,
-		"--dark-surface-neutral-mix": `${Math.min(r.darkLift + 4, 38)}%`,
-		"--dark-border-neutral-mix": `${Math.min(r.darkLift + 16, 56)}%`,
-		"--surface-tint-color": `var(--color-${r.tintSource})`,
-		"--surface-tint": `${r.tint}%`,
-		"--surface-tint-half": `${r.tint / 2}%`,
-		"--surface-border-tint": `${Math.min(r.tint * 2.5, 24)}%`
-	};
-}
-function h(e, t, n) {
-	return n ? `oklch(from var(--color-${e}) ${t === "light" ? "min(l, 0.55)" : "max(l, 0.72)"} c h)` : `var(--color-${e})`;
-}
-//#endregion
+import { i as e, n as t, r as n, t as r } from "./theme-B5Hf-g9g.js";
+import { createContext as i, createElement as a, forwardRef as o, useContext as s, useEffect as c, useLayoutEffect as l, useMemo as u, useRef as d, useState as f } from "react";
+import { jsx as p, jsxs as m } from "react/jsx-runtime";
 //#region src/LastStackUI.tsx
-var g = e(null);
-function _() {
-	return r(g);
+var h = i(null);
+function g() {
+	return s(h);
 }
-var v = typeof window > "u" ? i : a;
-function y({ children: e, className: t = "", style: n, theme: i, scope: a = "auto", ...c }) {
-	let u = s(null), d = r(g), f = a === "root" || a === "auto" && d === null, p = o(() => i ? m(i) : null, [i ? JSON.stringify(i) : ""]);
-	return v(() => {
-		if (!f || !p) return;
-		let e = document.documentElement, t = Object.entries(p), n = t.map(([t]) => [t, e.style.getPropertyValue(t)]);
+var _ = typeof window > "u" ? c : l;
+function v({ children: e, className: n = "", style: r, theme: i, scope: a = "auto", ...o }) {
+	let c = d(null), l = s(h), f = a === "root" || a === "auto" && l === null, m = u(() => i ? t(i) : null, [i ? JSON.stringify(i) : ""]);
+	return _(() => {
+		if (!f || !m) return;
+		let e = document.documentElement, t = Object.entries(m), n = t.map(([t]) => [t, e.style.getPropertyValue(t)]);
 		for (let [n, r] of t) e.style.setProperty(n, r);
 		return () => {
 			for (let [t, r] of n) r ? e.style.setProperty(t, r) : e.style.removeProperty(t);
 		};
-	}, [f, p]), /* @__PURE__ */ l(g.Provider, {
-		value: u,
-		children: /* @__PURE__ */ l("div", {
-			ref: u,
-			className: `ls-ui ${t}`.trim(),
+	}, [f, m]), /* @__PURE__ */ p(h.Provider, {
+		value: c,
+		children: /* @__PURE__ */ p("div", {
+			ref: c,
+			className: `ls-ui ${n}`.trim(),
 			style: {
-				...p,
-				...n
+				...m,
+				...r
 			},
-			...c,
+			...o,
 			children: e
 		})
 	});
 }
 //#endregion
 //#region src/components/Badge.tsx
-function b({ className: e = "", size: t = "md", tone: n = "primary", ...r }) {
-	return /* @__PURE__ */ l("span", {
+function y({ className: e = "", size: t = "md", tone: n = "primary", ...r }) {
+	return /* @__PURE__ */ p("span", {
 		className: `ui-badge ui-badge--${n} ui-badge--${t} ${e}`.trim(),
 		...r
 	});
 }
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/mergeClasses.mjs
-var x = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) === t).join(" ").trim(), S = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), C = (e) => e.replace(/^([A-Z])|[\s-_]+(\w)/g, (e, t, n) => n ? n.toUpperCase() : t.toLowerCase()), w = (e) => {
-	let t = C(e);
+var b = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) === t).join(" ").trim(), x = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), S = (e) => e.replace(/^([A-Z])|[\s-_]+(\w)/g, (e, t, n) => n ? n.toUpperCase() : t.toLowerCase()), C = (e) => {
+	let t = S(e);
 	return t.charAt(0).toUpperCase() + t.slice(1);
-}, T = {
+}, w = {
 	xmlns: "http://www.w3.org/2000/svg",
 	width: 24,
 	height: 24,
@@ -131,31 +57,31 @@ var x = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 }, ee = (e) => {
 	for (let t in e) if (t.startsWith("aria-") || t === "role" || t === "title") return !0;
 	return !1;
-}, E = e({}), D = () => r(E), O = n(({ color: e, size: n, strokeWidth: r, absoluteStrokeWidth: i, className: a = "", children: o, iconNode: s, ...c }, l) => {
-	let { size: u = 24, strokeWidth: d = 2, absoluteStrokeWidth: f = !1, color: p = "currentColor", className: m = "" } = D() ?? {}, h = i ?? f ? Number(r ?? d) * 24 / Number(n ?? u) : r ?? d;
-	return t("svg", {
+}, T = i({}), E = () => s(T), D = o(({ color: e, size: t, strokeWidth: n, absoluteStrokeWidth: r, className: i = "", children: o, iconNode: s, ...c }, l) => {
+	let { size: u = 24, strokeWidth: d = 2, absoluteStrokeWidth: f = !1, color: p = "currentColor", className: m = "" } = E() ?? {}, h = r ?? f ? Number(n ?? d) * 24 / Number(t ?? u) : n ?? d;
+	return a("svg", {
 		ref: l,
-		...T,
-		width: n ?? u ?? T.width,
-		height: n ?? u ?? T.height,
+		...w,
+		width: t ?? u ?? w.width,
+		height: t ?? u ?? w.height,
 		stroke: e ?? p,
 		strokeWidth: h,
-		className: x("lucide", m, a),
+		className: b("lucide", m, i),
 		...!o && !ee(c) && { "aria-hidden": "true" },
 		...c
-	}, [...s.map(([e, n]) => t(e, n)), ...Array.isArray(o) ? o : [o]]);
-}), k = (e, r) => {
-	let i = n(({ className: n, ...i }, a) => t(O, {
-		ref: a,
-		iconNode: r,
-		className: x(`lucide-${S(w(e))}`, `lucide-${e}`, n),
-		...i
+	}, [...s.map(([e, t]) => a(e, t)), ...Array.isArray(o) ? o : [o]]);
+}), O = (e, t) => {
+	let n = o(({ className: n, ...r }, i) => a(D, {
+		ref: i,
+		iconNode: t,
+		className: b(`lucide-${x(C(e))}`, `lucide-${e}`, n),
+		...r
 	}));
-	return i.displayName = w(e), i;
-}, A = k("chevron-right", [["path", {
+	return n.displayName = C(e), n;
+}, te = O("chevron-right", [["path", {
 	d: "m9 18 6-6-6-6",
 	key: "mthhwq"
-}]]), te = k("circle-check", [["circle", {
+}]]), k = O("circle-check", [["circle", {
 	cx: "12",
 	cy: "12",
 	r: "10",
@@ -163,7 +89,7 @@ var x = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 }], ["path", {
 	d: "m9 12 2 2 4-4",
 	key: "dzmm74"
-}]]), j = k("circle-x", [
+}]]), A = O("circle-x", [
 	["circle", {
 		cx: "12",
 		cy: "12",
@@ -178,8 +104,8 @@ var x = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 		d: "m9 9 6 6",
 		key: "z0biqf"
 	}]
-]), M = {
-	info: k("info", [
+]), j = {
+	info: O("info", [
 		["circle", {
 			cx: "12",
 			cy: "12",
@@ -195,8 +121,8 @@ var x = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 			key: "e9boi3"
 		}]
 	]),
-	success: te,
-	warning: k("triangle-alert", [
+	success: k,
+	warning: O("triangle-alert", [
 		["path", {
 			d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
 			key: "wmoenq"
@@ -210,19 +136,19 @@ var x = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 			key: "p32p05"
 		}]
 	]),
-	error: j
+	error: A
 };
-function N({ className: e = "", tone: t = "info", title: n, flush: r = !1, children: i, ...a }) {
-	let o = M[t];
-	return /* @__PURE__ */ u("div", {
+function M({ className: e = "", tone: t = "info", title: n, flush: r = !1, children: i, ...a }) {
+	let o = j[t];
+	return /* @__PURE__ */ m("div", {
 		className: `ui-callout ui-callout--${t}${r ? " ui-callout--flush" : ""} ${e}`.trim(),
 		...a,
-		children: [/* @__PURE__ */ l(o, {
+		children: [/* @__PURE__ */ p(o, {
 			className: "ui-callout__icon",
 			"aria-hidden": !0
-		}), /* @__PURE__ */ u("div", {
+		}), /* @__PURE__ */ m("div", {
 			className: "ui-callout__content",
-			children: [n && /* @__PURE__ */ l("p", {
+			children: [n && /* @__PURE__ */ p("p", {
 				className: "ui-callout__title",
 				children: n
 			}), i]
@@ -231,13 +157,13 @@ function N({ className: e = "", tone: t = "info", title: n, flush: r = !1, child
 }
 //#endregion
 //#region src/components/Button.tsx
-function P({ className: e = "", size: t = "md", tone: n = "primary", variant: r = "solid", loading: i = !1, disabled: a, children: o, ...s }) {
-	return /* @__PURE__ */ u("button", {
+function N({ className: e = "", size: t = "md", tone: n = "primary", variant: r = "solid", loading: i = !1, disabled: a, children: o, ...s }) {
+	return /* @__PURE__ */ m("button", {
 		"aria-busy": i || void 0,
 		className: `ui-button ui-button--${r} ui-button--${n} ui-button--${t}${i ? " ui-button--loading" : ""} ${e}`.trim(),
 		disabled: a || i,
 		...s,
-		children: [i ? /* @__PURE__ */ l("span", {
+		children: [i ? /* @__PURE__ */ p("span", {
 			"aria-hidden": !0,
 			className: "ui-button__spinner"
 		}) : null, o]
@@ -245,43 +171,43 @@ function P({ className: e = "", size: t = "md", tone: n = "primary", variant: r 
 }
 //#endregion
 //#region src/components/Card.tsx
-function F({ className: e = "", variant: t = "default", ...n }) {
-	return /* @__PURE__ */ l("div", {
+function P({ className: e = "", variant: t = "default", ...n }) {
+	return /* @__PURE__ */ p("div", {
 		className: `ui-card ui-card--${t} ${e}`.trim(),
 		...n
 	});
 }
-function I({ className: e = "", ...t }) {
-	return /* @__PURE__ */ l("h3", {
+function F({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("h3", {
 		className: `ui-card__title ${e}`.trim(),
 		...t
 	});
 }
-function L({ className: e = "", ...t }) {
-	return /* @__PURE__ */ l("p", {
+function I({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("p", {
 		className: `ui-card__description ${e}`.trim(),
 		...t
 	});
 }
 //#endregion
 //#region src/components/Checkbox.tsx
-function R({ children: e, className: t = "", tone: n = "primary", ...r }) {
-	return /* @__PURE__ */ u("label", {
+function L({ children: e, className: t = "", tone: n = "primary", ...r }) {
+	return /* @__PURE__ */ m("label", {
 		className: `ui-checkbox ui-checkbox--${n} ${t}`.trim(),
-		children: [/* @__PURE__ */ l("input", {
+		children: [/* @__PURE__ */ p("input", {
 			type: "checkbox",
 			...r
-		}), /* @__PURE__ */ l("span", { children: e })]
+		}), /* @__PURE__ */ p("span", { children: e })]
 	});
 }
 //#endregion
 //#region src/components/SegmentedControl.tsx
-function z({ "aria-label": e, className: t = "", onChange: n, options: r, size: i = "md", tone: a = "primary", value: o }) {
-	return /* @__PURE__ */ l("div", {
+function R({ "aria-label": e, className: t = "", onChange: n, options: r, size: i = "md", tone: a = "primary", value: o }) {
+	return /* @__PURE__ */ p("div", {
 		"aria-label": e,
 		className: `ui-segmented ui-segmented--${a} ui-segmented--${i} ${t}`.trim(),
 		role: "radiogroup",
-		children: r.map((e) => /* @__PURE__ */ l("button", {
+		children: r.map((e) => /* @__PURE__ */ p("button", {
 			"aria-checked": e.value === o,
 			onClick: () => n(e.value),
 			role: "radio",
@@ -292,88 +218,88 @@ function z({ "aria-label": e, className: t = "", onChange: n, options: r, size: 
 }
 //#endregion
 //#region src/components/Slider.tsx
-var B = (e, t) => {
+var z = (e, t) => {
 	let n = typeof e == "number" ? e : Number(e);
 	return Number.isFinite(n) ? n : t;
 };
-function V({ className: e = "", label: t, tone: n = "primary", valueLabel: r, style: i, ...a }) {
-	let o = B(a.min, 0), s = B(a.max, 100), c = B(a.value ?? a.defaultValue, o), d = s === o ? 0 : Math.min(100, Math.max(0, (c - o) / (s - o) * 100));
-	return /* @__PURE__ */ u("label", {
+function B({ className: e = "", label: t, tone: n = "primary", valueLabel: r, style: i, ...a }) {
+	let o = z(a.min, 0), s = z(a.max, 100), c = z(a.value ?? a.defaultValue, o), l = s === o ? 0 : Math.min(100, Math.max(0, (c - o) / (s - o) * 100));
+	return /* @__PURE__ */ m("label", {
 		className: `ui-slider ui-slider--${n} ${e}`.trim(),
 		style: i,
-		children: [/* @__PURE__ */ u("span", { children: [t, r ? /* @__PURE__ */ l("strong", { children: r }) : null] }), /* @__PURE__ */ l("input", {
+		children: [/* @__PURE__ */ m("span", { children: [t, r ? /* @__PURE__ */ p("strong", { children: r }) : null] }), /* @__PURE__ */ p("input", {
 			type: "range",
-			style: { "--slider-pct": `${d}%` },
+			style: { "--slider-pct": `${l}%` },
 			...a
 		})]
 	});
 }
 //#endregion
 //#region src/components/ComponentPreviewCards.tsx
-function H({ mode: e }) {
-	let [t, n] = c("left"), [r, i] = c(72);
-	return /* @__PURE__ */ l("div", {
+function V({ mode: e }) {
+	let [t, n] = f("left"), [r, i] = f(72);
+	return /* @__PURE__ */ p("div", {
 		className: e === "dark" ? "dark" : "ls-ui light",
-		children: /* @__PURE__ */ u(F, {
+		children: /* @__PURE__ */ m(P, {
 			className: "grid gap-[22px]",
 			children: [
-				/* @__PURE__ */ u("div", { children: [/* @__PURE__ */ l(I, { children: "425 Industrial Way" }), /* @__PURE__ */ l(L, { children: "last comp: 03/2026 · 18,400 sqft" })] }),
-				/* @__PURE__ */ u("div", {
+				/* @__PURE__ */ m("div", { children: [/* @__PURE__ */ p(F, { children: "425 Industrial Way" }), /* @__PURE__ */ p(I, { children: "last comp: 03/2026 · 18,400 sqft" })] }),
+				/* @__PURE__ */ m("div", {
 					className: "flex flex-wrap gap-3",
 					"aria-label": "Semantic badge examples",
 					children: [
-						/* @__PURE__ */ l(b, {
+						/* @__PURE__ */ p(y, {
 							tone: "info",
 							children: "info"
 						}),
-						/* @__PURE__ */ l(b, {
+						/* @__PURE__ */ p(y, {
 							tone: "success",
 							children: "success"
 						}),
-						/* @__PURE__ */ l(b, {
+						/* @__PURE__ */ p(y, {
 							tone: "warning",
 							children: "warning"
 						}),
-						/* @__PURE__ */ l(b, {
+						/* @__PURE__ */ p(y, {
 							tone: "error",
 							children: "error"
 						})
 					]
 				}),
-				/* @__PURE__ */ l(N, {
+				/* @__PURE__ */ p(M, {
 					tone: "info",
 					title: "Market note",
 					children: "Vacancy is trending down across comparable industrial assets."
 				}),
-				/* @__PURE__ */ u("div", {
+				/* @__PURE__ */ m("div", {
 					className: "grid grid-cols-[repeat(auto-fit,minmax(min(150px,100%),max-content))] items-center gap-4 max-[560px]:flex max-[560px]:flex-col max-[560px]:items-stretch",
 					"aria-label": "Primary and accent button examples",
 					children: [
-						/* @__PURE__ */ l(P, { children: "primary filled" }),
-						/* @__PURE__ */ l(P, {
+						/* @__PURE__ */ p(N, { children: "primary filled" }),
+						/* @__PURE__ */ p(N, {
 							variant: "outline",
 							children: "primary outline"
 						}),
-						/* @__PURE__ */ l(P, {
+						/* @__PURE__ */ p(N, {
 							tone: "accent",
 							children: "accent filled"
 						}),
-						/* @__PURE__ */ l(P, {
+						/* @__PURE__ */ p(N, {
 							tone: "accent",
 							variant: "outline",
 							children: "accent outline"
 						})
 					]
 				}),
-				/* @__PURE__ */ u("div", {
+				/* @__PURE__ */ m("div", {
 					className: "grid w-[min(340px,100%)] gap-3.5 [&_.ui-segmented]:w-full [&_.ui-segmented_button]:flex-1 [&_.ui-slider]:w-full",
 					"aria-label": "Input component examples",
 					children: [
-						/* @__PURE__ */ l(R, {
+						/* @__PURE__ */ p(L, {
 							defaultChecked: !0,
 							children: "Include off-market comps"
 						}),
-						/* @__PURE__ */ l(V, {
+						/* @__PURE__ */ p(B, {
 							label: "Confidence",
 							max: "100",
 							min: "0",
@@ -381,7 +307,7 @@ function H({ mode: e }) {
 							value: r,
 							valueLabel: `${r}%`
 						}),
-						/* @__PURE__ */ l(z, {
+						/* @__PURE__ */ p(R, {
 							"aria-label": "Example view",
 							options: [{
 								label: "left",
@@ -401,7 +327,7 @@ function H({ mode: e }) {
 }
 //#endregion
 //#region src/palette.ts
-var U = [
+var H = [
 	50,
 	100,
 	200,
@@ -414,113 +340,113 @@ var U = [
 	900,
 	950
 ];
-function W(e) {
+function U(e) {
 	return e <= 500 ? "dark" : "light";
 }
-var G = () => ({
-	...Object.fromEntries(U.map((e) => [e, ""])),
+var W = () => ({
+	...Object.fromEntries(H.map((e) => [e, ""])),
 	seed: ""
-}), K = () => Object.fromEntries(d.map((e) => [e, G()]));
-function q(e, t) {
+}), G = () => Object.fromEntries(e.map((e) => [e, W()]));
+function K(e, t) {
 	let n = document.createElement("span");
 	n.style.cssText = "position:absolute;width:0;height:0;visibility:hidden;pointer-events:none", e.appendChild(n);
 	let r = getComputedStyle(n), i = t.map((e) => (n.style.color = "", n.style.color = `var(${e})`, r.color));
 	return n.remove(), i;
 }
-function J(e) {
-	let t = _(), [n, r] = c(K);
-	return i(() => {
-		let n = e?.current ?? t?.current ?? document.documentElement;
-		if (!n) return;
-		let i = d.flatMap((e) => [`--color-${e}`, ...U.map((t) => `--color-${e}-${t}`)]), a = () => {
-			let e = q(n, i), t = 0;
-			r(Object.fromEntries(d.map((n) => {
-				let r = e[t++];
-				return [n, {
-					...Object.fromEntries(U.map((n) => [n, e[t++]])),
+function q(t) {
+	let n = g(), [r, i] = f(G);
+	return c(() => {
+		let r = t?.current ?? n?.current ?? document.documentElement;
+		if (!r) return;
+		let a = e.flatMap((e) => [`--color-${e}`, ...H.map((t) => `--color-${e}-${t}`)]), o = () => {
+			let t = K(r, a), n = 0;
+			i(Object.fromEntries(e.map((e) => {
+				let r = t[n++];
+				return [e, {
+					...Object.fromEntries(H.map((e) => [e, t[n++]])),
 					seed: r
 				}];
 			})));
 		};
-		a();
-		let o = new MutationObserver(a);
-		return o.observe(n, {
+		o();
+		let s = new MutationObserver(o);
+		return s.observe(r, {
 			attributes: !0,
 			attributeFilter: ["style", "class"]
-		}), () => o.disconnect();
-	}, [e, t]), n;
+		}), () => s.disconnect();
+	}, [t, n]), r;
 }
 //#endregion
 //#region src/components/RampSwatches.tsx
-function Y() {
-	let e = J();
-	return /* @__PURE__ */ l("div", {
+function J() {
+	let t = q();
+	return /* @__PURE__ */ p("div", {
 		className: "grid gap-4",
-		children: d.map((t) => /* @__PURE__ */ u("div", {
+		children: e.map((e) => /* @__PURE__ */ m("div", {
 			className: "grid gap-1.5",
-			children: [/* @__PURE__ */ u("div", {
+			children: [/* @__PURE__ */ m("div", {
 				className: "flex items-baseline gap-2",
 				children: [
-					/* @__PURE__ */ l("span", {
+					/* @__PURE__ */ p("span", {
 						className: "text-[0.88rem] font-semibold text-text-primary",
-						children: t
+						children: e
 					}),
-					/* @__PURE__ */ l("span", {
+					/* @__PURE__ */ p("span", {
 						className: "inline-block h-3 w-3 rounded-full border border-border align-middle",
-						style: { background: `var(--color-${t})` }
+						style: { background: `var(--color-${e})` }
 					}),
-					/* @__PURE__ */ u("span", {
+					/* @__PURE__ */ m("span", {
 						className: "font-mono text-[0.72rem] text-text-secondary",
-						children: ["seed ", e[t].seed]
+						children: ["seed ", t[e].seed]
 					})
 				]
-			}), /* @__PURE__ */ l("div", {
+			}), /* @__PURE__ */ p("div", {
 				className: "grid gap-1",
-				style: { gridTemplateColumns: `repeat(${U.length}, minmax(0, 1fr))` },
-				children: U.map((e) => /* @__PURE__ */ u("div", {
+				style: { gridTemplateColumns: `repeat(${H.length}, minmax(0, 1fr))` },
+				children: H.map((t) => /* @__PURE__ */ m("div", {
 					className: "grid h-14 min-w-0 content-between rounded-md p-1.5",
 					style: {
-						background: `var(--color-${t}-${e})`,
-						color: W(e) === "dark" ? "#000" : "#fff"
+						background: `var(--color-${e}-${t})`,
+						color: U(t) === "dark" ? "#000" : "#fff"
 					},
-					title: `--color-${t}-${e}`,
-					children: [/* @__PURE__ */ l("span", {
+					title: `--color-${e}-${t}`,
+					children: [/* @__PURE__ */ p("span", {
 						className: "font-mono text-[0.7rem] font-medium",
-						children: e
-					}), /* @__PURE__ */ l("span", {
+						children: t
+					}), /* @__PURE__ */ p("span", {
 						className: "font-mono text-[0.6rem] opacity-80",
-						children: W(e) === "dark" ? "black" : "white"
+						children: U(t) === "dark" ? "black" : "white"
 					})]
-				}, e))
+				}, t))
 			})]
-		}, t))
+		}, e))
 	});
 }
 //#endregion
 //#region src/components/Container.tsx
-function X({ className: e = "", size: t = "md", ...n }) {
-	return /* @__PURE__ */ l("div", {
+function Y({ className: e = "", size: t = "md", ...n }) {
+	return /* @__PURE__ */ p("div", {
 		className: `ui-container ui-container--${t} ${e}`.trim(),
 		...n
 	});
 }
 //#endregion
 //#region src/components/Disclosure.tsx
-function Z({ className: e = "", title: t, defaultOpen: n = !1, children: r, ...i }) {
-	return /* @__PURE__ */ u("details", {
+function X({ className: e = "", title: t, defaultOpen: n = !1, children: r, ...i }) {
+	return /* @__PURE__ */ m("details", {
 		className: `ui-disclosure ${e}`.trim(),
 		open: n,
 		...i,
-		children: [/* @__PURE__ */ u("summary", {
+		children: [/* @__PURE__ */ m("summary", {
 			className: "ui-disclosure__summary",
-			children: [/* @__PURE__ */ l(A, {
+			children: [/* @__PURE__ */ p(te, {
 				className: "ui-disclosure__chevron",
 				"aria-hidden": !0
-			}), /* @__PURE__ */ l("span", {
+			}), /* @__PURE__ */ p("span", {
 				className: "ui-disclosure__title",
 				children: t
 			})]
-		}), /* @__PURE__ */ l("div", {
+		}), /* @__PURE__ */ p("div", {
 			className: "ui-disclosure__content",
 			children: r
 		})]
@@ -529,20 +455,20 @@ function Z({ className: e = "", title: t, defaultOpen: n = !1, children: r, ...i
 //#endregion
 //#region src/components/Field.tsx
 function ne({ className: e = "", children: t, label: n, hint: r, error: i, htmlFor: a, ...o }) {
-	return /* @__PURE__ */ u("div", {
+	return /* @__PURE__ */ m("div", {
 		className: `ui-field ${e}`.trim(),
 		...o,
 		children: [
-			n ? /* @__PURE__ */ l("label", {
+			n ? /* @__PURE__ */ p("label", {
 				className: "ui-field__label",
 				htmlFor: a,
 				children: n
 			}) : null,
 			t,
-			i ? /* @__PURE__ */ l("p", {
+			i ? /* @__PURE__ */ p("p", {
 				className: "ui-field__error",
 				children: i
-			}) : r ? /* @__PURE__ */ l("p", {
+			}) : r ? /* @__PURE__ */ p("p", {
 				className: "ui-field__hint",
 				children: r
 			}) : null
@@ -551,16 +477,16 @@ function ne({ className: e = "", children: t, label: n, hint: r, error: i, htmlF
 }
 //#endregion
 //#region src/components/Inline.tsx
-function re({ className: e = "", gap: t = "md", align: n = "center", justify: r = "start", wrap: i = !1, ...a }) {
-	return /* @__PURE__ */ l("div", {
+function Z({ className: e = "", gap: t = "md", align: n = "center", justify: r = "start", wrap: i = !1, ...a }) {
+	return /* @__PURE__ */ p("div", {
 		className: `ui-inline ui-inline--gap-${t} ui-inline--align-${n} ui-inline--justify-${r}${i ? " ui-inline--wrap" : ""} ${e}`.trim(),
 		...a
 	});
 }
 //#endregion
 //#region src/components/Input.tsx
-function ie({ className: e = "", inputSize: t = "md", invalid: n = !1, ...r }) {
-	return /* @__PURE__ */ l("input", {
+function re({ className: e = "", inputSize: t = "md", invalid: n = !1, ...r }) {
+	return /* @__PURE__ */ p("input", {
 		"aria-invalid": n || void 0,
 		className: `ui-input ui-input--${t}${n ? " ui-input--invalid" : ""} ${e}`.trim(),
 		...r
@@ -568,28 +494,28 @@ function ie({ className: e = "", inputSize: t = "md", invalid: n = !1, ...r }) {
 }
 //#endregion
 //#region src/components/Progress.tsx
-function ae({ className: e = "", value: t = 0, max: n = 100, tone: r = "primary", size: i = "md", segments: a, ...o }) {
+function ie({ className: e = "", value: t = 0, max: n = 100, tone: r = "primary", size: i = "md", segments: a, ...o }) {
 	let s = a ?? [{
 		value: t,
 		tone: r
-	}], c = s.reduce((e, t) => e + Math.max(0, t.value), 0), u = (e) => n <= 0 ? 0 : Math.min(100, Math.max(0, e) / n * 100);
-	return /* @__PURE__ */ l("div", {
+	}], c = s.reduce((e, t) => e + Math.max(0, t.value), 0), l = (e) => n <= 0 ? 0 : Math.min(100, Math.max(0, e) / n * 100);
+	return /* @__PURE__ */ p("div", {
 		className: `ui-progress ui-progress--${i} ${e}`.trim(),
 		role: "progressbar",
 		"aria-valuemin": 0,
 		"aria-valuemax": n,
 		"aria-valuenow": c,
 		...o,
-		children: s.map((e, t) => /* @__PURE__ */ l("div", {
+		children: s.map((e, t) => /* @__PURE__ */ p("div", {
 			className: `ui-progress__fill ui-progress__fill--${e.tone ?? r}`,
-			style: { width: `${u(e.value)}%` }
+			style: { width: `${l(e.value)}%` }
 		}, `${t}-${e.tone ?? r}`))
 	});
 }
 //#endregion
 //#region src/components/Spinner.tsx
-function oe({ className: e = "", size: t = "md", tone: n = "primary", label: r = "Loading", ...i }) {
-	return /* @__PURE__ */ l("span", {
+function ae({ className: e = "", size: t = "md", tone: n = "primary", label: r = "Loading", ...i }) {
+	return /* @__PURE__ */ p("span", {
 		"aria-label": r,
 		className: `ui-spinner ui-spinner--${t} ui-spinner--${n} ${e}`.trim(),
 		role: "status",
@@ -598,22 +524,22 @@ function oe({ className: e = "", size: t = "md", tone: n = "primary", label: r =
 }
 //#endregion
 //#region src/components/Stack.tsx
-function se({ className: e = "", gap: t = "md", align: n = "stretch", ...r }) {
-	return /* @__PURE__ */ l("div", {
+function oe({ className: e = "", gap: t = "md", align: n = "stretch", ...r }) {
+	return /* @__PURE__ */ p("div", {
 		className: `ui-stack ui-stack--gap-${t} ui-stack--align-${n} ${e}`.trim(),
 		...r
 	});
 }
 //#endregion
 //#region src/components/Tabs.tsx
-function ce({ className: e = "", tone: t = "primary", size: n = "md", rule: r = !1, ...i }) {
-	return /* @__PURE__ */ l("nav", {
+function se({ className: e = "", tone: t = "primary", size: n = "md", rule: r = !1, ...i }) {
+	return /* @__PURE__ */ p("nav", {
 		className: `ui-tabs ui-tabs--${t} ui-tabs--${n}${r ? " ui-tabs--rule" : ""} ${e}`.trim(),
 		...i
 	});
 }
-function le({ className: e = "", active: t = !1, ...n }) {
-	return /* @__PURE__ */ l("a", {
+function ce({ className: e = "", active: t = !1, ...n }) {
+	return /* @__PURE__ */ p("a", {
 		className: `ui-tab ${e}`.trim(),
 		"aria-current": t ? "page" : void 0,
 		...n
@@ -621,62 +547,62 @@ function le({ className: e = "", active: t = !1, ...n }) {
 }
 //#endregion
 //#region src/components/Table.tsx
-function ue({ className: e = "", size: t = "md", caption: n, children: r, ...i }) {
-	return /* @__PURE__ */ l("div", {
+function le({ className: e = "", size: t = "md", caption: n, children: r, ...i }) {
+	return /* @__PURE__ */ p("div", {
 		className: "ui-table__scroll",
-		children: /* @__PURE__ */ u("table", {
+		children: /* @__PURE__ */ m("table", {
 			className: `ui-table ui-table--${t} ${e}`.trim(),
 			...i,
-			children: [n ? /* @__PURE__ */ l("caption", {
+			children: [n ? /* @__PURE__ */ p("caption", {
 				className: "ui-table__caption",
 				children: n
 			}) : null, r]
 		})
 	});
 }
-function de({ className: e = "", ...t }) {
-	return /* @__PURE__ */ l("thead", {
+function ue({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("thead", {
 		className: `ui-table__head ${e}`.trim(),
 		...t
 	});
 }
-function fe({ className: e = "", ...t }) {
-	return /* @__PURE__ */ l("tbody", {
+function de({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("tbody", {
 		className: `ui-table__body ${e}`.trim(),
 		...t
 	});
 }
-function pe({ className: e = "", ...t }) {
-	return /* @__PURE__ */ l("tr", {
+function fe({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("tr", {
 		className: `ui-table__row ${e}`.trim(),
 		...t
 	});
 }
-function me({ className: e = "", numeric: t = !1, scope: n = "col", ...r }) {
-	return /* @__PURE__ */ l("th", {
+function pe({ className: e = "", numeric: t = !1, scope: n = "col", ...r }) {
+	return /* @__PURE__ */ p("th", {
 		className: `ui-table__header${t ? " ui-table__header--numeric" : ""} ${e}`.trim(),
 		scope: n,
 		...r
 	});
 }
-function he({ className: e = "", numeric: t = !1, ...n }) {
-	return /* @__PURE__ */ l("td", {
+function me({ className: e = "", numeric: t = !1, ...n }) {
+	return /* @__PURE__ */ p("td", {
 		className: `ui-table__cell${t ? " ui-table__cell--numeric" : ""} ${e}`.trim(),
 		...n
 	});
 }
 //#endregion
 //#region src/components/Text.tsx
-function ge({ className: e = "", tone: t = "default", size: n = "md", weight: r = "normal", ...i }) {
-	return /* @__PURE__ */ l("span", {
+function he({ className: e = "", tone: t = "default", size: n = "md", weight: r = "normal", ...i }) {
+	return /* @__PURE__ */ p("span", {
 		className: `ui-text ui-text--${t} ui-text--${n} ui-text--${r} ${e}`.trim(),
 		...i
 	});
 }
 //#endregion
 //#region src/components/Textarea.tsx
-function _e({ className: e = "", invalid: t = !1, ...n }) {
-	return /* @__PURE__ */ l("textarea", {
+function ge({ className: e = "", invalid: t = !1, ...n }) {
+	return /* @__PURE__ */ p("textarea", {
 		"aria-invalid": t || void 0,
 		className: `ui-textarea${t ? " ui-textarea--invalid" : ""} ${e}`.trim(),
 		...n
@@ -689,7 +615,7 @@ var Q = {
 	muted: "",
 	foreground: "",
 	hover: ""
-}, ve = {
+}, _e = {
 	primary: Q,
 	accent: Q,
 	success: Q,
@@ -711,7 +637,7 @@ var Q = {
 		muted: "",
 		focus: ""
 	}
-}, ye = [
+}, ve = [
 	"primary",
 	"accent",
 	"success",
@@ -720,11 +646,11 @@ var Q = {
 	"info"
 ];
 function $(e) {
-	let t = _(), [n, r] = c(ve);
-	return i(() => {
+	let t = g(), [n, r] = f(_e);
+	return c(() => {
 		let n = e?.current ?? t?.current ?? document.documentElement, i = getComputedStyle(n), a = (e) => i.getPropertyValue(`--color-${e}`).trim();
 		r({
-			...Object.fromEntries(ye.map((e) => [e, {
+			...Object.fromEntries(ve.map((e) => [e, {
 				default: a(e),
 				muted: a(`${e}-tint`),
 				foreground: a(`${e}-on-tint`),
@@ -748,8 +674,8 @@ function $(e) {
 		});
 	}, [e, t]), { palette: n };
 }
-function be(e) {
+function ye(e) {
 	return $(e).palette;
 }
 //#endregion
-export { b as Badge, P as Button, N as Callout, F as Card, L as CardDescription, I as CardTitle, R as Checkbox, H as ComponentPreviewCard, X as Container, Z as Disclosure, ne as Field, re as Inline, ie as Input, y as LastStackUI, ae as Progress, Y as RampSwatches, z as SegmentedControl, V as Slider, oe as Spinner, se as Stack, le as Tab, ue as Table, fe as TableBody, he as TableCell, de as TableHead, me as TableHeaderCell, pe as TableRow, ce as Tabs, ge as Text, _e as Textarea, p as createThemeConfig, m as createThemeStyle, f as defaultThemeConfig, U as rampSteps, d as seedColorNames, W as stepTextTone, be as useLastStackColorValues, _ as useLastStackScope, J as usePalette, $ as useTheme };
+export { y as Badge, N as Button, M as Callout, P as Card, I as CardDescription, F as CardTitle, L as Checkbox, V as ComponentPreviewCard, Y as Container, X as Disclosure, ne as Field, Z as Inline, re as Input, v as LastStackUI, ie as Progress, J as RampSwatches, R as SegmentedControl, B as Slider, ae as Spinner, oe as Stack, ce as Tab, le as Table, de as TableBody, me as TableCell, ue as TableHead, pe as TableHeaderCell, fe as TableRow, se as Tabs, he as Text, ge as Textarea, r as createThemeConfig, t as createThemeStyle, n as defaultThemeConfig, H as rampSteps, e as seedColorNames, U as stepTextTone, ye as useLastStackColorValues, g as useLastStackScope, q as usePalette, $ as useTheme };

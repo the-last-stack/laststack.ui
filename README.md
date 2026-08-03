@@ -207,6 +207,29 @@ Every component spreads the rest of its props onto the element it renders, so
 `useTheme()` and `useLastStackColorValues()` read the resolved theme from
 inside the provider — the mixed palette, not just the six seeds you passed in.
  
+### Without a DOM
+ 
+`@the-last-stack/laststack.ui/color` derives the same tokens as flat colour
+values. It imports no CSS and touches no DOM, so a React Native bundler can
+load it.
+ 
+```js
+import { derivePalette } from '@the-last-stack/laststack.ui/color'
+ 
+const p = derivePalette({ seeds }, isDark ? 'dark' : 'light')
+p.bg            // '#111114'
+p.actionPrimary // the clamped brand colour, legible on that background
+p.errorOnTint   // what to write on p.errorTint
+```
+ 
+The stylesheet stays the engine on the web — it gamut-maps, re-derives per
+scope, and makes the mode a class. This is those rules written out a second
+time for renderers that have none of that, and `npm run check:palette` fails
+the build if the two stop agreeing.
+ 
+The numbered ramps are web-only: they overshoot sRGB chroma on purpose and
+rely on the browser pulling it back.
+ 
 ### CSS
  
 ```js
@@ -242,6 +265,7 @@ npm run build
 | `npm run dev` | Start the workbench dev server |
 | `npm run build` | Build the workbench for deployment |
 | `npm run build:lib` | Build the component library package |
+| `npm run check:palette` | Diff the DOM-free palette against the stylesheet (needs a build) |
 | `npm run preview` | Preview the workbench production build |
  
 

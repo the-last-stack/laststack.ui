@@ -39,4 +39,21 @@ export type LastStackThemeStyle = CSSProperties & Record<`--color-${SeedColorNam
 };
 export declare const defaultThemeConfig: ResolvedLastStackThemeConfig;
 export declare function createThemeConfig(config: LastStackThemeConfig): ResolvedLastStackThemeConfig;
+/**
+ * How far each surface token travels from neutral, as percentages.
+ *
+ * The stylesheet takes these as custom properties and the DOM-free palette
+ * takes them as numbers, so they are computed once here rather than twice.
+ */
+export declare function surfaceMixes(surface: ResolvedLastStackThemeConfig['surface']): {
+    lightBg: number;
+    lightSurface: number;
+    lightBorder: number;
+    darkBg: number;
+    darkSurface: number;
+    darkBorder: number;
+    tint: number;
+    tintHalf: number;
+    borderTint: number;
+};
 export declare function createThemeStyle(config: LastStackThemeConfig): LastStackThemeStyle;
