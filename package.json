@@ -1,7 +1,7 @@
 {
   "name": "@the-last-stack/laststack.ui",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.3.0",
   "publishConfig": {
     "access": "public"
   },
@@ -31,6 +31,10 @@
       "types": "./dist-lib/index.d.ts",
       "import": "./dist-lib/index.js"
     },
+    "./color": {
+      "types": "./dist-lib/color/index.d.ts",
+      "import": "./dist-lib/color.js"
+    },
     "./styles.css": "./dist-lib/index.css",
     "./tailwind.css": "./src/tailwind.css",
     "./theme.css": "./src/theme.css",
@@ -46,8 +50,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts",
+    "build:lib": "node scripts/check-mode-cascade.mjs && tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts && node scripts/check-palette-parity.mjs",
     "lint": "eslint .",
+    "check:cascade": "node scripts/check-mode-cascade.mjs",
+    "check:palette": "node scripts/check-palette-parity.mjs",
     "preview": "vite preview",
     "prepublishOnly": "npm run build:lib"
   },

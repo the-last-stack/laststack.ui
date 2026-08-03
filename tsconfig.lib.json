@@ -18,6 +18,7 @@
     "src/css.d.ts",
     "src/index.ts",
     "src/theme.ts",
+    "src/color/**/*.ts",
     "src/LastStackUI.tsx",
     "src/components/**/*.tsx"
   ]

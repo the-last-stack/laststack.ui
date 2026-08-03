@@ -5,5 +5,5 @@ type SliderProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
     tone?: SliderTone;
     valueLabel?: string;
 };
-export declare function Slider({ className, label, tone, valueLabel, ...props }: SliderProps): import("react").JSX.Element;
+export declare function Slider({ className, label, tone, valueLabel, style, ...props }: SliderProps): import("react").JSX.Element;
 export {};

@@ -58,46 +58,144 @@
   --color-error-on-tint: color-mix(in srgb, var(--color-error) 70%, black);
 }
 
+/* --- ramps ---------------------------------------------------------------
+   Numbered scales derived from each seed. The seed supplies hue and chroma;
+   LIGHTNESS IS FIXED PER STEP, so step 300 is the same lightness whatever
+   colour you passed in. That's what makes the number mean something across
+   intents — and it makes contrast a property of the step rather than of the
+   colour:
+
+       step <= 500  ->  black text        step >= 600  ->  white text
+
+   holds for every hue. The jump from 500 (L .68) to 600 (L .53) is deliberate:
+   it steps over the band around L .56 where neither black nor white reaches
+   4.5:1, so no step is ever illegible both ways.
+
+   Chroma tapers toward both ends. That taper is PERCEPTUAL — without it light
+   steps go neon and dark steps go muddy. It is not a gamut guarantee: how much
+   chroma sRGB can hold varies sharply by hue (yellow can't be dark and
+   saturated, blue can't be light and saturated), and one curve can't track all
+   of them. A saturated warm seed will ask for more chroma than the dark steps
+   can hold. That's fine and intended — CSS gamut-maps it by reducing chroma
+   while preserving lightness and hue, which is exactly the right fallback and
+   better than anything we'd hand-roll. Lightness survives, so the text rule
+   above still holds.
+
+   Mode-independent by design. Dark mode doesn't change the ramp, it changes
+   which step you reach for. The seed itself is never snapped into the scale;
+   it stays available as `seed` on the palette object.  */
+:root,
 .ls-ui,
 .catalog {
-  --color-bg-neutral: color-mix(in srgb, var(--color-neutral) var(--light-bg-neutral-mix), white);
-  --color-surface-neutral: color-mix(in srgb, var(--color-neutral) var(--light-surface-neutral-mix), white);
-  --color-border-neutral: color-mix(in srgb, var(--color-neutral) var(--light-border-neutral-mix), white);
-  --color-bg: color-mix(in srgb, var(--surface-tint-color) var(--surface-tint), var(--color-bg-neutral));
-  --color-surface: color-mix(in srgb, var(--surface-tint-color) var(--surface-tint-half), var(--color-surface-neutral));
-  --color-border: color-mix(in srgb, var(--surface-tint-color) var(--surface-border-tint), var(--color-border-neutral));
+  --ramp-l-50: 0.975;
+  --ramp-c-50: 0.09;
+  --ramp-l-100: 0.945;
+  --ramp-c-100: 0.2;
+  --ramp-l-200: 0.895;
+  --ramp-c-200: 0.4;
+  --ramp-l-300: 0.835;
+  --ramp-c-300: 0.64;
+  --ramp-l-400: 0.76;
+  --ramp-c-400: 0.96;
+  --ramp-l-500: 0.68;
+  --ramp-c-500: 1.0;
+  --ramp-l-600: 0.53;
+  --ramp-c-600: 0.85;
+  --ramp-l-700: 0.45;
+  --ramp-c-700: 0.72;
+  --ramp-l-800: 0.375;
+  --ramp-c-800: 0.61;
+  --ramp-l-900: 0.3;
+  --ramp-c-900: 0.49;
+  --ramp-l-950: 0.24;
+  --ramp-c-950: 0.4;
 
-  --color-text-primary: color-mix(in srgb, var(--color-neutral) 85%, black);
-  --color-text-secondary: color-mix(in srgb, var(--color-neutral) 55%, black);
+  --color-primary-50: oklch(from var(--color-primary) var(--ramp-l-50) calc(c * var(--ramp-c-50)) h);
+  --color-primary-100: oklch(from var(--color-primary) var(--ramp-l-100) calc(c * var(--ramp-c-100)) h);
+  --color-primary-200: oklch(from var(--color-primary) var(--ramp-l-200) calc(c * var(--ramp-c-200)) h);
+  --color-primary-300: oklch(from var(--color-primary) var(--ramp-l-300) calc(c * var(--ramp-c-300)) h);
+  --color-primary-400: oklch(from var(--color-primary) var(--ramp-l-400) calc(c * var(--ramp-c-400)) h);
+  --color-primary-500: oklch(from var(--color-primary) var(--ramp-l-500) calc(c * var(--ramp-c-500)) h);
+  --color-primary-600: oklch(from var(--color-primary) var(--ramp-l-600) calc(c * var(--ramp-c-600)) h);
+  --color-primary-700: oklch(from var(--color-primary) var(--ramp-l-700) calc(c * var(--ramp-c-700)) h);
+  --color-primary-800: oklch(from var(--color-primary) var(--ramp-l-800) calc(c * var(--ramp-c-800)) h);
+  --color-primary-900: oklch(from var(--color-primary) var(--ramp-l-900) calc(c * var(--ramp-c-900)) h);
+  --color-primary-950: oklch(from var(--color-primary) var(--ramp-l-950) calc(c * var(--ramp-c-950)) h);
 
-  --color-action-primary: var(--color-action-primary-light);
-  --color-action-accent: var(--color-action-accent-light);
-  --color-action-error: oklch(from var(--color-error) min(l, 0.55) c h);
-  --color-primary-hover: color-mix(in srgb, var(--color-primary) 88%, black);
-  --color-accent-hover: color-mix(in srgb, var(--color-accent) 88%, black);
-  --color-info-hover: color-mix(in srgb, var(--color-info) 88%, black);
-  --color-success-hover: color-mix(in srgb, var(--color-success) 88%, black);
-  --color-warning-hover: color-mix(in srgb, var(--color-warning) 88%, black);
-  --color-error-hover: color-mix(in srgb, var(--color-error) 88%, black);
-  --color-text-subtle: color-mix(in srgb, var(--color-neutral) 35%, black);
-  --color-border-focus: var(--color-action-accent);
+  --color-accent-50: oklch(from var(--color-accent) var(--ramp-l-50) calc(c * var(--ramp-c-50)) h);
+  --color-accent-100: oklch(from var(--color-accent) var(--ramp-l-100) calc(c * var(--ramp-c-100)) h);
+  --color-accent-200: oklch(from var(--color-accent) var(--ramp-l-200) calc(c * var(--ramp-c-200)) h);
+  --color-accent-300: oklch(from var(--color-accent) var(--ramp-l-300) calc(c * var(--ramp-c-300)) h);
+  --color-accent-400: oklch(from var(--color-accent) var(--ramp-l-400) calc(c * var(--ramp-c-400)) h);
+  --color-accent-500: oklch(from var(--color-accent) var(--ramp-l-500) calc(c * var(--ramp-c-500)) h);
+  --color-accent-600: oklch(from var(--color-accent) var(--ramp-l-600) calc(c * var(--ramp-c-600)) h);
+  --color-accent-700: oklch(from var(--color-accent) var(--ramp-l-700) calc(c * var(--ramp-c-700)) h);
+  --color-accent-800: oklch(from var(--color-accent) var(--ramp-l-800) calc(c * var(--ramp-c-800)) h);
+  --color-accent-900: oklch(from var(--color-accent) var(--ramp-l-900) calc(c * var(--ramp-c-900)) h);
+  --color-accent-950: oklch(from var(--color-accent) var(--ramp-l-950) calc(c * var(--ramp-c-950)) h);
 
-  --color-primary-tint: color-mix(in srgb, var(--color-primary) 12%, white);
-  --color-accent-tint: color-mix(in srgb, var(--color-accent) 22%, white);
-  --color-info-tint: color-mix(in srgb, var(--color-info) 14%, white);
-  --color-success-tint: color-mix(in srgb, var(--color-success) 14%, white);
-  --color-warning-tint: color-mix(in srgb, var(--color-warning) 14%, white);
-  --color-error-tint: color-mix(in srgb, var(--color-error) 14%, white);
+  --color-info-50: oklch(from var(--color-info) var(--ramp-l-50) calc(c * var(--ramp-c-50)) h);
+  --color-info-100: oklch(from var(--color-info) var(--ramp-l-100) calc(c * var(--ramp-c-100)) h);
+  --color-info-200: oklch(from var(--color-info) var(--ramp-l-200) calc(c * var(--ramp-c-200)) h);
+  --color-info-300: oklch(from var(--color-info) var(--ramp-l-300) calc(c * var(--ramp-c-300)) h);
+  --color-info-400: oklch(from var(--color-info) var(--ramp-l-400) calc(c * var(--ramp-c-400)) h);
+  --color-info-500: oklch(from var(--color-info) var(--ramp-l-500) calc(c * var(--ramp-c-500)) h);
+  --color-info-600: oklch(from var(--color-info) var(--ramp-l-600) calc(c * var(--ramp-c-600)) h);
+  --color-info-700: oklch(from var(--color-info) var(--ramp-l-700) calc(c * var(--ramp-c-700)) h);
+  --color-info-800: oklch(from var(--color-info) var(--ramp-l-800) calc(c * var(--ramp-c-800)) h);
+  --color-info-900: oklch(from var(--color-info) var(--ramp-l-900) calc(c * var(--ramp-c-900)) h);
+  --color-info-950: oklch(from var(--color-info) var(--ramp-l-950) calc(c * var(--ramp-c-950)) h);
 
-  --color-primary-on-tint: color-mix(in srgb, var(--color-primary) 76%, black);
-  --color-accent-on-tint: color-mix(in srgb, var(--color-accent) 64%, black);
-  --color-info-on-tint: color-mix(in srgb, var(--color-info) 70%, black);
-  --color-success-on-tint: color-mix(in srgb, var(--color-success) 70%, black);
-  --color-warning-on-tint: color-mix(in srgb, var(--color-warning) 70%, black);
-  --color-error-on-tint: color-mix(in srgb, var(--color-error) 70%, black);
+  --color-success-50: oklch(from var(--color-success) var(--ramp-l-50) calc(c * var(--ramp-c-50)) h);
+  --color-success-100: oklch(from var(--color-success) var(--ramp-l-100) calc(c * var(--ramp-c-100)) h);
+  --color-success-200: oklch(from var(--color-success) var(--ramp-l-200) calc(c * var(--ramp-c-200)) h);
+  --color-success-300: oklch(from var(--color-success) var(--ramp-l-300) calc(c * var(--ramp-c-300)) h);
+  --color-success-400: oklch(from var(--color-success) var(--ramp-l-400) calc(c * var(--ramp-c-400)) h);
+  --color-success-500: oklch(from var(--color-success) var(--ramp-l-500) calc(c * var(--ramp-c-500)) h);
+  --color-success-600: oklch(from var(--color-success) var(--ramp-l-600) calc(c * var(--ramp-c-600)) h);
+  --color-success-700: oklch(from var(--color-success) var(--ramp-l-700) calc(c * var(--ramp-c-700)) h);
+  --color-success-800: oklch(from var(--color-success) var(--ramp-l-800) calc(c * var(--ramp-c-800)) h);
+  --color-success-900: oklch(from var(--color-success) var(--ramp-l-900) calc(c * var(--ramp-c-900)) h);
+  --color-success-950: oklch(from var(--color-success) var(--ramp-l-950) calc(c * var(--ramp-c-950)) h);
+
+  --color-warning-50: oklch(from var(--color-warning) var(--ramp-l-50) calc(c * var(--ramp-c-50)) h);
+  --color-warning-100: oklch(from var(--color-warning) var(--ramp-l-100) calc(c * var(--ramp-c-100)) h);
+  --color-warning-200: oklch(from var(--color-warning) var(--ramp-l-200) calc(c * var(--ramp-c-200)) h);
+  --color-warning-300: oklch(from var(--color-warning) var(--ramp-l-300) calc(c * var(--ramp-c-300)) h);
+  --color-warning-400: oklch(from var(--color-warning) var(--ramp-l-400) calc(c * var(--ramp-c-400)) h);
+  --color-warning-500: oklch(from var(--color-warning) var(--ramp-l-500) calc(c * var(--ramp-c-500)) h);
+  --color-warning-600: oklch(from var(--color-warning) var(--ramp-l-600) calc(c * var(--ramp-c-600)) h);
+  --color-warning-700: oklch(from var(--color-warning) var(--ramp-l-700) calc(c * var(--ramp-c-700)) h);
+  --color-warning-800: oklch(from var(--color-warning) var(--ramp-l-800) calc(c * var(--ramp-c-800)) h);
+  --color-warning-900: oklch(from var(--color-warning) var(--ramp-l-900) calc(c * var(--ramp-c-900)) h);
+  --color-warning-950: oklch(from var(--color-warning) var(--ramp-l-950) calc(c * var(--ramp-c-950)) h);
+
+  --color-error-50: oklch(from var(--color-error) var(--ramp-l-50) calc(c * var(--ramp-c-50)) h);
+  --color-error-100: oklch(from var(--color-error) var(--ramp-l-100) calc(c * var(--ramp-c-100)) h);
+  --color-error-200: oklch(from var(--color-error) var(--ramp-l-200) calc(c * var(--ramp-c-200)) h);
+  --color-error-300: oklch(from var(--color-error) var(--ramp-l-300) calc(c * var(--ramp-c-300)) h);
+  --color-error-400: oklch(from var(--color-error) var(--ramp-l-400) calc(c * var(--ramp-c-400)) h);
+  --color-error-500: oklch(from var(--color-error) var(--ramp-l-500) calc(c * var(--ramp-c-500)) h);
+  --color-error-600: oklch(from var(--color-error) var(--ramp-l-600) calc(c * var(--ramp-c-600)) h);
+  --color-error-700: oklch(from var(--color-error) var(--ramp-l-700) calc(c * var(--ramp-c-700)) h);
+  --color-error-800: oklch(from var(--color-error) var(--ramp-l-800) calc(c * var(--ramp-c-800)) h);
+  --color-error-900: oklch(from var(--color-error) var(--ramp-l-900) calc(c * var(--ramp-c-900)) h);
+  --color-error-950: oklch(from var(--color-error) var(--ramp-l-950) calc(c * var(--ramp-c-950)) h);
+
 }
 
-.dark {
+/* Dark has to beat the light block below on SPECIFICITY, not on order, because
+   the light block sits later in the file so that `.light` can win its own tie.
+   Two shapes to cover, and missing either one breaks a real case:
+     `.dark .ls-ui`  provider nested inside a dark ancestor (`<html class="dark">`)
+     `.ls-ui.dark`   provider that is itself the dark scope (the workbench shell)
+   Both are (0,2,0) and beat the light block's bare `.ls-ui` (0,1,0), while
+   `.ls-ui.light` ties at (0,2,0) and wins by coming later. */
+.dark,
+.dark .ls-ui,
+.dark .catalog,
+.ls-ui.dark,
+.catalog.dark {
   --color-bg-neutral: color-mix(in srgb, var(--color-neutral) var(--dark-bg-neutral-mix), black);
   --color-surface-neutral: color-mix(in srgb, var(--color-neutral) var(--dark-surface-neutral-mix), black);
   --color-border-neutral: color-mix(in srgb, var(--color-neutral) var(--dark-border-neutral-mix), black);
@@ -133,4 +231,53 @@
   --color-success-on-tint: oklch(from var(--color-success) 0.78 c h);
   --color-warning-on-tint: oklch(from var(--color-warning) 0.78 c h);
   --color-error-on-tint: oklch(from var(--color-error) 0.78 c h);
+}
+
+/* The provider re-derives these from the seeds passed via the `theme` prop —
+   they can't be computed on :root, which only ever sees the defaults.
+   `.light` is the explicit light scope: it lets a subtree opt back into light
+   inside a dark ancestor (side-by-side specimens), and it ties on specificity
+   with `.dark .ls-ui` while sitting later in the file, so it wins. */
+.ls-ui,
+.catalog,
+.light,
+.light .ls-ui,
+.light .catalog,
+.ls-ui.light,
+.catalog.light {
+  --color-bg-neutral: color-mix(in srgb, var(--color-neutral) var(--light-bg-neutral-mix), white);
+  --color-surface-neutral: color-mix(in srgb, var(--color-neutral) var(--light-surface-neutral-mix), white);
+  --color-border-neutral: color-mix(in srgb, var(--color-neutral) var(--light-border-neutral-mix), white);
+  --color-bg: color-mix(in srgb, var(--surface-tint-color) var(--surface-tint), var(--color-bg-neutral));
+  --color-surface: color-mix(in srgb, var(--surface-tint-color) var(--surface-tint-half), var(--color-surface-neutral));
+  --color-border: color-mix(in srgb, var(--surface-tint-color) var(--surface-border-tint), var(--color-border-neutral));
+
+  --color-text-primary: color-mix(in srgb, var(--color-neutral) 85%, black);
+  --color-text-secondary: color-mix(in srgb, var(--color-neutral) 55%, black);
+
+  --color-action-primary: var(--color-action-primary-light);
+  --color-action-accent: var(--color-action-accent-light);
+  --color-action-error: oklch(from var(--color-error) min(l, 0.55) c h);
+  --color-primary-hover: color-mix(in srgb, var(--color-primary) 88%, black);
+  --color-accent-hover: color-mix(in srgb, var(--color-accent) 88%, black);
+  --color-info-hover: color-mix(in srgb, var(--color-info) 88%, black);
+  --color-success-hover: color-mix(in srgb, var(--color-success) 88%, black);
+  --color-warning-hover: color-mix(in srgb, var(--color-warning) 88%, black);
+  --color-error-hover: color-mix(in srgb, var(--color-error) 88%, black);
+  --color-text-subtle: color-mix(in srgb, var(--color-neutral) 35%, black);
+  --color-border-focus: var(--color-action-accent);
+
+  --color-primary-tint: color-mix(in srgb, var(--color-primary) 12%, white);
+  --color-accent-tint: color-mix(in srgb, var(--color-accent) 22%, white);
+  --color-info-tint: color-mix(in srgb, var(--color-info) 14%, white);
+  --color-success-tint: color-mix(in srgb, var(--color-success) 14%, white);
+  --color-warning-tint: color-mix(in srgb, var(--color-warning) 14%, white);
+  --color-error-tint: color-mix(in srgb, var(--color-error) 14%, white);
+
+  --color-primary-on-tint: color-mix(in srgb, var(--color-primary) 76%, black);
+  --color-accent-on-tint: color-mix(in srgb, var(--color-accent) 64%, black);
+  --color-info-on-tint: color-mix(in srgb, var(--color-info) 70%, black);
+  --color-success-on-tint: color-mix(in srgb, var(--color-success) 70%, black);
+  --color-warning-on-tint: color-mix(in srgb, var(--color-warning) 70%, black);
+  --color-error-on-tint: color-mix(in srgb, var(--color-error) 70%, black);
 }

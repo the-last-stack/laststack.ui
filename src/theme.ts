@@ -92,9 +92,30 @@ export function createThemeConfig(config: LastStackThemeConfig): ResolvedLastSta
   }
 }
 
+/**
+ * How far each surface token travels from neutral, as percentages.
+ *
+ * The stylesheet takes these as custom properties and the DOM-free palette
+ * takes them as numbers, so they are computed once here rather than twice.
+ */
+export function surfaceMixes(surface: ResolvedLastStackThemeConfig['surface']) {
+  return {
+    lightBg: 12 - surface.lightBrightness,
+    lightSurface: Math.max(9 - surface.lightBrightness, 0),
+    lightBorder: Math.min(30 - surface.lightBrightness, 34),
+    darkBg: surface.darkLift,
+    darkSurface: Math.min(surface.darkLift + 4, 38),
+    darkBorder: Math.min(surface.darkLift + 16, 56),
+    tint: surface.tint,
+    tintHalf: surface.tint / 2,
+    borderTint: Math.min(surface.tint * 2.5, 24),
+  }
+}
+
 export function createThemeStyle(config: LastStackThemeConfig): LastStackThemeStyle {
   const theme = createThemeConfig(config)
   const { clamps, seeds, surface } = theme
+  const m = surfaceMixes(surface)
 
   return {
     '--color-primary': seeds.primary,
@@ -107,16 +128,16 @@ export function createThemeStyle(config: LastStackThemeConfig): LastStackThemeSt
     '--color-action-primary-dark': actionColor('primary', 'dark', clamps.primaryDark),
     '--color-action-accent-light': actionColor('accent', 'light', clamps.accentLight),
     '--color-action-accent-dark': actionColor('accent', 'dark', clamps.accentDark),
-    '--light-bg-neutral-mix': `${12 - surface.lightBrightness}%`,
-    '--light-surface-neutral-mix': `${Math.max(9 - surface.lightBrightness, 0)}%`,
-    '--light-border-neutral-mix': `${Math.min(30 - surface.lightBrightness, 34)}%`,
-    '--dark-bg-neutral-mix': `${surface.darkLift}%`,
-    '--dark-surface-neutral-mix': `${Math.min(surface.darkLift + 4, 38)}%`,
-    '--dark-border-neutral-mix': `${Math.min(surface.darkLift + 16, 56)}%`,
+    '--light-bg-neutral-mix': `${m.lightBg}%`,
+    '--light-surface-neutral-mix': `${m.lightSurface}%`,
+    '--light-border-neutral-mix': `${m.lightBorder}%`,
+    '--dark-bg-neutral-mix': `${m.darkBg}%`,
+    '--dark-surface-neutral-mix': `${m.darkSurface}%`,
+    '--dark-border-neutral-mix': `${m.darkBorder}%`,
     '--surface-tint-color': `var(--color-${surface.tintSource})`,
-    '--surface-tint': `${surface.tint}%`,
-    '--surface-tint-half': `${surface.tint / 2}%`,
-    '--surface-border-tint': `${Math.min(surface.tint * 2.5, 24)}%`,
+    '--surface-tint': `${m.tint}%`,
+    '--surface-tint-half': `${m.tintHalf}%`,
+    '--surface-border-tint': `${m.borderTint}%`,
   }
 }
 

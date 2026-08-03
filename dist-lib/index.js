@@ -1,107 +1,50 @@
 import "./index.css";
-import { jsx as e, jsxs as t } from "react/jsx-runtime";
-import { createContext as n, createElement as r, forwardRef as i, useContext as a, useEffect as o, useState as s } from "react";
-//#region src/theme.ts
-var c = [
-	"primary",
-	"accent",
-	"info",
-	"success",
-	"warning",
-	"error"
-], l = {
-	seeds: {
-		primary: "#292966",
-		accent: "#9ac2d9",
-		info: "#4f8fbf",
-		success: "#5fa868",
-		warning: "#d9a441",
-		error: "#c9626b"
-	},
-	clamps: {
-		primaryLight: !0,
-		primaryDark: !0,
-		accentLight: !0,
-		accentDark: !0
-	},
-	surface: {
-		tint: 4,
-		tintSource: "primary",
-		lightBrightness: 8,
-		darkLift: 12
-	}
-};
-function u(e) {
-	return {
-		seeds: {
-			...l.seeds,
-			...e.seeds
-		},
-		clamps: {
-			...l.clamps,
-			...e.clamps
-		},
-		surface: {
-			...l.surface,
-			...e.surface
-		}
-	};
-}
-function d(e) {
-	let { clamps: t, seeds: n, surface: r } = u(e);
-	return {
-		"--color-primary": n.primary,
-		"--color-accent": n.accent,
-		"--color-info": n.info,
-		"--color-success": n.success,
-		"--color-warning": n.warning,
-		"--color-error": n.error,
-		"--color-action-primary-light": f("primary", "light", t.primaryLight),
-		"--color-action-primary-dark": f("primary", "dark", t.primaryDark),
-		"--color-action-accent-light": f("accent", "light", t.accentLight),
-		"--color-action-accent-dark": f("accent", "dark", t.accentDark),
-		"--light-bg-neutral-mix": `${12 - r.lightBrightness}%`,
-		"--light-surface-neutral-mix": `${Math.max(9 - r.lightBrightness, 0)}%`,
-		"--light-border-neutral-mix": `${Math.min(30 - r.lightBrightness, 34)}%`,
-		"--dark-bg-neutral-mix": `${r.darkLift}%`,
-		"--dark-surface-neutral-mix": `${Math.min(r.darkLift + 4, 38)}%`,
-		"--dark-border-neutral-mix": `${Math.min(r.darkLift + 16, 56)}%`,
-		"--surface-tint-color": `var(--color-${r.tintSource})`,
-		"--surface-tint": `${r.tint}%`,
-		"--surface-tint-half": `${r.tint / 2}%`,
-		"--surface-border-tint": `${Math.min(r.tint * 2.5, 24)}%`
-	};
-}
-function f(e, t, n) {
-	return n ? `oklch(from var(--color-${e}) ${t === "light" ? "min(l, 0.55)" : "max(l, 0.72)"} c h)` : `var(--color-${e})`;
-}
-//#endregion
+import { i as e, n as t, r as n, t as r } from "./theme-B5Hf-g9g.js";
+import { createContext as i, createElement as a, forwardRef as o, useContext as s, useEffect as c, useLayoutEffect as l, useMemo as u, useRef as d, useState as f } from "react";
+import { jsx as p, jsxs as m } from "react/jsx-runtime";
 //#region src/LastStackUI.tsx
-function p({ children: t, className: n = "", style: r, theme: i, ...a }) {
-	return /* @__PURE__ */ e("div", {
-		className: `ls-ui ${n}`.trim(),
-		style: {
-			...i ? d(i) : null,
-			...r
-		},
-		...a,
-		children: t
+var h = i(null);
+function g() {
+	return s(h);
+}
+var _ = typeof window > "u" ? c : l;
+function v({ children: e, className: n = "", style: r, theme: i, scope: a = "auto", ...o }) {
+	let c = d(null), l = s(h), f = a === "root" || a === "auto" && l === null, m = u(() => i ? t(i) : null, [i ? JSON.stringify(i) : ""]);
+	return _(() => {
+		if (!f || !m) return;
+		let e = document.documentElement, t = Object.entries(m), n = t.map(([t]) => [t, e.style.getPropertyValue(t)]);
+		for (let [n, r] of t) e.style.setProperty(n, r);
+		return () => {
+			for (let [t, r] of n) r ? e.style.setProperty(t, r) : e.style.removeProperty(t);
+		};
+	}, [f, m]), /* @__PURE__ */ p(h.Provider, {
+		value: c,
+		children: /* @__PURE__ */ p("div", {
+			ref: c,
+			className: `ls-ui ${n}`.trim(),
+			style: {
+				...m,
+				...r
+			},
+			...o,
+			children: e
+		})
 	});
 }
 //#endregion
 //#region src/components/Badge.tsx
-function m({ className: t = "", size: n = "md", tone: r = "primary", ...i }) {
-	return /* @__PURE__ */ e("span", {
-		className: `ui-badge ui-badge--${r} ui-badge--${n} ${t}`.trim(),
-		...i
+function y({ className: e = "", size: t = "md", tone: n = "primary", ...r }) {
+	return /* @__PURE__ */ p("span", {
+		className: `ui-badge ui-badge--${n} ui-badge--${t} ${e}`.trim(),
+		...r
 	});
 }
 //#endregion
 //#region node_modules/lucide-react/dist/esm/shared/src/utils/mergeClasses.mjs
-var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) === t).join(" ").trim(), g = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), _ = (e) => e.replace(/^([A-Z])|[\s-_]+(\w)/g, (e, t, n) => n ? n.toUpperCase() : t.toLowerCase()), v = (e) => {
-	let t = _(e);
+var b = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) === t).join(" ").trim(), x = (e) => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), S = (e) => e.replace(/^([A-Z])|[\s-_]+(\w)/g, (e, t, n) => n ? n.toUpperCase() : t.toLowerCase()), C = (e) => {
+	let t = S(e);
 	return t.charAt(0).toUpperCase() + t.slice(1);
-}, y = {
+}, w = {
 	xmlns: "http://www.w3.org/2000/svg",
 	width: 24,
 	height: 24,
@@ -114,31 +57,31 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 }, ee = (e) => {
 	for (let t in e) if (t.startsWith("aria-") || t === "role" || t === "title") return !0;
 	return !1;
-}, te = n({}), b = () => a(te), x = i(({ color: e, size: t, strokeWidth: n, absoluteStrokeWidth: i, className: a = "", children: o, iconNode: s, ...c }, l) => {
-	let { size: u = 24, strokeWidth: d = 2, absoluteStrokeWidth: f = !1, color: p = "currentColor", className: m = "" } = b() ?? {}, g = i ?? f ? Number(n ?? d) * 24 / Number(t ?? u) : n ?? d;
-	return r("svg", {
+}, T = i({}), E = () => s(T), D = o(({ color: e, size: t, strokeWidth: n, absoluteStrokeWidth: r, className: i = "", children: o, iconNode: s, ...c }, l) => {
+	let { size: u = 24, strokeWidth: d = 2, absoluteStrokeWidth: f = !1, color: p = "currentColor", className: m = "" } = E() ?? {}, h = r ?? f ? Number(n ?? d) * 24 / Number(t ?? u) : n ?? d;
+	return a("svg", {
 		ref: l,
-		...y,
-		width: t ?? u ?? y.width,
-		height: t ?? u ?? y.height,
+		...w,
+		width: t ?? u ?? w.width,
+		height: t ?? u ?? w.height,
 		stroke: e ?? p,
-		strokeWidth: g,
-		className: h("lucide", m, a),
+		strokeWidth: h,
+		className: b("lucide", m, i),
 		...!o && !ee(c) && { "aria-hidden": "true" },
 		...c
-	}, [...s.map(([e, t]) => r(e, t)), ...Array.isArray(o) ? o : [o]]);
-}), S = (e, t) => {
-	let n = i(({ className: n, ...i }, a) => r(x, {
-		ref: a,
+	}, [...s.map(([e, t]) => a(e, t)), ...Array.isArray(o) ? o : [o]]);
+}), O = (e, t) => {
+	let n = o(({ className: n, ...r }, i) => a(D, {
+		ref: i,
 		iconNode: t,
-		className: h(`lucide-${g(v(e))}`, `lucide-${e}`, n),
-		...i
+		className: b(`lucide-${x(C(e))}`, `lucide-${e}`, n),
+		...r
 	}));
-	return n.displayName = v(e), n;
-}, C = S("chevron-right", [["path", {
+	return n.displayName = C(e), n;
+}, te = O("chevron-right", [["path", {
 	d: "m9 18 6-6-6-6",
 	key: "mthhwq"
-}]]), w = S("circle-check", [["circle", {
+}]]), k = O("circle-check", [["circle", {
 	cx: "12",
 	cy: "12",
 	r: "10",
@@ -146,7 +89,7 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 }], ["path", {
 	d: "m9 12 2 2 4-4",
 	key: "dzmm74"
-}]]), T = S("circle-x", [
+}]]), A = O("circle-x", [
 	["circle", {
 		cx: "12",
 		cy: "12",
@@ -161,8 +104,8 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 		d: "m9 9 6 6",
 		key: "z0biqf"
 	}]
-]), E = {
-	info: S("info", [
+]), j = {
+	info: O("info", [
 		["circle", {
 			cx: "12",
 			cy: "12",
@@ -178,8 +121,8 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 			key: "e9boi3"
 		}]
 	]),
-	success: w,
-	warning: S("triangle-alert", [
+	success: k,
+	warning: O("triangle-alert", [
 		["path", {
 			d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
 			key: "wmoenq"
@@ -193,171 +136,178 @@ var h = (...e) => e.filter((e, t, n) => !!e && e.trim() !== "" && n.indexOf(e) =
 			key: "p32p05"
 		}]
 	]),
-	error: T
+	error: A
 };
-function D({ className: n = "", tone: r = "info", title: i, flush: a = !1, children: o, ...s }) {
-	let c = E[r];
-	return /* @__PURE__ */ t("div", {
-		className: `ui-callout ui-callout--${r}${a ? " ui-callout--flush" : ""} ${n}`.trim(),
-		...s,
-		children: [/* @__PURE__ */ e(c, {
+function M({ className: e = "", tone: t = "info", title: n, flush: r = !1, children: i, ...a }) {
+	let o = j[t];
+	return /* @__PURE__ */ m("div", {
+		className: `ui-callout ui-callout--${t}${r ? " ui-callout--flush" : ""} ${e}`.trim(),
+		...a,
+		children: [/* @__PURE__ */ p(o, {
 			className: "ui-callout__icon",
 			"aria-hidden": !0
-		}), /* @__PURE__ */ t("div", {
+		}), /* @__PURE__ */ m("div", {
 			className: "ui-callout__content",
-			children: [i && /* @__PURE__ */ e("p", {
+			children: [n && /* @__PURE__ */ p("p", {
 				className: "ui-callout__title",
-				children: i
-			}), o]
+				children: n
+			}), i]
 		})]
 	});
 }
 //#endregion
 //#region src/components/Button.tsx
-function O({ className: n = "", size: r = "md", tone: i = "primary", variant: a = "solid", loading: o = !1, disabled: s, children: c, ...l }) {
-	return /* @__PURE__ */ t("button", {
-		"aria-busy": o || void 0,
-		className: `ui-button ui-button--${a} ui-button--${i} ui-button--${r}${o ? " ui-button--loading" : ""} ${n}`.trim(),
-		disabled: s || o,
-		...l,
-		children: [o ? /* @__PURE__ */ e("span", {
+function N({ className: e = "", size: t = "md", tone: n = "primary", variant: r = "solid", loading: i = !1, disabled: a, children: o, ...s }) {
+	return /* @__PURE__ */ m("button", {
+		"aria-busy": i || void 0,
+		className: `ui-button ui-button--${r} ui-button--${n} ui-button--${t}${i ? " ui-button--loading" : ""} ${e}`.trim(),
+		disabled: a || i,
+		...s,
+		children: [i ? /* @__PURE__ */ p("span", {
 			"aria-hidden": !0,
 			className: "ui-button__spinner"
-		}) : null, c]
+		}) : null, o]
 	});
 }
 //#endregion
 //#region src/components/Card.tsx
-function k({ className: t = "", variant: n = "default", ...r }) {
-	return /* @__PURE__ */ e("div", {
-		className: `ui-card ui-card--${n} ${t}`.trim(),
-		...r
-	});
-}
-function A({ className: t = "", ...n }) {
-	return /* @__PURE__ */ e("h3", {
-		className: `ui-card__title ${t}`.trim(),
+function P({ className: e = "", variant: t = "default", ...n }) {
+	return /* @__PURE__ */ p("div", {
+		className: `ui-card ui-card--${t} ${e}`.trim(),
 		...n
 	});
 }
-function j({ className: t = "", ...n }) {
-	return /* @__PURE__ */ e("p", {
-		className: `ui-card__description ${t}`.trim(),
-		...n
+function F({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("h3", {
+		className: `ui-card__title ${e}`.trim(),
+		...t
+	});
+}
+function I({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("p", {
+		className: `ui-card__description ${e}`.trim(),
+		...t
 	});
 }
 //#endregion
 //#region src/components/Checkbox.tsx
-function M({ children: n, className: r = "", tone: i = "primary", ...a }) {
-	return /* @__PURE__ */ t("label", {
-		className: `ui-checkbox ui-checkbox--${i} ${r}`.trim(),
-		children: [/* @__PURE__ */ e("input", {
+function L({ children: e, className: t = "", tone: n = "primary", ...r }) {
+	return /* @__PURE__ */ m("label", {
+		className: `ui-checkbox ui-checkbox--${n} ${t}`.trim(),
+		children: [/* @__PURE__ */ p("input", {
 			type: "checkbox",
-			...a
-		}), /* @__PURE__ */ e("span", { children: n })]
+			...r
+		}), /* @__PURE__ */ p("span", { children: e })]
 	});
 }
 //#endregion
 //#region src/components/SegmentedControl.tsx
-function N({ "aria-label": t, className: n = "", onChange: r, options: i, size: a = "md", tone: o = "primary", value: s }) {
-	return /* @__PURE__ */ e("div", {
-		"aria-label": t,
-		className: `ui-segmented ui-segmented--${o} ui-segmented--${a} ${n}`.trim(),
+function R({ "aria-label": e, className: t = "", onChange: n, options: r, size: i = "md", tone: a = "primary", value: o }) {
+	return /* @__PURE__ */ p("div", {
+		"aria-label": e,
+		className: `ui-segmented ui-segmented--${a} ui-segmented--${i} ${t}`.trim(),
 		role: "radiogroup",
-		children: i.map((t) => /* @__PURE__ */ e("button", {
-			"aria-checked": t.value === s,
-			onClick: () => r(t.value),
+		children: r.map((e) => /* @__PURE__ */ p("button", {
+			"aria-checked": e.value === o,
+			onClick: () => n(e.value),
 			role: "radio",
 			type: "button",
-			children: t.label
-		}, t.value))
+			children: e.label
+		}, e.value))
 	});
 }
 //#endregion
 //#region src/components/Slider.tsx
-function P({ className: n = "", label: r, tone: i = "primary", valueLabel: a, ...o }) {
-	return /* @__PURE__ */ t("label", {
-		className: `ui-slider ui-slider--${i} ${n}`.trim(),
-		children: [/* @__PURE__ */ t("span", { children: [r, a ? /* @__PURE__ */ e("strong", { children: a }) : null] }), /* @__PURE__ */ e("input", {
+var z = (e, t) => {
+	let n = typeof e == "number" ? e : Number(e);
+	return Number.isFinite(n) ? n : t;
+};
+function B({ className: e = "", label: t, tone: n = "primary", valueLabel: r, style: i, ...a }) {
+	let o = z(a.min, 0), s = z(a.max, 100), c = z(a.value ?? a.defaultValue, o), l = s === o ? 0 : Math.min(100, Math.max(0, (c - o) / (s - o) * 100));
+	return /* @__PURE__ */ m("label", {
+		className: `ui-slider ui-slider--${n} ${e}`.trim(),
+		style: i,
+		children: [/* @__PURE__ */ m("span", { children: [t, r ? /* @__PURE__ */ p("strong", { children: r }) : null] }), /* @__PURE__ */ p("input", {
 			type: "range",
-			...o
+			style: { "--slider-pct": `${l}%` },
+			...a
 		})]
 	});
 }
 //#endregion
 //#region src/components/ComponentPreviewCards.tsx
-function F({ mode: n }) {
-	let [r, i] = s("left"), [a, o] = s(72);
-	return /* @__PURE__ */ e("div", {
-		className: n === "dark" ? "dark" : "ls-ui",
-		children: /* @__PURE__ */ t(k, {
+function V({ mode: e }) {
+	let [t, n] = f("left"), [r, i] = f(72);
+	return /* @__PURE__ */ p("div", {
+		className: e === "dark" ? "dark" : "ls-ui light",
+		children: /* @__PURE__ */ m(P, {
 			className: "grid gap-[22px]",
 			children: [
-				/* @__PURE__ */ t("div", { children: [/* @__PURE__ */ e(A, { children: "425 Industrial Way" }), /* @__PURE__ */ e(j, { children: "last comp: 03/2026 · 18,400 sqft" })] }),
-				/* @__PURE__ */ t("div", {
+				/* @__PURE__ */ m("div", { children: [/* @__PURE__ */ p(F, { children: "425 Industrial Way" }), /* @__PURE__ */ p(I, { children: "last comp: 03/2026 · 18,400 sqft" })] }),
+				/* @__PURE__ */ m("div", {
 					className: "flex flex-wrap gap-3",
 					"aria-label": "Semantic badge examples",
 					children: [
-						/* @__PURE__ */ e(m, {
+						/* @__PURE__ */ p(y, {
 							tone: "info",
 							children: "info"
 						}),
-						/* @__PURE__ */ e(m, {
+						/* @__PURE__ */ p(y, {
 							tone: "success",
 							children: "success"
 						}),
-						/* @__PURE__ */ e(m, {
+						/* @__PURE__ */ p(y, {
 							tone: "warning",
 							children: "warning"
 						}),
-						/* @__PURE__ */ e(m, {
+						/* @__PURE__ */ p(y, {
 							tone: "error",
 							children: "error"
 						})
 					]
 				}),
-				/* @__PURE__ */ e(D, {
+				/* @__PURE__ */ p(M, {
 					tone: "info",
 					title: "Market note",
 					children: "Vacancy is trending down across comparable industrial assets."
 				}),
-				/* @__PURE__ */ t("div", {
+				/* @__PURE__ */ m("div", {
 					className: "grid grid-cols-[repeat(auto-fit,minmax(min(150px,100%),max-content))] items-center gap-4 max-[560px]:flex max-[560px]:flex-col max-[560px]:items-stretch",
 					"aria-label": "Primary and accent button examples",
 					children: [
-						/* @__PURE__ */ e(O, { children: "primary filled" }),
-						/* @__PURE__ */ e(O, {
+						/* @__PURE__ */ p(N, { children: "primary filled" }),
+						/* @__PURE__ */ p(N, {
 							variant: "outline",
 							children: "primary outline"
 						}),
-						/* @__PURE__ */ e(O, {
+						/* @__PURE__ */ p(N, {
 							tone: "accent",
 							children: "accent filled"
 						}),
-						/* @__PURE__ */ e(O, {
+						/* @__PURE__ */ p(N, {
 							tone: "accent",
 							variant: "outline",
 							children: "accent outline"
 						})
 					]
 				}),
-				/* @__PURE__ */ t("div", {
+				/* @__PURE__ */ m("div", {
 					className: "grid w-[min(340px,100%)] gap-3.5 [&_.ui-segmented]:w-full [&_.ui-segmented_button]:flex-1 [&_.ui-slider]:w-full",
 					"aria-label": "Input component examples",
 					children: [
-						/* @__PURE__ */ e(M, {
+						/* @__PURE__ */ p(L, {
 							defaultChecked: !0,
 							children: "Include off-market comps"
 						}),
-						/* @__PURE__ */ e(P, {
+						/* @__PURE__ */ p(B, {
 							label: "Confidence",
 							max: "100",
 							min: "0",
-							onChange: (e) => o(Number(e.target.value)),
-							value: a,
-							valueLabel: `${a}%`
+							onChange: (e) => i(Number(e.target.value)),
+							value: r,
+							valueLabel: `${r}%`
 						}),
-						/* @__PURE__ */ e(N, {
+						/* @__PURE__ */ p(R, {
 							"aria-label": "Example view",
 							options: [{
 								label: "left",
@@ -366,8 +316,8 @@ function F({ mode: n }) {
 								label: "right",
 								value: "right"
 							}],
-							onChange: i,
-							value: r
+							onChange: n,
+							value: t
 						})
 					]
 				})
@@ -376,189 +326,286 @@ function F({ mode: n }) {
 	});
 }
 //#endregion
+//#region src/palette.ts
+var H = [
+	50,
+	100,
+	200,
+	300,
+	400,
+	500,
+	600,
+	700,
+	800,
+	900,
+	950
+];
+function U(e) {
+	return e <= 500 ? "dark" : "light";
+}
+var W = () => ({
+	...Object.fromEntries(H.map((e) => [e, ""])),
+	seed: ""
+}), G = () => Object.fromEntries(e.map((e) => [e, W()]));
+function K(e, t) {
+	let n = document.createElement("span");
+	n.style.cssText = "position:absolute;width:0;height:0;visibility:hidden;pointer-events:none", e.appendChild(n);
+	let r = getComputedStyle(n), i = t.map((e) => (n.style.color = "", n.style.color = `var(${e})`, r.color));
+	return n.remove(), i;
+}
+function q(t) {
+	let n = g(), [r, i] = f(G);
+	return c(() => {
+		let r = t?.current ?? n?.current ?? document.documentElement;
+		if (!r) return;
+		let a = e.flatMap((e) => [`--color-${e}`, ...H.map((t) => `--color-${e}-${t}`)]), o = () => {
+			let t = K(r, a), n = 0;
+			i(Object.fromEntries(e.map((e) => {
+				let r = t[n++];
+				return [e, {
+					...Object.fromEntries(H.map((e) => [e, t[n++]])),
+					seed: r
+				}];
+			})));
+		};
+		o();
+		let s = new MutationObserver(o);
+		return s.observe(r, {
+			attributes: !0,
+			attributeFilter: ["style", "class"]
+		}), () => s.disconnect();
+	}, [t, n]), r;
+}
+//#endregion
+//#region src/components/RampSwatches.tsx
+function J() {
+	let t = q();
+	return /* @__PURE__ */ p("div", {
+		className: "grid gap-4",
+		children: e.map((e) => /* @__PURE__ */ m("div", {
+			className: "grid gap-1.5",
+			children: [/* @__PURE__ */ m("div", {
+				className: "flex items-baseline gap-2",
+				children: [
+					/* @__PURE__ */ p("span", {
+						className: "text-[0.88rem] font-semibold text-text-primary",
+						children: e
+					}),
+					/* @__PURE__ */ p("span", {
+						className: "inline-block h-3 w-3 rounded-full border border-border align-middle",
+						style: { background: `var(--color-${e})` }
+					}),
+					/* @__PURE__ */ m("span", {
+						className: "font-mono text-[0.72rem] text-text-secondary",
+						children: ["seed ", t[e].seed]
+					})
+				]
+			}), /* @__PURE__ */ p("div", {
+				className: "grid gap-1",
+				style: { gridTemplateColumns: `repeat(${H.length}, minmax(0, 1fr))` },
+				children: H.map((t) => /* @__PURE__ */ m("div", {
+					className: "grid h-14 min-w-0 content-between rounded-md p-1.5",
+					style: {
+						background: `var(--color-${e}-${t})`,
+						color: U(t) === "dark" ? "#000" : "#fff"
+					},
+					title: `--color-${e}-${t}`,
+					children: [/* @__PURE__ */ p("span", {
+						className: "font-mono text-[0.7rem] font-medium",
+						children: t
+					}), /* @__PURE__ */ p("span", {
+						className: "font-mono text-[0.6rem] opacity-80",
+						children: U(t) === "dark" ? "black" : "white"
+					})]
+				}, t))
+			})]
+		}, e))
+	});
+}
+//#endregion
 //#region src/components/Container.tsx
-function I({ className: t = "", size: n = "md", ...r }) {
-	return /* @__PURE__ */ e("div", {
-		className: `ui-container ui-container--${n} ${t}`.trim(),
-		...r
+function Y({ className: e = "", size: t = "md", ...n }) {
+	return /* @__PURE__ */ p("div", {
+		className: `ui-container ui-container--${t} ${e}`.trim(),
+		...n
 	});
 }
 //#endregion
 //#region src/components/Disclosure.tsx
-function L({ className: n = "", title: r, defaultOpen: i = !1, children: a, ...o }) {
-	return /* @__PURE__ */ t("details", {
-		className: `ui-disclosure ${n}`.trim(),
-		open: i,
-		...o,
-		children: [/* @__PURE__ */ t("summary", {
+function X({ className: e = "", title: t, defaultOpen: n = !1, children: r, ...i }) {
+	return /* @__PURE__ */ m("details", {
+		className: `ui-disclosure ${e}`.trim(),
+		open: n,
+		...i,
+		children: [/* @__PURE__ */ m("summary", {
 			className: "ui-disclosure__summary",
-			children: [/* @__PURE__ */ e(C, {
+			children: [/* @__PURE__ */ p(te, {
 				className: "ui-disclosure__chevron",
 				"aria-hidden": !0
-			}), /* @__PURE__ */ e("span", {
+			}), /* @__PURE__ */ p("span", {
 				className: "ui-disclosure__title",
-				children: r
+				children: t
 			})]
-		}), /* @__PURE__ */ e("div", {
+		}), /* @__PURE__ */ p("div", {
 			className: "ui-disclosure__content",
-			children: a
+			children: r
 		})]
 	});
 }
 //#endregion
 //#region src/components/Field.tsx
-function R({ className: n = "", children: r, label: i, hint: a, error: o, htmlFor: s, ...c }) {
-	return /* @__PURE__ */ t("div", {
-		className: `ui-field ${n}`.trim(),
-		...c,
+function ne({ className: e = "", children: t, label: n, hint: r, error: i, htmlFor: a, ...o }) {
+	return /* @__PURE__ */ m("div", {
+		className: `ui-field ${e}`.trim(),
+		...o,
 		children: [
-			i ? /* @__PURE__ */ e("label", {
+			n ? /* @__PURE__ */ p("label", {
 				className: "ui-field__label",
-				htmlFor: s,
-				children: i
+				htmlFor: a,
+				children: n
 			}) : null,
-			r,
-			o ? /* @__PURE__ */ e("p", {
+			t,
+			i ? /* @__PURE__ */ p("p", {
 				className: "ui-field__error",
-				children: o
-			}) : a ? /* @__PURE__ */ e("p", {
+				children: i
+			}) : r ? /* @__PURE__ */ p("p", {
 				className: "ui-field__hint",
-				children: a
+				children: r
 			}) : null
 		]
 	});
 }
 //#endregion
 //#region src/components/Inline.tsx
-function z({ className: t = "", gap: n = "md", align: r = "center", justify: i = "start", wrap: a = !1, ...o }) {
-	return /* @__PURE__ */ e("div", {
-		className: `ui-inline ui-inline--gap-${n} ui-inline--align-${r} ui-inline--justify-${i}${a ? " ui-inline--wrap" : ""} ${t}`.trim(),
-		...o
+function Z({ className: e = "", gap: t = "md", align: n = "center", justify: r = "start", wrap: i = !1, ...a }) {
+	return /* @__PURE__ */ p("div", {
+		className: `ui-inline ui-inline--gap-${t} ui-inline--align-${n} ui-inline--justify-${r}${i ? " ui-inline--wrap" : ""} ${e}`.trim(),
+		...a
 	});
 }
 //#endregion
 //#region src/components/Input.tsx
-function B({ className: t = "", inputSize: n = "md", invalid: r = !1, ...i }) {
-	return /* @__PURE__ */ e("input", {
-		"aria-invalid": r || void 0,
-		className: `ui-input ui-input--${n}${r ? " ui-input--invalid" : ""} ${t}`.trim(),
-		...i
+function re({ className: e = "", inputSize: t = "md", invalid: n = !1, ...r }) {
+	return /* @__PURE__ */ p("input", {
+		"aria-invalid": n || void 0,
+		className: `ui-input ui-input--${t}${n ? " ui-input--invalid" : ""} ${e}`.trim(),
+		...r
 	});
 }
 //#endregion
 //#region src/components/Progress.tsx
-function V({ className: t = "", value: n = 0, max: r = 100, tone: i = "primary", size: a = "md", segments: o, ...s }) {
-	let c = o ?? [{
-		value: n,
-		tone: i
-	}], l = c.reduce((e, t) => e + Math.max(0, t.value), 0), u = (e) => r <= 0 ? 0 : Math.min(100, Math.max(0, e) / r * 100);
-	return /* @__PURE__ */ e("div", {
-		className: `ui-progress ui-progress--${a} ${t}`.trim(),
+function ie({ className: e = "", value: t = 0, max: n = 100, tone: r = "primary", size: i = "md", segments: a, ...o }) {
+	let s = a ?? [{
+		value: t,
+		tone: r
+	}], c = s.reduce((e, t) => e + Math.max(0, t.value), 0), l = (e) => n <= 0 ? 0 : Math.min(100, Math.max(0, e) / n * 100);
+	return /* @__PURE__ */ p("div", {
+		className: `ui-progress ui-progress--${i} ${e}`.trim(),
 		role: "progressbar",
 		"aria-valuemin": 0,
-		"aria-valuemax": r,
-		"aria-valuenow": l,
-		...s,
-		children: c.map((t, n) => /* @__PURE__ */ e("div", {
-			className: `ui-progress__fill ui-progress__fill--${t.tone ?? i}`,
-			style: { width: `${u(t.value)}%` }
-		}, `${n}-${t.tone ?? i}`))
+		"aria-valuemax": n,
+		"aria-valuenow": c,
+		...o,
+		children: s.map((e, t) => /* @__PURE__ */ p("div", {
+			className: `ui-progress__fill ui-progress__fill--${e.tone ?? r}`,
+			style: { width: `${l(e.value)}%` }
+		}, `${t}-${e.tone ?? r}`))
 	});
 }
 //#endregion
 //#region src/components/Spinner.tsx
-function H({ className: t = "", size: n = "md", tone: r = "primary", label: i = "Loading", ...a }) {
-	return /* @__PURE__ */ e("span", {
-		"aria-label": i,
-		className: `ui-spinner ui-spinner--${n} ui-spinner--${r} ${t}`.trim(),
+function ae({ className: e = "", size: t = "md", tone: n = "primary", label: r = "Loading", ...i }) {
+	return /* @__PURE__ */ p("span", {
+		"aria-label": r,
+		className: `ui-spinner ui-spinner--${t} ui-spinner--${n} ${e}`.trim(),
 		role: "status",
-		...a
+		...i
 	});
 }
 //#endregion
 //#region src/components/Stack.tsx
-function U({ className: t = "", gap: n = "md", align: r = "stretch", ...i }) {
-	return /* @__PURE__ */ e("div", {
-		className: `ui-stack ui-stack--gap-${n} ui-stack--align-${r} ${t}`.trim(),
-		...i
+function oe({ className: e = "", gap: t = "md", align: n = "stretch", ...r }) {
+	return /* @__PURE__ */ p("div", {
+		className: `ui-stack ui-stack--gap-${t} ui-stack--align-${n} ${e}`.trim(),
+		...r
 	});
 }
 //#endregion
 //#region src/components/Tabs.tsx
-function W({ className: t = "", tone: n = "primary", size: r = "md", rule: i = !1, ...a }) {
-	return /* @__PURE__ */ e("nav", {
-		className: `ui-tabs ui-tabs--${n} ui-tabs--${r}${i ? " ui-tabs--rule" : ""} ${t}`.trim(),
-		...a
+function se({ className: e = "", tone: t = "primary", size: n = "md", rule: r = !1, ...i }) {
+	return /* @__PURE__ */ p("nav", {
+		className: `ui-tabs ui-tabs--${t} ui-tabs--${n}${r ? " ui-tabs--rule" : ""} ${e}`.trim(),
+		...i
 	});
 }
-function G({ className: t = "", active: n = !1, ...r }) {
-	return /* @__PURE__ */ e("a", {
-		className: `ui-tab ${t}`.trim(),
-		"aria-current": n ? "page" : void 0,
-		...r
+function ce({ className: e = "", active: t = !1, ...n }) {
+	return /* @__PURE__ */ p("a", {
+		className: `ui-tab ${e}`.trim(),
+		"aria-current": t ? "page" : void 0,
+		...n
 	});
 }
 //#endregion
 //#region src/components/Table.tsx
-function K({ className: n = "", size: r = "md", caption: i, children: a, ...o }) {
-	return /* @__PURE__ */ e("div", {
+function le({ className: e = "", size: t = "md", caption: n, children: r, ...i }) {
+	return /* @__PURE__ */ p("div", {
 		className: "ui-table__scroll",
-		children: /* @__PURE__ */ t("table", {
-			className: `ui-table ui-table--${r} ${n}`.trim(),
-			...o,
-			children: [i ? /* @__PURE__ */ e("caption", {
+		children: /* @__PURE__ */ m("table", {
+			className: `ui-table ui-table--${t} ${e}`.trim(),
+			...i,
+			children: [n ? /* @__PURE__ */ p("caption", {
 				className: "ui-table__caption",
-				children: i
-			}) : null, a]
+				children: n
+			}) : null, r]
 		})
 	});
 }
-function q({ className: t = "", ...n }) {
-	return /* @__PURE__ */ e("thead", {
-		className: `ui-table__head ${t}`.trim(),
-		...n
+function ue({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("thead", {
+		className: `ui-table__head ${e}`.trim(),
+		...t
 	});
 }
-function J({ className: t = "", ...n }) {
-	return /* @__PURE__ */ e("tbody", {
-		className: `ui-table__body ${t}`.trim(),
-		...n
+function de({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("tbody", {
+		className: `ui-table__body ${e}`.trim(),
+		...t
 	});
 }
-function Y({ className: t = "", ...n }) {
-	return /* @__PURE__ */ e("tr", {
-		className: `ui-table__row ${t}`.trim(),
-		...n
+function fe({ className: e = "", ...t }) {
+	return /* @__PURE__ */ p("tr", {
+		className: `ui-table__row ${e}`.trim(),
+		...t
 	});
 }
-function X({ className: t = "", numeric: n = !1, scope: r = "col", ...i }) {
-	return /* @__PURE__ */ e("th", {
-		className: `ui-table__header${n ? " ui-table__header--numeric" : ""} ${t}`.trim(),
-		scope: r,
-		...i
-	});
-}
-function Z({ className: t = "", numeric: n = !1, ...r }) {
-	return /* @__PURE__ */ e("td", {
-		className: `ui-table__cell${n ? " ui-table__cell--numeric" : ""} ${t}`.trim(),
+function pe({ className: e = "", numeric: t = !1, scope: n = "col", ...r }) {
+	return /* @__PURE__ */ p("th", {
+		className: `ui-table__header${t ? " ui-table__header--numeric" : ""} ${e}`.trim(),
+		scope: n,
 		...r
+	});
+}
+function me({ className: e = "", numeric: t = !1, ...n }) {
+	return /* @__PURE__ */ p("td", {
+		className: `ui-table__cell${t ? " ui-table__cell--numeric" : ""} ${e}`.trim(),
+		...n
 	});
 }
 //#endregion
 //#region src/components/Text.tsx
-function ne({ className: t = "", tone: n = "default", size: r = "md", weight: i = "normal", ...a }) {
-	return /* @__PURE__ */ e("span", {
-		className: `ui-text ui-text--${n} ui-text--${r} ui-text--${i} ${t}`.trim(),
-		...a
+function he({ className: e = "", tone: t = "default", size: n = "md", weight: r = "normal", ...i }) {
+	return /* @__PURE__ */ p("span", {
+		className: `ui-text ui-text--${t} ui-text--${n} ui-text--${r} ${e}`.trim(),
+		...i
 	});
 }
 //#endregion
 //#region src/components/Textarea.tsx
-function re({ className: t = "", invalid: n = !1, ...r }) {
-	return /* @__PURE__ */ e("textarea", {
-		"aria-invalid": n || void 0,
-		className: `ui-textarea${n ? " ui-textarea--invalid" : ""} ${t}`.trim(),
-		...r
+function ge({ className: e = "", invalid: t = !1, ...n }) {
+	return /* @__PURE__ */ p("textarea", {
+		"aria-invalid": t || void 0,
+		className: `ui-textarea${t ? " ui-textarea--invalid" : ""} ${e}`.trim(),
+		...n
 	});
 }
 //#endregion
@@ -568,7 +615,7 @@ var Q = {
 	muted: "",
 	foreground: "",
 	hover: ""
-}, ie = {
+}, _e = {
 	primary: Q,
 	accent: Q,
 	success: Q,
@@ -590,7 +637,7 @@ var Q = {
 		muted: "",
 		focus: ""
 	}
-}, ae = [
+}, ve = [
 	"primary",
 	"accent",
 	"success",
@@ -599,36 +646,36 @@ var Q = {
 	"info"
 ];
 function $(e) {
-	let [t, n] = s(ie);
-	return o(() => {
-		let t = e?.current ?? document.documentElement, r = getComputedStyle(t), i = (e) => r.getPropertyValue(`--color-${e}`).trim();
-		n({
-			...Object.fromEntries(ae.map((e) => [e, {
-				default: i(e),
-				muted: i(`${e}-tint`),
-				foreground: i(`${e}-on-tint`),
-				hover: i(`${e}-hover`)
+	let t = g(), [n, r] = f(_e);
+	return c(() => {
+		let n = e?.current ?? t?.current ?? document.documentElement, i = getComputedStyle(n), a = (e) => i.getPropertyValue(`--color-${e}`).trim();
+		r({
+			...Object.fromEntries(ve.map((e) => [e, {
+				default: a(e),
+				muted: a(`${e}-tint`),
+				foreground: a(`${e}-on-tint`),
+				hover: a(`${e}-hover`)
 			}])),
 			background: {
-				default: i("bg"),
-				muted: i("bg-neutral"),
-				raised: i("surface")
+				default: a("bg"),
+				muted: a("bg-neutral"),
+				raised: a("surface")
 			},
 			foreground: {
-				default: i("text-primary"),
-				muted: i("text-secondary"),
-				subtle: i("text-subtle")
+				default: a("text-primary"),
+				muted: a("text-secondary"),
+				subtle: a("text-subtle")
 			},
 			border: {
-				default: i("border"),
-				muted: i("border-neutral"),
-				focus: i("border-focus")
+				default: a("border"),
+				muted: a("border-neutral"),
+				focus: a("border-focus")
 			}
 		});
-	}, [e]), { palette: t };
+	}, [e, t]), { palette: n };
 }
-function oe(e) {
+function ye(e) {
 	return $(e).palette;
 }
 //#endregion
-export { m as Badge, O as Button, D as Callout, k as Card, j as CardDescription, A as CardTitle, M as Checkbox, F as ComponentPreviewCard, I as Container, L as Disclosure, R as Field, z as Inline, B as Input, p as LastStackUI, V as Progress, N as SegmentedControl, P as Slider, H as Spinner, U as Stack, G as Tab, K as Table, J as TableBody, Z as TableCell, q as TableHead, X as TableHeaderCell, Y as TableRow, W as Tabs, ne as Text, re as Textarea, u as createThemeConfig, d as createThemeStyle, l as defaultThemeConfig, c as seedColorNames, oe as useLastStackColorValues, $ as useTheme };
+export { y as Badge, N as Button, M as Callout, P as Card, I as CardDescription, F as CardTitle, L as Checkbox, V as ComponentPreviewCard, Y as Container, X as Disclosure, ne as Field, Z as Inline, re as Input, v as LastStackUI, ie as Progress, J as RampSwatches, R as SegmentedControl, B as Slider, ae as Spinner, oe as Stack, ce as Tab, le as Table, de as TableBody, me as TableCell, ue as TableHead, pe as TableHeaderCell, fe as TableRow, se as Tabs, he as Text, ge as Textarea, r as createThemeConfig, t as createThemeStyle, n as defaultThemeConfig, H as rampSteps, e as seedColorNames, U as stepTextTone, ye as useLastStackColorValues, g as useLastStackScope, q as usePalette, $ as useTheme };
