@@ -92,8 +92,13 @@ export function derivePalette(config: LastStackThemeConfig, mode: PaletteMode): 
 
   const bg = mix(tintColor, bgNeutral, m.tint)
 
-  // Text runs the other way — toward the end the background isn't at — and the
-  // three steps are the same ladder read from opposite ends.
+  // Text runs the other way — toward the end the background isn't at. Each
+  // ladder starts at the step that carries body copy and climbs away from it,
+  // so a larger number is a quieter colour on either side.
+  //
+  // The light steps clear AA against the page at every rung and AAA at the
+  // first: 7.8:1, 5.9:1, 4.8:1. They have to be checked against the page and
+  // not each other, which is what makes them numbers rather than a spacing.
   const text = (light: number, darkPct: number) =>
     mix(NEUTRAL, dark ? 'white' : 'black', dark ? darkPct : light)
 
@@ -120,9 +125,9 @@ export function derivePalette(config: LastStackThemeConfig, mode: PaletteMode): 
     surface: mix(tintColor, surfaceNeutral, dark ? m.tint : m.tintHalf),
     border: mix(tintColor, borderNeutral, m.borderTint),
 
-    textPrimary: text(85, 12),
-    textSecondary: text(55, 45),
-    textSubtle: text(35, 60),
+    textPrimary: text(55, 12),
+    textSecondary: text(68, 45),
+    textSubtle: text(78, 60),
 
     actionPrimary: action('primary', dark ? clamps.primaryDark : clamps.primaryLight),
     actionAccent: action('accent', dark ? clamps.accentDark : clamps.accentLight),

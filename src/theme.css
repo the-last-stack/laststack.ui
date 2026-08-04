@@ -24,8 +24,8 @@
   --color-surface: color-mix(in srgb, var(--surface-tint-color) var(--surface-tint-half), var(--color-surface-neutral));
   --color-border: color-mix(in srgb, var(--surface-tint-color) var(--surface-border-tint), var(--color-border-neutral));
 
-  --color-text-primary: color-mix(in srgb, var(--color-neutral) 85%, black);
-  --color-text-secondary: color-mix(in srgb, var(--color-neutral) 55%, black);
+  --color-text-primary: color-mix(in srgb, var(--color-neutral) 55%, black);
+  --color-text-secondary: color-mix(in srgb, var(--color-neutral) 68%, black);
 
   --color-action-primary-light: oklch(from var(--color-primary) min(l, 0.55) c h);
   --color-action-primary-dark: oklch(from var(--color-primary) max(l, 0.72) c h);
@@ -40,7 +40,7 @@
   --color-success-hover: color-mix(in srgb, var(--color-success) 88%, black);
   --color-warning-hover: color-mix(in srgb, var(--color-warning) 88%, black);
   --color-error-hover: color-mix(in srgb, var(--color-error) 88%, black);
-  --color-text-subtle: color-mix(in srgb, var(--color-neutral) 35%, black);
+  --color-text-subtle: color-mix(in srgb, var(--color-neutral) 78%, black);
   --color-border-focus: var(--color-action-accent);
 
   --color-primary-tint: color-mix(in srgb, var(--color-primary) 12%, white);
@@ -252,8 +252,8 @@
   --color-surface: color-mix(in srgb, var(--surface-tint-color) var(--surface-tint-half), var(--color-surface-neutral));
   --color-border: color-mix(in srgb, var(--surface-tint-color) var(--surface-border-tint), var(--color-border-neutral));
 
-  --color-text-primary: color-mix(in srgb, var(--color-neutral) 85%, black);
-  --color-text-secondary: color-mix(in srgb, var(--color-neutral) 55%, black);
+  --color-text-primary: color-mix(in srgb, var(--color-neutral) 55%, black);
+  --color-text-secondary: color-mix(in srgb, var(--color-neutral) 68%, black);
 
   --color-action-primary: var(--color-action-primary-light);
   --color-action-accent: var(--color-action-accent-light);
@@ -264,7 +264,7 @@
   --color-success-hover: color-mix(in srgb, var(--color-success) 88%, black);
   --color-warning-hover: color-mix(in srgb, var(--color-warning) 88%, black);
   --color-error-hover: color-mix(in srgb, var(--color-error) 88%, black);
-  --color-text-subtle: color-mix(in srgb, var(--color-neutral) 35%, black);
+  --color-text-subtle: color-mix(in srgb, var(--color-neutral) 78%, black);
   --color-border-focus: var(--color-action-accent);
 
   --color-primary-tint: color-mix(in srgb, var(--color-primary) 12%, white);
